@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
+
 
 class SoloAlmacen
 {
@@ -15,6 +17,13 @@ class SoloAlmacen
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        switch (auth::user()->rol_id) {
+            case ('1'):
+                return redirect('Administrador'); //Admin
+                break;
+            case ('2'):
+                return $next($request); //Almancen
+                break;
+        }
     }
 }

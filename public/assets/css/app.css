@@ -1,0 +1,234 @@
+.body {
+    width: 100%;
+    height: 100%;
+    font-family: "Helvetica", Arial, sans-serif;
+    transform: translatex(0px) translatey(0px);
+}
+.card-body{
+    background-color:#ffffff;
+   }
+   /* Card body */
+.cuadrorojo{
+    background-color:#691c32;
+    color:#c9a46e;
+    background-clip:border-box;
+    padding-top:25px;
+    padding-bottom:25px;
+    text-transform:uppercase;
+    text-shadow:rgba(0, 0, 0, 0.3) 0px 1px 1px;
+    white-space:normal;
+    word-spacing:3.9px;
+    border-top-left-radius:8px;
+    border-top-right-radius:8px;
+    border-bottom-left-radius:8px;
+    border-bottom-right-radius:8px;
+   }
+/* ---------------------------------------------------
+    Navigation
+----------------------------------------------------- */
+#Topbar {
+    background-color: #10312b !important;
+    box-shadow:0px 0px 5px 0px #7c7c7c;
+
+}
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+.wrapper {
+    display: flex;
+    align-items: stretch;
+}   
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    box-shadow: 0px 0px 6px -2px #212529;
+    transition: all 0.5s;
+    background-color: #f8f4eb !important;
+    border-right-width:1px;
+    z-index:115;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+.nav-pills .nav-item .nav-link {
+    font-weight: 600;
+    color: #000000;
+}
+
+/* Active */
+.nav-pills li .active {
+    background-color: #9f2241 !important;
+    border: 0;
+    color: #DDC9A3;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #0b30d4;
+}
+
+ul.CTAs {
+    padding: 20px;
+}
+
+ul.CTAs a {
+    text-align: center;
+    font-size: 0.9em !important;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+/* ---------------------------------------------------
+    CONTENT
+----------------------------------------------------- */
+
+#content {
+    background-color:#ffffff;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    transition: all 0.3s;
+
+}
+
+#content main {
+    padding-top: 15px;
+    padding-bottom: 12px;
+}
+
+/* Button */
+.BotonRojo {
+    background-color: #9f2241;
+    text-decoration: none;
+    border: 0;
+    padding: 9px 12px;
+    font-size: .9rem;
+    margin-bottom: 12px;
+    color: #ffffff;
+    transition: background-color 0.3s ease; /* Transición suave */
+}
+/* Cambio al pasar el cursor */
+.BotonRojo:hover {
+    background-color: #691c32;
+}
+
+/* Button */
+.BotonGris {
+    background-color: #98989a;
+    border: 0;
+    padding: 9px 12px;
+    font-size: .9rem;
+    margin-bottom: 12px;
+    color: #ffffff;
+}
+.BotonGris:hover {
+    background-color: #6f7271;
+}
+
+.custom-span {
+    background-color: #faf7f2;
+    border-color: #c9a46e;
+}
+
+.custom-input {
+    background-color: #faf7f2;
+    border-color: #c9a46e;
+    
+}
+
+.custom-select {
+    background-color: #faf7f2;
+    border-color: #c9a46e;
+}
+.sselect {
+    background-color: #f3e4cb;
+    border-color: #c9a46e;
+    
+}
+
+/* Custom */
+.custom-table tr .custom-th{
+    background-color:#c9a56e;
+    color:#ffffff;
+    box-shadow:none;
+   }
+   
+   /* Custom */
+   .custom-table tr .custom-td{
+    background-color:#f9f6f0;
+    border-color:#c9a56e;
+   }
+   
+   /* Span Tag */
+.pagination .active span{
+    background-color:#af7946;
+    border-color:#f4efe1;
+   }
+   
+   /* Page link */
+   .pagination li a.page-link{
+    background-color:#f4efe1;
+    color:#000000;
+   }
+
+
+
+   ol.roman {
+    list-style: none;
+    counter-reset: roman-counter;
+  }
+  
+  ol.roman > li::before {
+    content: counter(roman-counter, upper-roman) ". ";
+    counter-increment: roman-counter;
+  }
+  
+  ol.decimal {
+    list-style: none;
+    counter-reset: decimal-counter;
+  }
+  
+  ol.decimal > li::before {
+    content: counter(roman-counter, upper-roman) "." counter(decimal-counter) " ";
+    counter-increment: decimal-counter;
+  }
+  
+  
+
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+@media (max-width: 90%) {
+    #sidebar {
+        margin-left: -250px;
+    }
+
+    #sidebar.active {
+        margin-left: 0;
+    }
+
+    #sidebarCollapse span {
+        display: none;
+    }
+}
+
+
