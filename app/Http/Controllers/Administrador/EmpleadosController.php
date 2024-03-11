@@ -12,7 +12,7 @@ class EmpleadosController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('soloadministrador', ['only' => ['index']]);
+        $this->middleware('SoloAdministrador', ['only' => ['index']]);
     }
     public function index(Request $request)
     {
