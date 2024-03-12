@@ -9,7 +9,7 @@ class inventario extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id_articulo';
-    protected $table = 'unidadmedida';
+    protected $table = 'inventario';
     protected $fillable = [
         'marca_id',
         'modelo',

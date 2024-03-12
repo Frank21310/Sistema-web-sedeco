@@ -46,7 +46,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('Inventario.index') }}"
-                        class="nav-link {{ 'Almacen/Inventario' == request()->path() ? 'active' : '' }}">
+                        class="nav-link {{ 'Almancen/Inventario' == request()->path() ? 'active' : '' }}">
                         <i class="fas fa-user"></i>
                         Inventario
                     </a>

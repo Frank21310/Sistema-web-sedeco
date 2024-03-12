@@ -5,21 +5,22 @@
         <div class="card-header">
             <div class="row">
                 <div class="col">
-                    <h2 class="">Roles</h2>
+                    <h2 class="">Articulos</h2>
                 </div>
-                <div class="col g-col-6 d-flex justify-content-end ">
-                    <a id="BtnAgregar" href="{{ route('Roles.create') }}" class="btn btn-primary ml-auto BotonRojo">
+                <div class="col g-col-6 d-flex justify-content-end">
+                    <button type="button" class="btn btn-primary ml-auto BotonRojo" data-bs-toggle="modal"
+                        data-bs-target="#modalagregarrol">
                         <i class="fas fa-plus"></i>
                         Agregar
-                    </a>
+                    </button>
                 </div>
-            </div>
+            </div> 
         </div>
         <hr>
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    <h3>Lista de Roles existentes</h3>
+                    <h3>Lista de Articulos existentes</h3>
                 </div>
             </div>
             <div class="row">
@@ -71,23 +72,40 @@
                         <thead class="custom-thead">
                             <tr>
                                 <th class="custom-th">ID</th>
-                                <th class="custom-th">Nombre del Rol</th>
+                                <th class="custom-th">Descripción</th>
+                                <th class="col-2 custom-th">Categoria</th>
+                                <th class="col-2 custom-th">Estante</th>
+                                <th class="col-2 custom-th">Unidad de Medida</th>
+                                <th class="col-2 custom-th">Cantidad</th>
+                                <th class="col-2 custom-th">Existencia</th>
+                                <th class="col-2 custom-th">Fecha Elaboracion</th>
                                 <th class="col-2 custom-th">Acciones</th>
+
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($rols as $rol)
+                            @foreach ($Articulos as $Articulo)
                                 <tr>
-                                    <td class="custom-td">{{ $rol->id_rol }}</td>
-                                    <td class="custom-td">{{ $rol->nombre_rol }}</td>
+                                    <td class="custom-td">{{ $Articulo->id_articulo }}</td>
+                                    <td class="custom-td">{{ $Articulo->descripcion }}</td>
+                                    <td class="custom-td">{{ $Articulo->categoria_id }}</td>
+                                    <td class="custom-td">{{ $Articulo->estante }}</td>
+                                    <td class="custom-td">{{ $Articulo->unidad_id }}</td>
+                                    <td class="custom-td">{{ $Articulo->cantidad }}</td>
+                                    <td class="custom-td">{{ $Articulo->existencia }}</td>
+                                    <td class="custom-td">{{ $Articulo->fecha_elaboracion }}</td>
+                                    
                                     <td class="custom-td">
                                         <div class="btn-group" role="group">
-                                            <a href="{{ route('Roles.show', $rol->id_rol) }}" class="btn btn-info"><i
-                                                    class="fas fa-eye"></i></a>
-                                            <a href="{{ route('Roles.edit', $rol->id_rol) }}" class="btn btn-primary"><i
+                                            <a href="#" class="btn btn-info" data-bs-toggle="modal"
+                                                data-bs-target="#verrolmodal"
+                                                onclick="mostrarDetalles('{{ $Articulo->nombre_rol }}')">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="{{ route('Inventario.edit', $Articulo->id_articulo) }}" class="btn btn-primary"><i
                                                     class="fas fa-pencil-alt"></i></a>
-                                            <form action="{{ route('Roles.destroy', $rol->id_rol) }}"
-                                                id="delete_{{ $rol->id_rol }}" method="POST">
+                                            <form action="{{ route('Inventario.destroy', $Articulo->id_articulo) }}"
+                                                id="delete_{{ $Articulo->id_articulo }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
 
@@ -104,25 +122,79 @@
                     </table>
                 </div>
             </div>
+            <!-- Modal de nuevo rol -->
+            <div class="modal fade" id="modalagregarrol" tabindex="-1" aria-labelledby="agregarModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="agregarModalLabel">Agregar Nuevo Rol</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="createForm" action="{{ route('Inventario.store') }}" method="POST"
+                                enctype="multipart/form-data">
+                                @include('Almacen.Inventario.formularios.form')
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-primary"
+                                onclick="document.getElementById('createForm').submit()">Crear</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal para ver detalles del rol -->
+            <div class="modal fade" id="verrolmodal" tabindex="-1" aria-labelledby="verModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="verModalLabel">Detalles del Rol</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <!-- Aquí se mostrarán los detalles del rol -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="nombre_rol">Nombre del Rol:</label>
+                                    <span id="nombre_rol_span"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="card-footer">
-            @if ($rols->count() > 0)
-                {{ $rols->links() }}
+            @if ($Articulos->count() > 0)
+                {{ $Articulos->links() }}
             @endif
         </div>
     </div>
 
     <Script type="text/javascript">
         $('#limit').on('change', function() {
-            window.location.href = "{{ route('Roles.index') }}?limit=" + $(this).val() + '&search=' + $('#search')
+            window.location.href = "{{ route('Inventario.index') }}?limit=" + $(this).val() + '&search=' + $('#search')
                 .val()
         })
 
         $('#search').on('keyup', function(e) {
             if (e.keyCode == 13) {
-                window.location.href = "{{ route('Roles.index') }}?limit=" + $('#limit').val() + '&search=' + $(
+                window.location.href = "{{ route('Inventario.index') }}?limit=" + $('#limit').val() + '&search=' + $(
                     this).val()
             }
         })
     </Script>
+    <script>
+        function mostrarDetalles(nombreRol, permisos) {
+          document.getElementById('nombre_rol_span').innerText = nombreRol;
+          document.getElementById('permisos_span').innerText = permisos;
+        }
+      </script>
 @endsection
