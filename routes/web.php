@@ -4,6 +4,7 @@ use App\Http\Controllers\Administrador\EmpleadosController;
 use App\Http\Controllers\Administrador\RolesController;
 use App\Http\Controllers\Administrador\SoloAdminController;
 use App\Http\Controllers\Administrador\UsuariosController;
+use App\Http\Controllers\Almacen\Inventario;
 use App\Http\Controllers\Almacen\SoloAdminController as AlmacenSoloAdminController;
 use App\Http\Middleware\SoloAlmacen;
 use Illuminate\Support\Facades\Auth;
@@ -45,4 +46,6 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/Almancen', [SoloAlmacen::class, 'index'])->name(' administrador');
+    Route::resource('/Almancen/Inventario', Inventario::class);
+
 })->namespace('root');

@@ -8,7 +8,8 @@
                     <h2 class="">Usuarios</h2>
                 </div>
                 <div class="col g-col-6 d-flex justify-content-end ">
-                    <a id="BtnAgregar" href="{{ route('Usuarios.create') }}" class="btn btn-primary ml-auto BotonRojo">
+                    <a id="BtnAgregar" href="#" class="btn btn-primary ml-auto BotonRojo" data-bs-toggle="modal"
+                        data-bs-target="#agregarUsuarioModal">
                         <i class="fas fa-plus"></i>
                         Agregar
                     </a>
@@ -84,10 +85,13 @@
                                     <td class="custom-td">{{ $User->Roles->nombre_rol }}</td>
                                     <td class="custom-td">
                                         <div class="btn-group" role="group">
-                                            <a href="{{ route('Usuarios.show', $User->id) }}"
-                                                class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                            <a href="{{ route('Usuarios.edit', $User->id) }}"
-                                                class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
+                                            <a href="#" class="btn btn-info" data-bs-toggle="modal"
+                                                data-bs-target="#verUsuarioModal"
+                                                onclick="mostrarDetalles('{{ json_encode($User) }}')">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="{{ route('Usuarios.edit', $User->id) }}" class="btn btn-primary"><i
+                                                    class="fas fa-pencil-alt"></i></a>
                                             <form action="{{ route('Usuarios.destroy', $User->id) }}"
                                                 id="delete_{{ $User->id }}" method="POST">
                                                 @csrf
@@ -97,7 +101,7 @@
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
-                                            
+
                                         </div>
                                     </td>
                                 </tr>
@@ -107,7 +111,71 @@
                 </div>
             </div>
         </div>
+        <!-- Modal para agregar usuario -->
+        <div class="modal fade" id="agregarUsuarioModal" tabindex="-1" aria-labelledby="agregarUsuarioModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="agregarUsuarioModalLabel">Agregar Usuario</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Aquí se incluye el formulario de creación -->
+                        <form action="{{ route('Usuarios.store') }}" method="POST" enctype="multipart/form-data"
+                            id="create">
+                            @csrf
+                            @include('Administrador.Usuarios.formularios.form')
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" class="btn btn-primary"
+                            onclick="document.getElementById('create').submit()">Crear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal para mostrar detalles del usuario -->
+        <div class="modal fade" id="verUsuarioModal" tabindex="-1" aria-labelledby="verUsuarioModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="verUsuarioModalLabel">Detalles del Usuario</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
 
+                        <div class="row mb-3">
+                            <label for="empleado_num"
+                                class="col-md-4 col-form-label text-md-end">{{ __('Empleado') }}</label>
+                            <div class="col-md-6">
+                                <span id="empleado_num_span" class="form-control custom-span">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="id_rol" class="col-md-4 col-form-label text-md-end">{{ __('Rol') }}</label>
+                            <div class="col-md-6">
+                                <span  class="form-control custom-span" id="rol_id_span">
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Correo') }}</label>
+                            <div class="col-md-6">
+                                <span id="email_span" class="form-control custom-span" >
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="card-footer">
             @if ($Users->count() > 0)
                 {{ $Users->links() }}
@@ -116,7 +184,6 @@
     </div>
 
     <Script type="text/javascript">
-    
         $('#limit').on('change', function() {
             window.location.href = "{{ route('Usuarios.index') }}?limit=" + $(this).val() + '&search=' + $(
                 '#search').val()
@@ -130,4 +197,14 @@
             }
         })
     </Script>
+
+    <script>
+        function mostrarDetalles(userJson) {
+            var user = JSON.parse(userJson);
+            document.getElementById('empleado_num_span').innerText = user.empleado_num;
+            document.getElementById('email_span').innerText = user.email;
+            document.getElementById('rol_id_span').innerText = user.rol_id;
+
+        }
+    </script>
 @endsection

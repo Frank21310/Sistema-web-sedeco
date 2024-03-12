@@ -14,6 +14,8 @@ class UsuariosController extends Controller
 {
     public function index(Request $request)
     {
+        $empleados = Empleado::all();
+        $roles = Rol::all();
         $Users = User::select('*')->orderBy('id', 'ASC');
         $limit = (isset($request->limit)) ? $request->limit : 4;
 
@@ -23,24 +25,9 @@ class UsuariosController extends Controller
                 ->orWhere('rol_id', 'like', '%' . $request->search . '%');
         }
         $Users = $Users->paginate($limit)->appends($request->all());
-        return view('Administrador.Usuarios.index', compact('Users'));
+        return view('Administrador.Usuarios.index', compact('Users','empleados', 'roles'));
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        $empleados = Empleado::all();
-        $roles = Rol::all();
-
-        return view('Administrador.Usuarios.create', compact('empleados', 'roles'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $data = $request->validate([

@@ -23,18 +23,14 @@ class RolesController extends Controller
                 ->orWhere('nombre_rol', 'like', '%' . $request->search . '%');
         }
         $rols = $rols->paginate($limit)->appends($request->all());
-        return view('Administrador.roles.index', compact('rols'));
-    }
-    public function create()
-    {
-        return view('Administrador.roles.create');
+        return view('Administrador.Roles.index', compact('rols'));
     }
     public function store(Request $request)
     {
         $rol = new Rol();
         $rol = $this->createUpdateRol($request, $rol);
         return redirect()
-            ->route('roles.index');
+            ->route('Roles.index');
     }
     public function createUpdateRol(Request $request, $rol)
     {
@@ -42,22 +38,17 @@ class RolesController extends Controller
         $rol->save();
         return  $rol;
     }
-    public function show(string $id)
-    {
-        $rol = Rol::where('id_rol', $id)->firstOrFail();
-        return view('Administrador.roles.show', compact('rol', 'permisos'));
-    }
     public function edit(string $id)
     {
         $rol = Rol::where('id_rol', $id)->firstOrFail();
-        return view('Administrador.roles.edit', compact('rol', 'permisos'));
+        return view('Administrador.Roles.edit', compact('rol'));
     }
     public function update(Request $request, string $id)
     { {
             $rol = Rol::where('id_rol', $id)->firstOrFail();
             $rol = $this->createUpdateRol($request, $rol);
             return redirect()
-                ->route('roles.index');
+                ->route('Roles.index');
         }
     }
     public function destroy(string $id)
@@ -66,10 +57,10 @@ class RolesController extends Controller
             $rol = Rol::findOrFail($id);
             $rol->delete();
 
-            return redirect()->route('roles.index');
+            return redirect()->route('Roles.index');
         } catch (\Exception $e) {
             // Maneja la excepción aquí (puedes mostrar un mensaje de error, registrar la excepción, etc.)
-            return redirect()->route('roles.index')->with('error', 'No se pudo eliminar el registro.');
+            return redirect()->route('Roles.index')->with('error', 'No se pudo eliminar el registro.');
         }
     }
 

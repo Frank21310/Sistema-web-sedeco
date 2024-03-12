@@ -16,6 +16,7 @@ class EmpleadosController extends Controller
     }
     public function index(Request $request)
     {
+        $cargos = Cargo::all();
         $Empleados = Empleado::select('*')->orderBy('num_empleado', 'ASC');
         $limit = (isset($request->limit)) ? $request->limit : 5;
 
@@ -27,12 +28,7 @@ class EmpleadosController extends Controller
                 ->orWhere('cargo_id', 'like', '%' . $request->search . '%');
         }
         $Empleados = $Empleados->paginate($limit)->appends($request->all());
-        return view('Administrador.Empleados.index', compact('Empleados'));
-    }
-    public function create()
-    {
-        $cargos = Cargo::all();
-        return view('Administrador.Empleados.create', compact('cargos'));
+        return view('Administrador.Empleados.index', compact('Empleados','cargos'));
     }
     public function store(Request $request)
     {
@@ -43,18 +39,13 @@ class EmpleadosController extends Controller
     }
     public function createUpdateEmpleado(Request $request, $Empleado)
     {
+        $Empleado->num_empleado = $request->num_empleado;
         $Empleado->nombre = $request->nombre;
         $Empleado->apellido_paterno = $request->apellido_paterno;
         $Empleado->apellido_materno = $request->apellido_materno;
         $Empleado->cargo_id = $request->cargo_id;
         $Empleado->save();
         return  $Empleado;
-    }
-    public function show(string $id)
-    {
-        $cargos = Cargo::all();
-        $Empleado = Empleado::where('num_empleado', $id)->firstOrFail();
-        return view('Administrador.Empleados.show', compact('Empleado', 'cargos'));
     }
     public function edit(string $id)
     {
@@ -82,7 +73,4 @@ class EmpleadosController extends Controller
             return redirect()->route('Empleados.index')->with('error', 'No se pudo eliminar el registro.');
         }
     }
-
-
-
 }

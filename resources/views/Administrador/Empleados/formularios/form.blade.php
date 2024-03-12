@@ -24,12 +24,7 @@
             <input type="text" class="form-control custom-input" name="apellido_materno" value="{{(isset($Empleado))?$Empleado->apellido_materno:old('apellido_materno')}}" required>
         </div>
     </div>
-    <div class="col-12">
-        <div class="form-group">
-            <label for="">RFC</label>
-            <input type="text" class="form-control custom-input" name="rfc" value="{{(isset($Empleado))?$Empleado->rfc:old('rfc')}}" required>
-        </div>
-    </div>
+
     <div class="col-12">
         <div class="form-group">
             <label for="">Cargo</label>
@@ -44,19 +39,4 @@
             </select>
         </div>
     </div>
-    <div class="col-12">
-        <div class="form-group">
-            <label for="">Dependencia</label>
-            <select class="form-control custom-select" name="dependencia_id" value="{{(isset($Empleado))?$Empleado->dependencia_id:old('dependencia_id')}}"  required>
-                <option value="">Seleccione una dependencia</option>
-                @foreach ($dependecias as $dependecia)
-                    <option value="{{ $dependecia->id_dependencia}}" class="form-control">
-                         {{ $dependecia->nombre_dependencia }}
-                    </option>
-                @endforeach
-
-            </select>
-        </div>
-    </div>
-
 </div>

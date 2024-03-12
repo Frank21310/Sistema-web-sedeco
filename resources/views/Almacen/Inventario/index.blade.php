@@ -7,14 +7,13 @@
                 <div class="col">
                     <h2 class="">Roles</h2>
                 </div>
-                <div class="col g-col-6 d-flex justify-content-end">
-                    <button type="button" class="btn btn-primary ml-auto BotonRojo" data-bs-toggle="modal"
-                        data-bs-target="#modalagregarrol">
+                <div class="col g-col-6 d-flex justify-content-end ">
+                    <a id="BtnAgregar" href="{{ route('Roles.create') }}" class="btn btn-primary ml-auto BotonRojo">
                         <i class="fas fa-plus"></i>
                         Agregar
-                    </button>
+                    </a>
                 </div>
-            </div> 
+            </div>
         </div>
         <hr>
         <div class="card-body">
@@ -83,11 +82,8 @@
                                     <td class="custom-td">{{ $rol->nombre_rol }}</td>
                                     <td class="custom-td">
                                         <div class="btn-group" role="group">
-                                            <a href="#" class="btn btn-info" data-bs-toggle="modal"
-                                                data-bs-target="#verrolmodal"
-                                                onclick="mostrarDetalles('{{ $rol->nombre_rol }}')">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
+                                            <a href="{{ route('Roles.show', $rol->id_rol) }}" class="btn btn-info"><i
+                                                    class="fas fa-eye"></i></a>
                                             <a href="{{ route('Roles.edit', $rol->id_rol) }}" class="btn btn-primary"><i
                                                     class="fas fa-pencil-alt"></i></a>
                                             <form action="{{ route('Roles.destroy', $rol->id_rol) }}"
@@ -106,59 +102,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
-            </div>
-            <!-- Modal de nuevo rol -->
-            <div class="modal fade" id="modalagregarrol" tabindex="-1" aria-labelledby="agregarModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="agregarModalLabel">Agregar Nuevo Rol</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="createForm" action="{{ route('Roles.store') }}" method="POST"
-                                enctype="multipart/form-data">
-                                @csrf
-                                <div class="form-group">
-                                    <label for="nombre_rol">Nombre del Rol</label>
-                                    <input type="text" class="form-control" id="nombre_rol" name="nombre_rol" required>
-                                </div>
-                                <!-- Aquí puedes agregar más campos del formulario si es necesario -->
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary"
-                                onclick="document.getElementById('createForm').submit()">Crear</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Modal para ver detalles del rol -->
-            <div class="modal fade" id="verrolmodal" tabindex="-1" aria-labelledby="verModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="verModalLabel">Detalles del Rol</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-
-                        <div class="modal-body">
-                            <!-- Aquí se mostrarán los detalles del rol -->
-                            <div class="row">
-                                <div class="col-12">
-                                    <label for="nombre_rol">Nombre del Rol:</label>
-                                    <span id="nombre_rol_span"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -182,10 +125,4 @@
             }
         })
     </Script>
-    <script>
-        function mostrarDetalles(nombreRol, permisos) {
-          document.getElementById('nombre_rol_span').innerText = nombreRol;
-          document.getElementById('permisos_span').innerText = permisos;
-        }
-      </script>
 @endsection

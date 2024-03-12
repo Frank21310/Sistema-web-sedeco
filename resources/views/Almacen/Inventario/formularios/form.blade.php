@@ -7,4 +7,8 @@
                 value="{{ isset($rol) ? $rol->nombre_rol : old('nombre_rol') }}" required>
         </div>
     </div>
+    <div class="col-12">
+        
+    </div>
+
 </div>

@@ -3,40 +3,40 @@
     <div class="col-12">
         <div class="form-group">
             <label for="">Num. Empleado</label>
-            <span type="text" class="form-control custom-span" name="num_empleado">{{(isset($Empleado))?$Empleado->num_empleado:old('num_empleado')}}</span>
+            <input type="text" class="form-control custom-input" name="num_empleado" required>
         </div>
     </div>
     <div class="col-12">
         <div class="form-group">
             <label for="">Nombre </label>
-            <span type="text" class="form-control custom-span" name="nombre">{{(isset($Empleado))?$Empleado->nombre:old('nombre')}}</span>
-
+            <input type="text" class="form-control custom-input" name="nombre" required>
         </div>
     </div>
     <div class="col-12">
         <div class="form-group">
             <label for="">Apellido Paterno</label>
-            <span type="text" class="form-control custom-span" name="apellido_paterno">{{(isset($Empleado))?$Empleado->apellido_paterno:old('apellido_paterno')}}</span>
-
+            <input type="text" class="form-control custom-input" name="apellido_paterno" required>
         </div>
     </div>
     <div class="col-12">
         <div class="form-group">
             <label for="">Apellido Materno</label>
-            <span type="text" class="form-control custom-span" name="apellido_materno">{{(isset($Empleado))?$Empleado->apellido_materno:old('apellido_materno')}}</span>
-        </div>
-    </div>
-    <div class="col-12">
-        <div class="form-group">
-            <label for="">Cargo</label>
-            <span type="text" class="form-control custom-span" name="cargo_id">{{(isset($Empleado))?$Empleado->Cargos->nombre_cargo:old('cargo_id')}}</span>
-        </div>
-    </div>
-    <div class="col-12">
-        <div class="form-group">
-            <label for="">Dependencia</label>
-            <span type="text" class="form-control custom-span" name="dependencia_id">{{ $Empleado->Dependencias->nombre_dependencia }}</span>
+            <input type="text" class="form-control custom-input" name="apellido_materno" required>
         </div>
     </div>
 
+    <div class="col-12">
+        <div class="form-group">
+            <label for="">Cargo</label>
+            <select class="form-control custom-select" name="cargo_id"  required>
+                <option value="">Seleccione un cargo</option>
+                @foreach ($cargos as $cargo)
+                    <option value="{{ $cargo->id_cargo}}" class="form-control">
+                         {{ $cargo->nombre_cargo }}
+                    </option>
+                @endforeach
+
+            </select>
+        </div>
+    </div>
 </div>

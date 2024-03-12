@@ -8,10 +8,11 @@
                     <h2 class="">Empleados</h2>
                 </div>
                 <div class="col g-col-6 d-flex justify-content-end ">
-                    <a id="BtnAgregar" href="{{ route('Empleados.create') }}" class="btn btn-primary ml-auto BotonRojo">
+                    <button type="button" class="btn btn-primary ml-auto BotonRojo" data-bs-toggle="modal"
+                        data-bs-target="#modalagregarempleado">
                         <i class="fas fa-plus"></i>
                         Agregar
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -89,10 +90,15 @@
                                     <td class="custom-td">{{ $Empleado->Cargos->nombre_cargo }}</td>
                                     <td class="custom-td">
                                         <div class="btn-group" role="group">
-                                            <a href="{{ route('Empleados.show', $Empleado->num_empleado) }}"
-                                                class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                            <a href="#" class="btn btn-info" data-bs-toggle="modal"
+                                                data-bs-target="#verempleadomodal"
+                                                onclick="mostrarDetalles('{{ json_encode($Empleado) }}')">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+
                                             <a href="{{ route('Empleados.edit', $Empleado->num_empleado) }}"
                                                 class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
+
                                             <form action="{{ route('Empleados.destroy', $Empleado->num_empleado) }}"
                                                 id="delete_{{ $Empleado->num_empleado }}" method="POST">
                                                 @csrf
@@ -112,14 +118,85 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="card-footer">
             @if ($Empleados->count() > 0)
                 {{ $Empleados->links() }}
             @endif
         </div>
     </div>
+    <!-- Modal para agregar un empleado -->
+    <div class="modal fade" id="modalagregarempleado" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="agregarModalLabel">Agregar Empleado</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="crearEmpleadoForm" action="{{ route('Empleados.store') }}" method="POST"
+                        enctype="multipart/form-data">
+                        @include('Administrador.Empleados.formularios.vistaform')
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary"
+                        onclick="document.getElementById('crearEmpleadoForm').submit()">Crear</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal para ver detalles del empleado -->
+    <div class="modal fade" id="verempleadomodal" tabindex="-1" aria-labelledby="verEmpleadoModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="verEmpleadoModalLabel">Detalles del Empleado</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="">Num. Empleado</label>
+                            <span type="text" class="form-control custom-span" id="num_empleado_span"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="">Nombre </label>
+                            <span type="text" class="form-control custom-span" id="nombre_span"></span>
 
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="">Apellido Paterno</label>
+                            <span type="text" class="form-control custom-span" id="apellido_paterno_span"></span>
+
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="">Apellido Materno</label>
+                            <span type="text" class="form-control custom-span" id="apellido_materno_span"></span>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="">Cargo</label>
+                            <span type="text" class="form-control custom-span" id="cargo_id_span"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <Script type="text/javascript">
         $('#limit').on('change', function() {
             window.location.href = "{{ route('Empleados.index') }}?limit=" + $(this).val() + '&search=' + $(
@@ -133,4 +210,14 @@
             }
         })
     </Script>
+    <script>
+        function mostrarDetalles(empleadoJson) {
+            var empleado = JSON.parse(empleadoJson);
+            document.getElementById('num_empleado_span').innerText = empleado.num_empleado;
+            document.getElementById('nombre_span').innerText = empleado.nombre;
+            document.getElementById('apellido_paterno_span').innerText = empleado.apellido_paterno;
+            document.getElementById('apellido_materno_span').innerText = empleado.apellido_materno;
+            document.getElementById('cargo_id_span').innerText = empleado.cargo_id;
+        }
+    </script>
 @endsection
