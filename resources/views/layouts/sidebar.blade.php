@@ -51,6 +51,13 @@
                         Inventario
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('Entradas.index') }}"
+                        class="nav-link {{ 'Almancen/Entradas' == request()->path() ? 'active' : '' }}">
+                        <i class="fas fa-user"></i>
+                        Entradas
+                    </a>
+                </li>
                 
             @endif
         </ul>

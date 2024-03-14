@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Almacen;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categoria;
 use App\Models\inventario as ModelsInventario;
+use App\Models\UnidadMedida;
 use Illuminate\Http\Request;
 
 class Inventario extends Controller
@@ -15,15 +17,20 @@ class Inventario extends Controller
     }
     public function index(Request $request)
     {
-        $Articulos = ModelsInventario::select('*')->orderBy('id_articulo', 'ASC');
+        $categorias = Categoria::all();
+        $medidas = UnidadMedida::all();
+
+        $Articulos = ModelsInventario::select('*')->orderBy('descripcion', 'ASC');
         $limit = (isset($request->limit)) ? $request->limit : 4;
 
         if (isset($request->search)) {
             $Articulos = $Articulos->where('id_articulo', 'like', '%' . $request->search . '%')
-                ->orWhere('descripcion', 'like', '%' . $request->search . '%');
+                ->orWhere('descripcion', 'like', '%' . $request->search . '%')
+                ->orWhere('categoria_id', 'like', '%' . $request->search . '%');
+                
         }
         $Articulos = $Articulos->paginate($limit)->appends($request->all());
-        return view('Almacen.Inventario.index', compact('Articulos'));
+        return view('Almacen.Inventario.index', compact('Articulos','categorias','medidas'));
     }
     public function store(Request $request)
     {

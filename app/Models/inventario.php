@@ -32,6 +32,6 @@ class inventario extends Model
     }
     public function Unidad()
     {
-        return $this->belongsTo(Categoria::class, 'unidad_id', 'id_unidad');
+        return $this->belongsTo(UnidadMedida::class, 'unidad_id', 'id_unidad');
     }
 }
