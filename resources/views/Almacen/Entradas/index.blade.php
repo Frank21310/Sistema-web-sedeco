@@ -83,24 +83,22 @@
                         <tbody>
                             @foreach ($Entradas as $Entrada)
                                 <tr>
-                                    <td class="custom-td">{{ $Entrada->descripcion }}</td>
-                                    <td class="custom-td">{{ $Entrada->Categoria->nombre_categoria }}</td>
-                                    <td class="custom-td">{{ $Entrada->estante }}</td>
-                                    <td class="custom-td">{{ $Entrada->Unidad->nombre_unidad }}</td>
-                                    <td class="custom-td">{{ $Entrada->cantidad }}</td>
-                                    <td class="custom-td">{{ $Entrada->existencia }}</td>
-                                    <!--<td class="custom-td">{{ $Entrada->fecha_elaboracion }}</td>-->
+                                    <td class="custom-td">{{ $Entrada->id_entrada }}</td>
+                                    <td class="custom-td">{{ $Entrada->folio}}</td>
+                                    <td class="custom-td">{{ $Entrada->Proveedor->nombre }}</td>
+                                    <td class="custom-td">{{ $Entrada->departamento_id }}</td>
+                                    <td class="custom-td">{{ $Entrada->fehcaentrada }}</td>
                                     
                                     <td class="custom-td">
                                         <div class="btn-group" role="group">
                                             <a href="#" class="btn btn-info" data-bs-toggle="modal"
                                                 data-bs-target="#verarticulomodal"
                                                 onclick="mostrarDetalles('{{ json_encode($Entrada) }}')">
-                                                <i class="fas fa-eye"></i>
+                                                <i class="fa fa-print"></i>
                                             </a>
-                                            <a href="{{ route('Inventario.edit', $Entrada->id_entrada) }}" class="btn btn-primary"><i
+                                            <a href="{{ route('Entradas.edit', $Entrada->id_entrada) }}" class="btn btn-primary"><i
                                                     class="fas fa-pencil-alt"></i></a>
-                                            <form action="{{ route('Inventario.destroy', $Entrada->id_entrada) }}"
+                                            <form action="{{ route('Entradas.destroy', $Entrada->id_entrada) }}"
                                                 id="delete_{{ $Entrada->id_entrada }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -119,7 +117,7 @@
                 </div>
             </div>
             <!-- Modal de nuva entrada -->
-            <div class="modal fade" id="modalagregarentrada" tabindex="-1" aria-labelledby="agregarModalLabel"
+            <div class="modal fade modal-lg" id="modalagregarentrada" tabindex="-1" aria-labelledby="agregarModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -128,7 +126,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form id="createForm" action="{{ route('Inventario.store') }}" method="POST"
+                            <form id="createForm" action="{{ route('Entradas.store') }}" method="POST"
                                 enctype="multipart/form-data">
                                 @include('Almacen.Entradas.formularios.form')
 
