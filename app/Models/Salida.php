@@ -8,4 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Salida extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'id_salida';
+    protected $table = 'salida';
+    protected $fillable = [
+        'entrada_id',
+        'fechasalida',
+        'empleado_num',
+    ];
+    public function Empleado()
+    {
+        return $this->belongsTo(Empleado::class, 'empleado_num', 'num_empleado');
+    }
+    public function Entrada()
+    {
+        return $this->belongsTo(Entrada::class, 'entrada_id', 'id_entrada');
+    }
+    
 }

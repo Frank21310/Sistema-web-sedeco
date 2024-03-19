@@ -58,6 +58,13 @@
                         Entradas
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('Salidas.index') }}"
+                        class="nav-link {{ 'Almancen/Entradas' == request()->path() ? 'active' : '' }}">
+                        <i class="fas fa-user"></i>
+                        Salidas
+                    </a>
+                </li>
                 
             @endif
         </ul>

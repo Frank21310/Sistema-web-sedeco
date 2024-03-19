@@ -122,7 +122,6 @@ class Entradas extends Controller
 
             return redirect()->route('Entradas.index');
         } catch (\Exception $e) {
-            // Maneja la excepción aquí (puedes mostrar un mensaje de error, registrar la excepción, etc.)
             return redirect()->route('Entradas.index')->with('error', 'No se pudo eliminar el registro.');
         }
     }

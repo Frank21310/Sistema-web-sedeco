@@ -76,8 +76,7 @@
                                 <th class="col-3 custom-th">Proveedor</th>
                                 <th class="col-2 custom-th">Solicitante</th>
                                 <th class="col-2 custom-th">Fecha Entrada</th>
-                                <th class="col-2 custom-th">Acciones</th>
-
+                                <th class="col-2 custom-th">Acciones</th> 
                             </tr>
                         </thead>
                         <tbody>
