@@ -15,6 +15,11 @@
                     </button>
                 </div>
             </div> 
+            @if (session('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
         </div>
         <hr>
         <div class="card-body">
@@ -72,9 +77,10 @@
                         <thead class="custom-thead">
                             <tr>
                                 <th class="col-1 custom-th">ID</th>
-                                <th class="col-2 custom-th">Folio</th>
+                                <th class="col-1 custom-th">Folio</th>
                                 <th class="col-3 custom-th">Proveedor</th>
                                 <th class="col-2 custom-th">Solicitante</th>
+                                <th class="col-2 custom-th">Recibe</th>
                                 <th class="col-2 custom-th">Fecha Entrada</th>
                                 <th class="col-2 custom-th">Acciones</th> 
                             </tr>
@@ -85,8 +91,9 @@
                                     <td class="custom-td">{{ $Entrada->id_entrada }}</td>
                                     <td class="custom-td">{{ $Entrada->folio}}</td>
                                     <td class="custom-td">{{ $Entrada->Proveedor->nombre }}</td>
-                                    <td class="custom-td">{{ $Entrada->departamento_id }}</td>
-                                    <td class="custom-td">{{ $Entrada->fehcaentrada }}</td>
+                                    <td class="custom-td">{{ $Entrada->Departamento->nombre_departamento }}</td>
+                                    <td class="custom-td">{{ $Entrada->Empleado->nombre }}</td>
+                                    <td class="custom-td">{{ $Entrada->fechaentrada }}</td>
                                     
                                     <td class="custom-td">
                                         <div class="btn-group" role="group">

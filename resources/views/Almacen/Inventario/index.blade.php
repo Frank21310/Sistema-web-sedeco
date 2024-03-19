@@ -15,6 +15,11 @@
                     </button>
                 </div>
             </div> 
+            @if (session('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
         </div>
         <hr>
         <div class="card-body">

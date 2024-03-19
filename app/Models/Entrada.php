@@ -32,5 +32,9 @@ class Entrada extends Model
     {
         return $this->belongsTo(Proveedor::class, 'proveedor_id', 'id_proveedor');
     }
+    public function Empleado()
+    {
+        return $this->belongsTo(Empleado::class, 'empleado_num', 'num_empleado');
+    }
     
 }

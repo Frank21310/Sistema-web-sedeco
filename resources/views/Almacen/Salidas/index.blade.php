@@ -14,7 +14,12 @@
                         Agregar
                     </button>
                 </div>
-            </div> 
+            </div>
+            @if (session('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
         </div>
         <hr>
         <div class="card-body">
@@ -71,23 +76,20 @@
                     <table class="table custom-table">
                         <thead class="custom-thead">
                             <tr>
-                                <th class="col-1 custom-th">ID</th>
-                                <th class="col-2 custom-th">Folio</th>
-                                <th class="col-3 custom-th">Proveedor</th>
-                                <th class="col-2 custom-th">Solicitante</th>
+                                <th class="col-2 custom-th">Folio Salida</th>
+                                <th class="col-2 custom-th">Folio Entrada</th>
+                                <th class="col-3 custom-th">Entrega</th>
                                 <th class="col-2 custom-th">Fecha Salida</th>
-                                <th class="col-2 custom-th">Acciones</th> 
+                                <th class="col-2 custom-th">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($Salidas as $Salida)
                                 <tr>
-                                    <td class="custom-td">{{ $Salida->id_entrada }}</td>
-                                    <td class="custom-td">{{ $Salida->folio}}</td>
-                                    <td class="custom-td">{{ $Salida->Proveedor->nombre }}</td>
-                                    <td class="custom-td">{{ $Salida->departamento_id }}</td>
-                                    <td class="custom-td">{{ $Salida->fehcaentrada }}</td>
-                                    
+                                    <td class="custom-td">{{ $Salida->id_salida }}</td>
+                                    <td class="custom-td">{{ $Salida->entrada_id }}</td>
+                                    <td class="custom-td">{{ $Salida->Empleado->nombre }}</td>
+                                    <td class="custom-td">{{ $Salida->fechasalida }}</td>
                                     <td class="custom-td">
                                         <div class="btn-group" role="group">
                                             <a href="#" class="btn btn-info" data-bs-toggle="modal"
@@ -95,10 +97,10 @@
                                                 onclick="mostrarDetalles('{{ json_encode($Salida) }}')">
                                                 <i class="fa fa-print"></i>
                                             </a>
-                                            <a href="{{ route('Salidas.edit', $Salida->id_entrada) }}" class="btn btn-primary"><i
-                                                    class="fas fa-pencil-alt"></i></a>
-                                            <form action="{{ route('Salidas.destroy', $Salida->id_entrada) }}"
-                                                id="delete_{{ $Salida->id_entrada }}" method="POST">
+                                            <a href="{{ route('Salidas.edit', $Salida->id_salida) }}"
+                                                class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
+                                            <form action="{{ route('Salidas.destroy', $Salida->id_salida) }}"
+                                                id="delete_{{ $Salida->id_salida }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
 
@@ -128,68 +130,12 @@
                             <form id="createForm" action="{{ route('Salidas.store') }}" method="POST"
                                 enctype="multipart/form-data">
                                 @include('Almacen.Salidas.formularios.form')
-
                             </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                             <button type="button" class="btn btn-primary"
-                                onclick="document.getElementById('createForm').submit()">Crear</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Modal para ver detalles del articulo -->
-            <div class="modal fade" id="verarticulomodal" tabindex="-1" aria-labelledby="verModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="verModalLabel">Detalles del articulo</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-
-                        <div class="modal-body">
-                            <!-- Aquí se mostrarán los detalles del rol -->
-                            <div class="row">
-                                <div class="col-12">
-                                    <label for="nombre_rol">descripcion:</label>
-                                    <span id="descripcion_span"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <label for="nombre_rol">Categoria:</label>
-                                    <span id="categoria_span"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <label for="nombre_rol">Ubicacion:</label>
-                                    <span id="estante_span"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <label for="nombre_rol">Medida:</label>
-                                    <span id="medida_span"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <label for="nombre_rol">Cantidad:</label>
-                                    <span id="cantidad_span"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <label for="nombre_rol">Existencia:</label>
-                                    <span id="existencia_span"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                onclick="document.getElementById('createForm').submit()">Generar</button>
                         </div>
                     </div>
                 </div>
@@ -204,26 +150,16 @@
 
     <Script type="text/javascript">
         $('#limit').on('change', function() {
-            window.location.href = "{{ route('Inventario.index') }}?limit=" + $(this).val() + '&search=' + $('#search')
+            window.location.href = "{{ route('Salidas.index') }}?limit=" + $(this).val() + '&search=' + $(
+                    '#search')
                 .val()
         })
 
         $('#search').on('keyup', function(e) {
             if (e.keyCode == 13) {
-                window.location.href = "{{ route('Inventario.index') }}?limit=" + $('#limit').val() + '&search=' + $(
+                window.location.href = "{{ route('Salidas.index') }}?limit=" + $('#limit').val() + '&search=' + $(
                     this).val()
             }
         })
     </Script>
-    <script>
-        function mostrarDetalles(articuloJson) {
-            var Articulo = JSON.parse(articuloJson);
-            document.getElementById('descripcion_span').innerText = Salida.descripcion;
-            document.getElementById('categoria_span').innerText = Salida.categoria_id;
-            document.getElementById('estante_span').innerText = Salida.estante;
-            document.getElementById('medida_span').innerText = Salida.unidad_id;
-            document.getElementById('cantidad_span').innerText = Salida.cantidad;
-            document.getElementById('existencia_span').innerText = Salida.existencia;
-        }
-    </script>
 @endsection

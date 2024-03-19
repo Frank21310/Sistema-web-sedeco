@@ -5,7 +5,9 @@
             <label for="">Folio de entrada</label>
             <input type="text" class="form-control custom-input" name="entrada_id" required>
         </div>
+        
     </div>
+    
     <div class="col">
         <div class="form-group">
             <label for="">Fecha de salida </label>

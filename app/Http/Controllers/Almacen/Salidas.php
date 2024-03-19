@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Almacen;
 
 use App\Http\Controllers\Controller;
+use App\Models\Entrada;
+use App\Models\inventario;
 use App\Models\Salida;
 use Illuminate\Http\Request;
 
@@ -15,7 +17,7 @@ class Salidas extends Controller
     }
     public function index(Request $request)
     {
-        $Salidas = Salida::select('*')->orderBy('id_entrada', 'ASC');
+        $Salidas = Salida::select('*')->orderBy('id_salida', 'ASC');
         $limit = (isset($request->limit)) ? $request->limit : 4;
 
         if (isset($request->search)) {
@@ -28,10 +30,15 @@ class Salidas extends Controller
 
     public function store(Request $request)
     {
+    $entradaExistente = Entrada::where('id_entrada', $request->entrada_id)->exists();
+
+    if (!$entradaExistente) {
+        return back()->with('Error', 'Folio no encontrado en la base de datos.');
+    }
         $salida = new Salida();
+        $salida->entrada_id = $request->entrada_id;
         $salida->fechasalida = $request->fechasalida;
         $salida->empleado_num = auth()->user()->empleado_num;
-        $salida->entrada_id = $request->entrada_id;
         $salida->save();
         return redirect()->route('Salidas.index');
     }
