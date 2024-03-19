@@ -97,9 +97,7 @@
                                     
                                     <td class="custom-td">
                                         <div class="btn-group" role="group">
-                                            <a href="#" class="btn btn-info" data-bs-toggle="modal"
-                                                data-bs-target="#verarticulomodal"
-                                                onclick="mostrarDetalles('{{ json_encode($Entrada) }}')">
+                                            <a href="{{ route('generar.pdf', $Entrada->id_entrada) }}" class="btn btn-info">
                                                 <i class="fa fa-print"></i>
                                             </a>
                                             <a href="{{ route('Entradas.edit', $Entrada->id_entrada) }}" class="btn btn-primary"><i

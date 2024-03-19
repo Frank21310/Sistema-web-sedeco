@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Inventario;
 use App\Models\Proveedor;
 use App\Models\UnidadMedida;
+use Dompdf\Dompdf;
 
 class Entradas extends Controller
 {
@@ -83,36 +84,36 @@ class Entradas extends Controller
     }
 
     public function update(Request $request, string $id)
-{
-    $Entrada = Entrada::where('id_entrada', $id)->firstOrFail();
-    $Entrada->factura = $request->factura;
-    $Entrada->folio = $request->folio;
-    $Entrada->fechaentrada = $request->fechaentrada;
-    $Entrada->fechafactura = $request->fechafactura;
-    $Entrada->departamento_id = $request->departamento_id;
-    $Entrada->proveedor_id = $request->proveedor_id;
-    $Entrada->empleado_num = auth()->user()->empleado_num;
-    $Entrada->save();
+    {
+        $Entrada = Entrada::where('id_entrada', $id)->firstOrFail();
+        $Entrada->factura = $request->factura;
+        $Entrada->folio = $request->folio;
+        $Entrada->fechaentrada = $request->fechaentrada;
+        $Entrada->fechafactura = $request->fechafactura;
+        $Entrada->departamento_id = $request->departamento_id;
+        $Entrada->proveedor_id = $request->proveedor_id;
+        $Entrada->empleado_num = auth()->user()->empleado_num;
+        $Entrada->save();
 
-    // Eliminar detalles de artículos existentes asociados a la entrada
-    $Entrada->detalles()->delete();
+        // Eliminar detalles de artículos existentes asociados a la entrada
+        $Entrada->detalles()->delete();
 
-    // Iterar sobre los detalles de los artículos del formulario y agregarlos a la entrada
-    foreach ($request->descripcion as $key => $descripcion) {
-        $articulo = new Inventario();
-        $articulo->descripcion = $descripcion;
-        $articulo->categoria_id = '7';
-        $articulo->unidad_id = $request->unidad_id[$key];
-        $articulo->cantidad = $request->cantidad[$key];
-        $articulo->existencia = $request->cantidad[$key];
+        // Iterar sobre los detalles de los artículos del formulario y agregarlos a la entrada
+        foreach ($request->descripcion as $key => $descripcion) {
+            $articulo = new Inventario();
+            $articulo->descripcion = $descripcion;
+            $articulo->categoria_id = '7';
+            $articulo->unidad_id = $request->unidad_id[$key];
+            $articulo->cantidad = $request->cantidad[$key];
+            $articulo->existencia = $request->cantidad[$key];
 
-        $articulo->save();
-        $Entrada->detalles()->create([
-            'articulo_id' => $articulo->id_articulo,
-        ]);
+            $articulo->save();
+            $Entrada->detalles()->create([
+                'articulo_id' => $articulo->id_articulo,
+            ]);
+        }
+        return redirect()->route('Entradas.index');
     }
-    return redirect()->route('Entradas.index');
-}
 
     public function destroy(string $id)
     {
@@ -124,5 +125,17 @@ class Entradas extends Controller
         } catch (\Exception $e) {
             return redirect()->route('Entradas.index')->with('error', 'No se pudo eliminar el registro.');
         }
+    }
+
+    public function generarPDF($id)
+    {
+        $Entrada = Entrada::find($id);
+        
+        $pdf = new Dompdf();
+        $pdf->loadHtml(view('Almacen.Entradas.pdf.pdf', compact('Entrada')));
+        $pdf->getOptions()->setIsPhpEnabled(true);
+        $pdf->setPaper('letter', 'landscape');
+        $pdf->render();
+        return $pdf->stream('Entrada.pdf');
     }
 }

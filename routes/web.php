@@ -50,5 +50,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/Almancen', [SoloAlmacen::class, 'index'])->name(' administrador');
     Route::resource('/Almancen/Inventario', Inventario::class);
     Route::resource('/Administrador/Entradas', Entradas::class);
+    Route::get('/generar-pdf/{id}', [Entradas::class, 'generarPDF'])->name('generar.pdf');
+
     Route::resource('/Administrador/Salidas', Salidas::class);
 })->namespace('root');

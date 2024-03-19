@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class Entrada extends Model
 {
@@ -38,3 +40,4 @@ class Entrada extends Model
     }
     
 }
+
