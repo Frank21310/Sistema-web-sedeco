@@ -10,14 +10,14 @@
             @if (Auth::user()->rol_id == 1)
                 <li class="nav-item">
                     <a href="{{ url('/home') }}" class="nav-link  {{ 'home' == request()->path() ? 'active' : '' }}">
-                        <i class="fas fa-user-tie"></i>
+                        <i class="fas fa-home bi me-2 "></i>
                         Inicio
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('Roles.index') }}"
                         class="nav-link {{ 'Administrador/Roles' == request()->path() ? 'active' : '' }}">
-                        <i class="fas fa-user-tie"></i>
+                        <i class="fi fi-ss-employee-man"></i>
                         Roles
                     </a>
                 </li>
@@ -25,14 +25,14 @@
                 <li class="nav-item">
                     <a href="{{ route('Empleados.index') }}"
                         class="nav-link {{ 'Administrador/Empleados' == request()->path() ? 'active' : '' }}">
-                        <i class="fas fa-user-tie"></i>
+                        <i class="fi fi-ss-employees"></i>
                         Empleados
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('Usuarios.index') }}"
                         class="nav-link {{ 'Administrador/Usuarios' == request()->path() ? 'active' : '' }}">
-                        <i class="fas fa-user"></i>
+                        <i class="fi fi-sr-user-gear"></i>
                         Usuarios
                     </a>
                 </li>
@@ -47,21 +47,21 @@
                 <li class="nav-item">
                     <a href="{{ route('Inventario.index') }}"
                         class="nav-link {{ 'Almancen/Inventario' == request()->path() ? 'active' : '' }}">
-                        <i class="fas fa-user"></i>
+                        <i class="fi fi-rs-inventory-alt"></i>
                         Inventario
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('Entradas.index') }}"
                         class="nav-link {{ 'Almancen/Entradas' == request()->path() ? 'active' : '' }}">
-                        <i class="fas fa-user"></i>
+                        <i class="fi fi-rr-add-document"></i>
                         Entradas
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('Salidas.index') }}"
                         class="nav-link {{ 'Almancen/Entradas' == request()->path() ? 'active' : '' }}">
-                        <i class="fas fa-user"></i>
+                        <i class="fi fi-bs-sign-out-alt"></i>
                         Salidas
                     </a>
                 </li>

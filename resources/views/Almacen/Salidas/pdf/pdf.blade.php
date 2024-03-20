@@ -40,7 +40,7 @@
         p {
             font-family: 'Montserrat';
             font-weight: bold;
-            font-size: 16px;
+            font-size: 15px;
             margin: 2;
             color: rgb(0, 0, 0);
 
@@ -62,14 +62,18 @@
         }
 
         .full-width-table th:first-child {
-            width: 60%;
+            width: 70%;
         }
 
         .full-width-table th:nth-child(2),
-        .full-width-table td:nth-child(2),
+        .full-width-table td:nth-child(2) {
+            width: 20%;
+            text-align: center;
+
+        }
         .full-width-table th:nth-child(3),
         .full-width-table td:nth-child(3) {
-            width: 20%;
+            width: 10%;
             text-align: center;
 
         }
@@ -104,18 +108,18 @@
     <header>
         <table>
             <tr>
-                <td>
-                    <img src="assets/img/sedeco.png" alt="" width="480px">
+                <td style="width: 60%;">
+                    <img src="assets/img/sedeco.png" alt="" width="400px">
                     <p>Departamento de Recursos Materiales y Servicios Generales</p>
                     <p>Solicitante:{{ $Entrada->Departamento->nombre_departamento }}</p>
                     <p>Proveedor:{{ $Entrada->Proveedor->nombre }}</p>
                 </td>
-                <td>
+                <td style="width: 40%;">
                     <p>Salida del Almacen</p>
                     <p>Factura:{{ $Entrada->factura }}</p>
                     <p>Folio de la factura:{{ $Entrada->folio }}</p>
-                    <p>Fecha de salida del almacén:{{ $Entrada->fechaentrada }}</p>
-                    <p>Fecha de factura: {{ $Entrada->fechafactura }}</p>
+                    <p>Fecha de salida del almacén: {{ \Carbon\Carbon::parse($Salida->fechasalida)->format('d/m/Y') }}</p>
+                    <p>Fecha de factura:  {{ \Carbon\Carbon::parse($Entrada->fechafactura)->format('d/m/Y') }}</p>
                     <p>RFC: {{ $Entrada->Proveedor->rfc }}</p>
 
                 </td>
