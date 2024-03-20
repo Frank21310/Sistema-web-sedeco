@@ -5,152 +5,166 @@
     <meta charset="UTF-8">
     <title>Entrada</title>
     <style>
-        /* Estilos para el encabezado */
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
+        /** Define the margins of your page **/
+        @page {
+            margin-top: 1.5cm;
+            margin-bottom: 2.5cm;
+            margin-left: 2.5cm;
+            margin-right: 2.5cm;
+        }
+
+        header {
             position: relative;
-        }
-
-        .header h1 {
-            margin: 0;
-            padding: 10px 0;
-        }
-
-        .header img {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100px;
-            /* Tamaño de la imagen */
-            height: auto;
-        }
-
-        .header .info {
-            position: absolute;
-            right: 0;
-            top: 0;
-        }
-
-        /* Estilos para el cuerpo */
-        .body {
-            margin: 0 20px;
-        }
-
-        .body table {
-            border-collapse: collapse;
+            height: 150px;
+            /* Adjust the height according to your header content */
             width: 100%;
-            margin-bottom: 20px;
+            /* Make sure the header spans the whole width */
         }
 
-        .body table,
-        .body table th,
-        .body table td {
+        main {
+            margin-top: 1cm;
+            /* Adjust this margin to your liking */
+        }
+
+
+        p {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            font-size: 15px;
+            margin: 2;
+            color: rgb(0, 0, 0);
+
+        }
+
+        .full-width-table {
+            width: 100%;
+            border-collapse: collapse;
+            
+        }
+
+        .full-width-table th,
+        .full-width-table td {
+            
             border: 1px solid black;
-        }
-
-        .body th,
-        .body td {
-            padding: 8px;
+            padding: 2px;
             text-align: left;
+            
         }
 
-        /* Estilos para las firmas */
-        .firmas {
-            margin-top: 20px;
+        .full-width-table th:first-child {
+            width: 60%;
         }
 
-        .firmas table {
+        .full-width-table th:nth-child(2),
+        .full-width-table td:nth-child(2),
+        .full-width-table th:nth-child(3),
+        .full-width-table td:nth-child(3) {
+            width: 20%;
+            text-align: center;
+
+        }
+
+        .full {
             width: 100%;
             border-collapse: collapse;
         }
 
-        .firmas td {
-            border: none;
-            padding: 5px;
-            text-align: center;
-            position: relative;
-        }
-
-        .firmas .linea {
-            border-top: 1px solid black;
-            width: 33%;
-            /* Divide en tres partes iguales */
-        }
-
-        .firmas .texto {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        /* Estilos para el pie de página */
-        .footer {
-            position: fixed;
-            bottom: 0;
+        .Firmas {
+            border-collapse: collapse;
             width: 100%;
+            margin-top: 2cm;
+
+        }
+
+        .Firmas td {
+            border: none;
+            padding: 10px;
+            /* Espacio entre celdas */
+            margin: 0;
             text-align: center;
-            font-size: 10px;
+            /* Centrar texto */
+        }
+
+        .Firmas p {
+            text-align: center;
+            margin: 0;
+            /* Eliminar márgenes */
         }
     </style>
 </head>
 
 <body>
     <!-- Encabezado -->
-    <div class="header">
-        <img src="assets/img/sedeco.png" alt="Logo">
-        <div class="info">
-            <p>Información adicional del encabezado</p>
-            <p>Otra información del encabezado si es necesario</p>
-        </div>
-    </div>
-
-    <!-- Cuerpo -->
-    <div class="body">
-        <h2>Datos de la Entrada</h2>
+    <header>
         <table>
-            <thead>
-                <tr>
-                    <th>Descripción</th>
-                    <th>Unidad de Medida</th>
-                    <th>Cantidad</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Descripción 1</td>
-                    <td>Unidad 1</td>
-                    <td>Cantidad 1</td>
-                </tr>
-                <tr>
-                    <td>Descripción 2</td>
-                    <td>Unidad 2</td>
-                    <td>Cantidad 2</td>
-                </tr>
-                <!-- Agrega más filas según sea necesario -->
-            </tbody>
-        </table>
+            <tr>
+                <td>
+                    <img src="assets/img/sedeco.png" alt="" width="480px">
+                    <p>Departamento de Recursos Materiales y Servicios Generales</p>
+                    <p>Solicitante:{{ $Entrada->Departamento->nombre_departamento }}</p>
+                    <p>Proveedor:{{ $Entrada->Proveedor->nombre }}</p>
+                </td>
+                <td>
+                    <p>Entrada del Almacen</p>
+                    <p>Factura:{{ $Entrada->factura }}</p>
+                    <p>Folio de la factura:{{ $Entrada->folio }}</p>
+                    <p>Fecha de entrada al almacén:{{ $Entrada->fechaentrada }}</p>
+                    <p>Fecha de factura: {{ $Entrada->fechafactura }}</p>
+                    <p>RFC: {{ $Entrada->Proveedor->rfc }}</p>
 
-        <!-- Firmas -->
-        <div class="firmas">
-            <table>
-                <tr>
-                    <td class="linea"></td>
-                    <td></td>
-                    <td class="linea"></td>
-                    <td></td>
-                    <td class="linea"></td>
-                </tr>
-                <tr>
-                    <td class="texto">Entrega</td>
-                    <td></td>
-                    <td class="texto">Jefe</td>
-                    <td></td>
-                    <td class="texto">Recibe</td>
-                </tr>
+                </td>
+            </tr>
+        </table>
+    </header>
+    <main>
+        <div>
+            <table class="full-width-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">Descripción</th>
+                        <th>Unidad de medida</th>
+                        <th>Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($articulos as $articulo)
+                        <tr>
+                            <td>{{ $articulo->descripcion }}</td>
+                            <td>{{ $articulo->Unidad->nombre_unidad }}</td>
+                            <td>{{ $articulo->cantidad }}</td>
+                        </tr>
+                    @endforeach
+
+                </tbody>
             </table>
         </div>
-    </div>
+        <div>
+            <table class="Firmas">
+                <tbody>
+                    <tr>
+                        <td>
+                            <p>_______________________________</p>
+                            <p>Entrega</p>
+                            <p>{{ $Entrada->Proveedor->nombre }}</p>
+                        </td>
+                        <td>
+                            <p>_______________________________</p>
+                            <p>C. Pedro Alberto Perez Sosa</p>
+                            <p>Jefe del Depto. de Recursos Materiales y Servicios Generales</p>
+                        </td>
+                        <td>
+                            <p>_______________________________</p>
+                            <p>Recibe</p>
+                            <p>{{ $Entrada->Empleado->nombre }} {{ $Entrada->Empleado->apellido_paterno }}
+                                {{ $Entrada->Empleado->apellido_materno }}</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+
 </body>
 
 </html>

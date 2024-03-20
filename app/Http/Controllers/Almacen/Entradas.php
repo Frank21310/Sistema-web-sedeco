@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Inventario;
 use App\Models\Proveedor;
 use App\Models\UnidadMedida;
-use Dompdf\Dompdf;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class Entradas extends Controller
 {
@@ -130,12 +130,18 @@ class Entradas extends Controller
     public function generarPDF($id)
     {
         $Entrada = Entrada::find($id);
-        
-        $pdf = new Dompdf();
-        $pdf->loadHtml(view('Almacen.Entradas.pdf.pdf', compact('Entrada')));
-        $pdf->getOptions()->setIsPhpEnabled(true);
+        $detallentradas = DetalleEntrada::where('entrada_id', $Entrada->id_entrada)->get();
+        $articulos = [];
+        foreach ($detallentradas as $detalle) {
+            $articulo = Inventario::find($detalle->articulo_id);
+            if ($articulo) {
+                $articulos[] = $articulo;
+            }
+        }
+
+        $pdf = Pdf::loadView('Almacen.Entradas.pdf.pdf', compact('Entrada','articulos'));
         $pdf->setPaper('letter', 'landscape');
         $pdf->render();
-        return $pdf->stream('Entrada.pdf');
+        return $pdf->stream('Entrada_' . $id . '.pdf');
     }
 }
