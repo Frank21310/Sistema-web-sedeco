@@ -111,10 +111,10 @@
                     <p>Proveedor:{{ $Entrada->Proveedor->nombre }}</p>
                 </td>
                 <td>
-                    <p>Entrada del Almacen</p>
+                    <p>Salida del Almacen</p>
                     <p>Factura:{{ $Entrada->factura }}</p>
                     <p>Folio de la factura:{{ $Entrada->folio }}</p>
-                    <p>Fecha de entrada al almacén:{{ $Entrada->fechaentrada }}</p>
+                    <p>Fecha de salida del almacén:{{ $Entrada->fechaentrada }}</p>
                     <p>Fecha de factura: {{ $Entrada->fechafactura }}</p>
                     <p>RFC: {{ $Entrada->Proveedor->rfc }}</p>
 
@@ -150,8 +150,9 @@
                     <tr>
                         <td>
                             <p>_______________________________</p>
-                            <p>Entrega</p>
-                            <p>{{ $Entrada->Proveedor->nombre }}</p>
+                            <p>{{ $Entrada->Empleado->nombre }} {{ $Entrada->Empleado->apellido_paterno }}
+                                {{ $Entrada->Empleado->apellido_materno }}</p>
+                            <p>{{ $Entrada->Empleado->Cargos->nombre_cargo }}</p>
                         </td>
                         <td>
                             <p>_______________________________</p>
@@ -161,9 +162,7 @@
                         <td>
                             <p>_______________________________</p>
                             <p>Recibe</p>
-                            <p>{{ $Entrada->Empleado->nombre }} {{ $Entrada->Empleado->apellido_paterno }}
-                                {{ $Entrada->Empleado->apellido_materno }}</p>
-                            <p>{{ $Entrada->Empleado->Cargos->nombre_cargo }}</p>
+                            
                         </td>
                     </tr>
                 </tbody>

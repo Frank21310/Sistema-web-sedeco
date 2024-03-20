@@ -20,7 +20,7 @@ class DetalleEntrada extends Model
     }
     public function Entrada()
     {
-        return $this->belongsTo(inventario::class, 'entrada_id', 'id_entrada');
+        return $this->belongsTo(Entrada::class, 'entrada_id', 'id_entrada');
     }
 
 }

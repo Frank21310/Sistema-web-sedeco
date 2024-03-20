@@ -11,6 +11,8 @@ use App\Models\Inventario;
 use App\Models\Proveedor;
 use App\Models\UnidadMedida;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
+
 
 class Entradas extends Controller
 {
@@ -95,10 +97,14 @@ class Entradas extends Controller
         $Entrada->empleado_num = auth()->user()->empleado_num;
         $Entrada->save();
 
-        // Eliminar detalles de artículos existentes asociados a la entrada
+        $detallesEntrada = $Entrada->detalles()->get();
+
         $Entrada->detalles()->delete();
 
-        // Iterar sobre los detalles de los artículos del formulario y agregarlos a la entrada
+        foreach ($detallesEntrada as $detalle) {
+            Inventario::where('id_articulo', $detalle->articulo_id)->delete();
+        }
+
         foreach ($request->descripcion as $key => $descripcion) {
             $articulo = new Inventario();
             $articulo->descripcion = $descripcion;
@@ -115,17 +121,6 @@ class Entradas extends Controller
         return redirect()->route('Entradas.index');
     }
 
-    public function destroy(string $id)
-    {
-        try {
-            $Entrada = Entrada::findOrFail($id);
-            $Entrada->delete();
-
-            return redirect()->route('Entradas.index');
-        } catch (\Exception $e) {
-            return redirect()->route('Entradas.index')->with('error', 'No se pudo eliminar el registro.');
-        }
-    }
 
     public function generarPDF($id)
     {
@@ -139,7 +134,7 @@ class Entradas extends Controller
             }
         }
 
-        $pdf = Pdf::loadView('Almacen.Entradas.pdf.pdf', compact('Entrada','articulos'));
+        $pdf = Pdf::loadView('Almacen.Entradas.pdf.pdf', compact('Entrada', 'articulos'));
         $pdf->setPaper('letter', 'landscape');
         $pdf->render();
         return $pdf->stream('Entrada_' . $id . '.pdf');

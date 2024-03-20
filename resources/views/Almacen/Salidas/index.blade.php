@@ -92,9 +92,7 @@
                                     <td class="custom-td">{{ $Salida->fechasalida }}</td>
                                     <td class="custom-td">
                                         <div class="btn-group" role="group">
-                                            <a href="#" class="btn btn-info" data-bs-toggle="modal"
-                                                data-bs-target="#verarticulomodal"
-                                                onclick="mostrarDetalles('{{ json_encode($Salida) }}')">
+                                            <a href="{{ route('generarsalida.pdf', $Salida->id_salida) }}" class="btn btn-info">
                                                 <i class="fa fa-print"></i>
                                             </a>
                                             <a href="{{ route('Salidas.edit', $Salida->id_salida) }}"

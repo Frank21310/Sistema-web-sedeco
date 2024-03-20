@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Almacen;
 
 use App\Http\Controllers\Controller;
+use App\Models\DetalleEntrada;
+use App\Models\DetalleSalida;
 use App\Models\Entrada;
 use App\Models\inventario;
 use App\Models\Salida;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class Salidas extends Controller
 {
@@ -30,11 +34,11 @@ class Salidas extends Controller
 
     public function store(Request $request)
     {
-    $entradaExistente = Entrada::where('id_entrada', $request->entrada_id)->exists();
+        $entradaExistente = Entrada::where('id_entrada', $request->entrada_id)->exists();
 
-    if (!$entradaExistente) {
-        return back()->with('Error', 'Folio no encontrado en la base de datos.');
-    }
+        if (!$entradaExistente) {
+            return back()->with('Error', 'Folio no encontrado en la base de datos.');
+        }
         $salida = new Salida();
         $salida->entrada_id = $request->entrada_id;
         $salida->fechasalida = $request->fechasalida;
@@ -69,5 +73,42 @@ class Salidas extends Controller
         } catch (\Exception $e) {
             return redirect()->route('Salidas.index')->with('error', 'No se pudo eliminar el registro.');
         }
+    }
+    public function generarSalidaPDF($id)
+    {
+        $Salida = Salida::find($id);
+
+        // Verificar si se encontró la salida
+        if (!$Salida) {
+            return response()->json(['error' => 'Salida no encontrada'], 404);
+        }
+
+        // Obtener la entrada relacionada con la salida
+        $Entrada = $Salida->Entrada;
+
+        // Verificar si se encontró la entrada
+        if (!$Entrada) {
+            return response()->json(['error' => 'Entrada no encontrada'], 404);
+        }
+
+        // Obtener los detalles de la entrada
+        $detallesEntrada = $Entrada->detalles;
+
+        // Inicializar un arreglo para los artículos
+        $articulos = [];
+
+        // Iterar sobre los detalles de la entrada para obtener los artículos
+        foreach ($detallesEntrada as $detalle) {
+            $articulo = $detalle->Inventario;
+
+            if ($articulo) {
+                $articulos[] = $articulo;
+            }
+        }
+
+        $pdf = Pdf::loadView('Almacen.Salidas.pdf.pdf', compact('Salida', 'Entrada', 'articulos'));
+        $pdf->setPaper('letter', 'landscape');
+
+        return $pdf->stream('Entrada_' . $id . '.pdf');
     }
 }
