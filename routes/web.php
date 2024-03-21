@@ -8,6 +8,7 @@ use App\Http\Controllers\Almacen\Entradas;
 use App\Http\Controllers\Almacen\Inventario;
 use App\Http\Controllers\Almacen\Salidas;
 use App\Http\Controllers\Almacen\SoloAdminController as AlmacenSoloAdminController;
+use App\Http\Controllers\Almacen\ValesController;
 use App\Http\Middleware\SoloAlmacen;
 use App\Models\Salida;
 use Illuminate\Support\Facades\Auth;
@@ -51,6 +52,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/Almancen', [SoloAlmacen::class, 'index'])->name(' administrador');
     Route::resource('/Almancen/Inventario', Inventario::class);
     Route::resource('/Administrador/Entradas', Entradas::class);
+    Route::resource('/Administrador/Vales', ValesController::class);
+
     Route::get('/Administrador/Entradas/generar-pdf/{id}', [Entradas::class, 'generarPDF'])->name('generar.pdf');
     Route::get('/Administrador/Salidas/generar-pdf/{id}', [Salidas::class, 'generarSalidaPDF'])->name('generarsalida.pdf');
 

@@ -65,6 +65,13 @@
                         Salidas
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('Vales.index') }}"
+                        class="nav-link {{ 'Almancen/Vales' == request()->path() ? 'active' : '' }}">
+                        <i class="fi fi-bs-sign-out-alt"></i>
+                        Vales
+                    </a>
+                </li>
                 
             @endif
         </ul>

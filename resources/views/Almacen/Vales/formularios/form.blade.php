@@ -1,57 +1,52 @@
 @csrf
-<div class="row d-grid gap-2 col-8 mx-auto">
-    <div class="col-12">
-        <div class="form-group">
-            <label for="">Descripcion</label>
-            <input type="text" class="form-control custom-input" name="descripcion"
-                required>
+<div class="row d-grid gap-2 mx-auto col-12">
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="">Departamento</label>
+                <select name="departamento_id" class="form-control custom-select" required>
+                    <option value="">Selecciona el departamento</option>
+                    @foreach ($Departamentos as $departamento)
+                        <option value="{{ $departamento->id_departamento }}">{{ $departamento->nombre_departamento }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
         </div>
     </div>
-    <div class="col-12">
-        <div class="form-group">
-            <label for="">Categoria</label>
-            <select class="form-control custom-select" name="categoria_id"  required>
-                <option value="">Seleccione una categoria</option>
-                @foreach ($categorias as $categoria)
-                    <option value="{{ $categoria->id_categoria}}" class="form-control">
-                         {{ $categoria->nombre_categoria }}
-                    </option>
-                @endforeach
-            </select>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label for="">Solicitante</label>
+                <select name="solicitante" class="form-control custom-select" required>
+                    <option value="">Selecciona el Solicitante</option>
+                    @foreach ($Solicitantes as $Solicitante)
+                        <option value="{{ $Solicitante->num_empleado }}">{{ $Solicitante->nombre}} {{ $Solicitante->apellido_paterno}}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
         </div>
     </div>
-    <div class="col-12">
-        <div class="form-group">
-            <label for="">Estante</label>
-            <input type="number" class="form-control custom-input" name="estante"
-                 required placeholder="0">
+
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="">Fecha de salida</label>
+                <input type="date" name="fechasalida" id="fechasalida" class="form-control custom-input" required>
+            </div>
         </div>
     </div>
-    <div class="col-12">
-        <div class="form-group">
-            <label for="">Unidad de medida</label>
-            <select class="form-control custom-select" name="unidad_id"  required>
-                <option value="">Seleccione una unidad de medida</option>
-                @foreach ($medidas as $medida)
-                    <option value="{{ $medida->id_unidad}}" class="form-control">
-                         {{ $medida->nombre_unidad }}
-                    </option>
-                @endforeach
-            </select>
-        </div>
-    </div>
-    <div class="col-12">
-        <div class="form-group">
-            <label for="">Cantidad</label>
-            <input type="number" class="form-control custom-input" name="cantidad"
-                 required placeholder="0.00" min="0.00" step="0.001">
-        </div>
-    </div>
-    <div class="col-12">
-        <div class="form-group">
-            <label for="">Existencia</label>
-            <input type="number" class="form-control custom-input" name="existencia"
-                 required placeholder="0.00" min="0.00" step="0.001">
-        </div>
-    </div>
+    <br>
+    @include('Almacen.Entradas.formularios.vistaform')
+
+    <br>
+
+
 </div>
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("input[type=date]");
+    </script>
+@endpush

@@ -9,7 +9,7 @@
                 </div>
                 <div class="col g-col-6 d-flex justify-content-end">
                     <button type="button" class="btn btn-primary ml-auto BotonRojo" data-bs-toggle="modal"
-                        data-bs-target="#modalagregarrol">
+                        data-bs-target="#modalagregarentrada">
                         <i class="fas fa-plus"></i>
                         Nuevo
                     </button>
@@ -25,7 +25,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    <h3>Vales existentes</h3>
+                    <h3>Vales realizados</h3>
                 </div>
             </div>
             <div class="row">
@@ -76,39 +76,32 @@
                     <table class="table custom-table">
                         <thead class="custom-thead">
                             <tr>
-                                <th class="col-4 custom-th">Descripción</th>
-                                <th class="col-2 custom-th">Categoria</th>
-                                <th class="col-1 custom-th">Estante</th>
-                                <th class="col-1 custom-th">Medida</th>
-                                <th class="col-1 custom-th">Cantidad</th>
-                                <th class="col-1 custom-th">Existencia</th>
-                                <!-- <th class="col-2 custom-th">Fecha Elaboracion</th> -->
-                                <th class="col-2 custom-th">Acciones</th>
-
+                                <th class="col-1 custom-th">ID</th>
+                                <th class="col-1 custom-th">Fecha de salida</th>
+                                <th class="col-3 custom-th">Soliciante</th>
+                                <th class="col-2 custom-th">Departamento</th>
+                                <th class="col-2 custom-th">Entrega</th>
+                                <th class="col-2 custom-th">Acciones</th> 
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($Articulos as $Articulo)
+                            @foreach ($Vales as $Vale)
                                 <tr>
-                                    <td class="custom-td">{{ $Articulo->descripcion }}</td>
-                                    <td class="custom-td">{{ $Articulo->Categoria->nombre_categoria }}</td>
-                                    <td class="custom-td">{{ $Articulo->estante }}</td>
-                                    <td class="custom-td">{{ $Articulo->Unidad->nombre_unidad }}</td>
-                                    <td class="custom-td">{{ $Articulo->cantidad }}</td>
-                                    <td class="custom-td">{{ $Articulo->existencia }}</td>
-                                    <!--<td class="custom-td">{{ $Articulo->fecha_elaboracion }}</td>-->
+                                    <td class="custom-td">{{ $Vale->id_vale }}</td>
+                                    <td class="custom-td">{{ $Vale->fechasalida}}</td>
+                                    <td class="custom-td">{{ $Vale->Solicitante->nombre }}</td>
+                                    <td class="custom-td">{{ $Vale->Departamento->nombre_departamento }}</td>
+                                    <td class="custom-td">{{ $Vale->Entrega->nombre }}</td>
                                     
                                     <td class="custom-td">
                                         <div class="btn-group" role="group">
-                                            <a href="#" class="btn btn-info" data-bs-toggle="modal"
-                                                data-bs-target="#verarticulomodal"
-                                                onclick="mostrarDetalles('{{ json_encode($Articulo) }}')">
-                                                <i class="fas fa-eye"></i>
+                                            <a href="{{ route('generar.pdf', $Vale->id_entrada) }}" class="btn btn-info">
+                                                <i class="fa fa-print"></i>
                                             </a>
-                                            <a href="{{ route('Inventario.edit', $Articulo->id_articulo) }}" class="btn btn-primary"><i
+                                            <a href="{{ route('Entradas.edit', $Vale->id_entrada) }}" class="btn btn-primary"><i
                                                     class="fas fa-pencil-alt"></i></a>
-                                            <form action="{{ route('Inventario.destroy', $Articulo->id_articulo) }}"
-                                                id="delete_{{ $Articulo->id_articulo }}" method="POST">
+                                            <form action="{{ route('Entradas.destroy', $Vale->id_entrada) }}"
+                                                id="delete_{{ $Vale->id_entrada }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
 
@@ -125,19 +118,20 @@
                     </table>
                 </div>
             </div>
-            <!-- Modal de nuevo articulo -->
-            <div class="modal fade" id="modalagregarrol" tabindex="-1" aria-labelledby="agregarModalLabel"
+            <!-- Modal de nuva entrada -->
+            <div class="modal fade modal-lg" id="modalagregarentrada" tabindex="-1" aria-labelledby="agregarModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="agregarModalLabel">Agregar Nuevo Articulo</h5>
+                            <h5 class="modal-title" id="agregarModalLabel">Nueva Vale</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form id="createForm" action="{{ route('Inventario.store') }}" method="POST"
+                            <form id="createForm" action="{{ route('Entradas.store') }}" method="POST"
                                 enctype="multipart/form-data">
-                                @include('Almacen.Inventario.formularios.form')
+                                @include('Almacen.Vales.formularios.form')
+
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -205,8 +199,8 @@
             </div>
         </div>
         <div class="card-footer">
-            @if ($Articulos->count() > 0)
-                {{ $Articulos->links() }}
+            @if ($Vales->count() > 0)
+                {{ $Vales->links() }}
             @endif
         </div>
     </div>
@@ -224,16 +218,4 @@
             }
         })
     </Script>
-    <script>
-        function mostrarDetalles(articuloJson) {
-            var Articulo = JSON.parse(articuloJson);
-            document.getElementById('descripcion_span').innerText = Articulo.descripcion;
-            document.getElementById('categoria_span').innerText = Articulo.categoria_id;
-            document.getElementById('estante_span').innerText = Articulo.estante;
-            document.getElementById('medida_span').innerText = Articulo.unidad_id;
-            document.getElementById('cantidad_span').innerText = Articulo.cantidad;
-            document.getElementById('existencia_span').innerText = Articulo.existencia;
-
-        }
-    </script>
 @endsection
