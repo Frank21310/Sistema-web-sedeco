@@ -10,6 +10,7 @@ use App\Models\inventario;
 use App\Models\UnidadMedida;
 use App\Models\Vale;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ValesController extends Controller
 {
@@ -32,38 +33,46 @@ class ValesController extends Controller
                 ->orWhere('solicita', 'like', '%' . $request->search . '%');
         }
         $Vales = $Vales->paginate($limit)->appends($request->all());
-        return view('Almacen.Vales.index', compact('Vales', 'medidas', 'Departamentos','Solicitantes'));
+        return view('Almacen.Vales.index', compact('Vales', 'medidas', 'Departamentos', 'Solicitantes'));
     }
 
     public function store(Request $request)
     {
-        $entrada = new Vale();
-        $entrada->fechasalida = $request->fechasalida;
-        $entrada->solicitante = $request->solicitante;
-        $entrada->departamento_id = $request->departamento_id;
-        $entrada->iniciosemana = $request->iniciosemana;
-        $entrada->finsemana = $request->finsemana;
-        $entrada->entrega = $request->entrega;
-        $entrada->empleado_num = auth()->user()->empleado_num;
-        $entrada->save();
+        $fechasalida = Carbon::parse($request->fechasalida);
+        $iniciosemana = $fechasalida->startOfWeek();
+        $finsemana = $fechasalida->endOfWeek();
 
-        foreach ($request->descripcion as $key => $descripcion) {
-            $articulo = new inventario();
-            $articulo->descripcion = $descripcion;
-            $articulo->categoria_id = '7';
-            $articulo->unidad_id = $request->unidad_id[$key];
-            $articulo->cantidad = $request->cantidad[$key];
-            $articulo->existencia = $request->cantidad[$key];
+        $vale = Vale::create([
+            'fechasalida' => $fechasalida,
+            'solicitante' => $request->solicitante,
+            'departamento_id' => $request->departamento_id,
+            'iniciosemana' => $iniciosemana,
+            'finsemana' => $finsemana,
+            'entrega' => auth()->user()->empleado_num,
+        ]);
 
-            $articulo->save();
-            $entrada->detalles()->create([
-                'articulo_id' => $articulo->id_articulo,
+        // Obtener las descripciones y salidas enviadas en el formulario
+        $descripciones = $request->descripcion;
+        $salidas = $request->salida;
+        $articulo_ids = $request->articulo_id;
+
+        // Iterar sobre las descripciones y salidas para crear los detalles
+        for ($i = 0; $i < count($descripciones); $i++) {
+            DetalleVales::create([
+                'vale_id' => $vale->id_vale,
+                'articulo_id' => $articulo_ids[$i], // Obtener el artículo_id correspondiente
+                'salida' => $salidas[$i],
             ]);
+
+            $inventario = Inventario::find($articulo_ids[$i]);
+            $inventario->salida += $salidas[$i];
+            $inventario->existencia -= $salidas[$i];
+            $inventario->save();
         }
 
-
-        return redirect()->route('Vales.index');
+        return redirect()->route('Vales.index')->with('Vale creado exitosamente.');
     }
+
 
     public function edit(string $id)
     {
@@ -116,5 +125,21 @@ class ValesController extends Controller
         }
         return redirect()->route('Vales.index');
     }
+    public function buscarArticulos(Request $request)
+{
+    $searchTerm = $request->input('query'); // Obtener el valor del parámetro 'query'
 
+    $articulos = Inventario::where('descripcion', 'like', '%' . $searchTerm . '%')->get();
+
+    $data = [];
+
+    foreach ($articulos as $articulo) {
+        $data[] = [
+            'label' => $articulo->descripcion, // 'label' es la descripción del artículo
+            'value' => $articulo->id_articulo // 'value' es el ID del artículo (opcional)
+        ];
+    }
+
+    return response()->json($data);
+}
 }

@@ -39,23 +39,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/Administrador/Empleados', EmpleadosController::class);
     Route::resource('/Administrador/Usuarios', UsuariosController::class);
 
-
-
-
-
 })->namespace('root');
-
-
-
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/Almancen', [SoloAlmacen::class, 'index'])->name(' administrador');
     Route::resource('/Almancen/Inventario', Inventario::class);
     Route::resource('/Administrador/Entradas', Entradas::class);
     Route::resource('/Administrador/Vales', ValesController::class);
+    Route::get('/Administrador/Vales//buscar-articulos', [ValesController::class, 'buscarArticulos'])->name('buscarArticulos');
+
 
     Route::get('/Administrador/Entradas/generar-pdf/{id}', [Entradas::class, 'generarPDF'])->name('generar.pdf');
     Route::get('/Administrador/Salidas/generar-pdf/{id}', [Salidas::class, 'generarSalidaPDF'])->name('generarsalida.pdf');
-
     Route::resource('/Administrador/Salidas', Salidas::class);
 })->namespace('root');

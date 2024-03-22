@@ -9,7 +9,7 @@ class DetalleVales extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id_detallevale';
-    protected $table = 'detallentrada';
+    protected $table = 'detallevales';
     protected $fillable = [
         'vale_id',
         'articulo_id',

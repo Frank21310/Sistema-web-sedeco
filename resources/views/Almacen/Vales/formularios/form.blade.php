@@ -38,7 +38,7 @@
         </div>
     </div>
     <br>
-    @include('Almacen.Entradas.formularios.vistaform')
+    @include('Almacen.Vales.formularios.vistaform')
 
     <br>
 

@@ -95,13 +95,13 @@
                                     
                                     <td class="custom-td">
                                         <div class="btn-group" role="group">
-                                            <a href="{{ route('generar.pdf', $Vale->id_entrada) }}" class="btn btn-info">
+                                            <a href="{{ route('generar.pdf', $Vale->id_vale) }}" class="btn btn-info">
                                                 <i class="fa fa-print"></i>
                                             </a>
-                                            <a href="{{ route('Entradas.edit', $Vale->id_entrada) }}" class="btn btn-primary"><i
+                                            <a href="{{ route('Vales.edit', $Vale->id_vale) }}" class="btn btn-primary"><i
                                                     class="fas fa-pencil-alt"></i></a>
-                                            <form action="{{ route('Entradas.destroy', $Vale->id_entrada) }}"
-                                                id="delete_{{ $Vale->id_entrada }}" method="POST">
+                                            <form action="{{ route('Vales.destroy', $Vale->id_vale) }}"
+                                                id="delete_{{ $Vale->id_vale }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
 
@@ -128,7 +128,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form id="createForm" action="{{ route('Entradas.store') }}" method="POST"
+                            <form id="createForm" action="{{ route('Vales.store') }}" method="POST"
                                 enctype="multipart/form-data">
                                 @include('Almacen.Vales.formularios.form')
 
@@ -142,61 +142,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Modal para ver detalles del articulo -->
-            <div class="modal fade" id="verarticulomodal" tabindex="-1" aria-labelledby="verModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="verModalLabel">Detalles del articulo</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
 
-                        <div class="modal-body">
-                            <!-- Aquí se mostrarán los detalles del rol -->
-                            <div class="row">
-                                <div class="col-12">
-                                    <label for="nombre_rol">descripcion:</label>
-                                    <span id="descripcion_span"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <label for="nombre_rol">Categoria:</label>
-                                    <span id="categoria_span"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <label for="nombre_rol">Ubicacion:</label>
-                                    <span id="estante_span"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <label for="nombre_rol">Medida:</label>
-                                    <span id="medida_span"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <label for="nombre_rol">Cantidad:</label>
-                                    <span id="cantidad_span"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <label for="nombre_rol">Existencia:</label>
-                                    <span id="existencia_span"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="card-footer">
             @if ($Vales->count() > 0)
@@ -207,15 +153,16 @@
 
     <Script type="text/javascript">
         $('#limit').on('change', function() {
-            window.location.href = "{{ route('Inventario.index') }}?limit=" + $(this).val() + '&search=' + $('#search')
+            window.location.href = "{{ route('Vales.index') }}?limit=" + $(this).val() + '&search=' + $('#search')
                 .val()
         })
 
         $('#search').on('keyup', function(e) {
             if (e.keyCode == 13) {
-                window.location.href = "{{ route('Inventario.index') }}?limit=" + $('#limit').val() + '&search=' + $(
+                window.location.href = "{{ route('Vales.index') }}?limit=" + $('#limit').val() + '&search=' + $(
                     this).val()
             }
         })
     </Script>
+    
 @endsection

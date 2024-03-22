@@ -19,6 +19,7 @@ class inventario extends Model
         'estante',
         'unidad_id',
         'cantidad',
+        'salida',
         'existencia',
         'fecha_elaboracion',
     ];
