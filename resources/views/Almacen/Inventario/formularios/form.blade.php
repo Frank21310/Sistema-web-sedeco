@@ -33,7 +33,7 @@
             <select class="form-control custom-select" name="unidad_id"  required>
                 <option value="">Seleccione una unidad de medida</option>
                 @foreach ($medidas as $medida)
-                    <option value="{{ $medida->id_unidad}}" class="form-control">
+                    <option value="{{ $medida->id_unidad}}" class="form-control" required>
                          {{ $medida->nombre_unidad }}
                     </option>
                 @endforeach
