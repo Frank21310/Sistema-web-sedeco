@@ -9,6 +9,7 @@ use App\Models\Empleado;
 use App\Models\inventario;
 use App\Models\UnidadMedida;
 use App\Models\Vale;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -77,9 +78,10 @@ class ValesController extends Controller
     public function edit(string $id)
     {
         $medidas = UnidadMedida::all();
+        $Empleados = Empleado::all();
         $Departamentos = Departamento::all();
         $Vale = Vale::where('id_vale', $id)->firstOrFail();
-        $detallevales = DetalleVales::where('vales_id', $Vale->id_vale)->get();
+        $detallevales = DetalleVales::where('vale_id', $Vale->id_vale)->get();
         $articulos = [];
         foreach ($detallevales as $detalle) {
             $articulo = Inventario::find($detalle->articulo_id);
@@ -87,59 +89,89 @@ class ValesController extends Controller
                 $articulos[] = $articulo;
             }
         }
-        return view('Almacen.Vales.edit', compact('Vale', 'medidas', 'proveedores', 'Departamentos', 'articulos'));
+        return view('Almacen.Vales.edit', compact('Vale', 'medidas', 'Departamentos', 'articulos','Empleados'));
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        $Vale = Vale::where('id_vale', $id)->firstOrFail();
-        $Vale->factura = $request->factura;
-        $Vale->folio = $request->folio;
-        $Vale->fechaentrada = $request->fechaentrada;
-        $Vale->fechafactura = $request->fechafactura;
-        $Vale->departamento_id = $request->departamento_id;
-        $Vale->proveedor_id = $request->proveedor_id;
-        $Vale->empleado_num = auth()->user()->empleado_num;
-        $Vale->save();
+        // Encontrar el registro existente que se desea actualizar
+        $vale = Vale::findOrFail($id);
 
-        $detallesEntrada = $Vale->detalles()->get();
+        // Guardar la fecha de salida del formulario
+        $fechasalida = Carbon::parse($request->fechasalida);
+        $iniciosemana = $fechasalida->startOfWeek();
+        $finsemana = $fechasalida->endOfWeek();
 
-        $Vale->detalles()->delete();
+        // Actualizar los datos del vale
+        $vale->update([
+            'fechasalida' => $fechasalida,
+            'solicitante' => $request->solicitante,
+            'departamento_id' => $request->departamento_id,
+            'iniciosemana' => $iniciosemana,
+            'finsemana' => $finsemana,
+            'entrega' => auth()->user()->empleado_num,
+        ]);
 
-        foreach ($detallesEntrada as $detalle) {
-            Inventario::where('id_articulo', $detalle->articulo_id)->delete();
+        // Eliminar todos los detalles actuales asociados a este vale
+        $vale->detalles()->delete();
+
+        // Obtener las descripciones y salidas enviadas en el formulario
+        $descripciones = $request->descripcion;
+        $salidas = $request->salida;
+        $articulo_ids = $request->articulo_id;
+
+        // Iterar sobre las descripciones y salidas para crear los detalles actualizados
+        for ($i = 0; $i < count($descripciones); $i++) {
+            if (!is_null($articulo_ids[$i])) { // Validar que articulo_id no sea null
+                $detalle = DetalleVales::create([
+                    'vale_id' => $vale->id_vale,
+                    'articulo_id' => $articulo_ids[$i],
+                    'salida' => $salidas[$i],
+                ]);
+        
+                // Actualizar el inventario correspondiente
+                $inventario = Inventario::find($articulo_ids[$i]);
+                $inventario->salida += $salidas[$i] - $detalle->salida; // Restar la salida anterior y agregar la nueva
+                $inventario->existencia -= $salidas[$i] - $detalle->salida; // Restar la salida anterior y agregar la nueva
+                $inventario->save();
+            }
         }
 
-        foreach ($request->descripcion as $key => $descripcion) {
-            $articulo = new Inventario();
-            $articulo->descripcion = $descripcion;
-            $articulo->categoria_id = '7';
-            $articulo->unidad_id = $request->unidad_id[$key];
-            $articulo->cantidad = $request->cantidad[$key];
-            $articulo->existencia = $request->cantidad[$key];
-
-            $articulo->save();
-            $Vale->detalles()->create([
-                'articulo_id' => $articulo->id_articulo,
-            ]);
-        }
-        return redirect()->route('Vales.index');
+        return redirect()->route('Vales.index')->with('success', 'Vale actualizado exitosamente.');
     }
+
     public function buscarArticulos(Request $request)
-{
-    $searchTerm = $request->input('query'); // Obtener el valor del parámetro 'query'
+    {
+        $searchTerm = $request->input('query'); // Obtener el valor del parámetro 'query'
 
-    $articulos = Inventario::where('descripcion', 'like', '%' . $searchTerm . '%')->get();
+        $articulos = Inventario::where('descripcion', 'like', '%' . $searchTerm . '%')->get();
 
-    $data = [];
+        $data = [];
 
-    foreach ($articulos as $articulo) {
-        $data[] = [
-            'label' => $articulo->descripcion, // 'label' es la descripción del artículo
-            'value' => $articulo->id_articulo // 'value' es el ID del artículo (opcional)
-        ];
+        foreach ($articulos as $articulo) {
+            $data[] = [
+                'label' => $articulo->descripcion, // 'label' es la descripción del artículo
+                'value' => $articulo->id_articulo // 'value' es el ID del artículo (opcional)
+            ];
+        }
+
+        return response()->json($data);
     }
+    public function generarvalePDF($id)
+    {
+        $Vales = Vale::find($id);
+        $detallevales = DetalleVales::where('vale_d', $Vales->id_vale)->get();
+        $articulos = [];
+        foreach ($detallevales as $detalle) {
+            $articulo = Inventario::find($detalle->articulo_id);
+            if ($articulo) {
+                $articulos[] = $articulo;
+            }
+        }
 
-    return response()->json($data);
-}
+        $pdf = Pdf::loadView('Almacen.Vales.pdf', compact('Vales', 'articulos'));
+        $pdf->setPaper('letter', 'landscape');
+        $pdf->render();
+        return $pdf->stream('Entrada_' . $id . '.pdf');
+    }
 }

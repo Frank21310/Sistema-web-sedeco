@@ -51,5 +51,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/Administrador/Entradas/generar-pdf/{id}', [Entradas::class, 'generarPDF'])->name('generar.pdf');
     Route::get('/Administrador/Salidas/generar-pdf/{id}', [Salidas::class, 'generarSalidaPDF'])->name('generarsalida.pdf');
+    Route::get('/Administrador/Vales/generar-pdf/{id}', [ValesController::class, 'generarvalePDF'])->name('generarvalePDF.pdf');
+
     Route::resource('/Administrador/Salidas', Salidas::class);
 })->namespace('root');

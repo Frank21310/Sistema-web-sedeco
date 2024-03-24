@@ -1,5 +1,5 @@
 @csrf
-<<div class="table-responsive">
+<div class="table-responsive">
     <table id="articulos-table" class="table custom-table">
         <thead class="custom-thead">
             <tr>
