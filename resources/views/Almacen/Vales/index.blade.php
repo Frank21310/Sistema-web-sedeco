@@ -14,6 +14,7 @@
                         Nuevo
                     </button>
                 </div>
+                
             </div> 
             @if (session('error'))
                 <div class="alert alert-danger" role="alert">
@@ -95,7 +96,7 @@
                                     
                                     <td class="custom-td">
                                         <div class="btn-group" role="group">
-                                            <a href="{{ route('generar.pdf', $Vale->id_vale) }}" class="btn btn-info">
+                                            <a href="{{ route('generarvalePDF.pdf', $Vale->id_vale) }}" class="btn btn-info">
                                                 <i class="fa fa-print"></i>
                                             </a>
                                             <a href="{{ route('Vales.edit', $Vale->id_vale) }}" class="btn btn-primary"><i

@@ -52,16 +52,14 @@ class ValesController extends Controller
             'entrega' => auth()->user()->empleado_num,
         ]);
 
-        // Obtener las descripciones y salidas enviadas en el formulario
         $descripciones = $request->descripcion;
         $salidas = $request->salida;
         $articulo_ids = $request->articulo_id;
 
-        // Iterar sobre las descripciones y salidas para crear los detalles
         for ($i = 0; $i < count($descripciones); $i++) {
             DetalleVales::create([
                 'vale_id' => $vale->id_vale,
-                'articulo_id' => $articulo_ids[$i], // Obtener el artículo_id correspondiente
+                'articulo_id' => $articulo_ids[$i], 
                 'salida' => $salidas[$i],
             ]);
 
@@ -82,27 +80,24 @@ class ValesController extends Controller
         $Departamentos = Departamento::all();
         $Vale = Vale::where('id_vale', $id)->firstOrFail();
         $detallevales = DetalleVales::where('vale_id', $Vale->id_vale)->get();
-        $articulos = [];
+        /*$articulos = [];
         foreach ($detallevales as $detalle) {
             $articulo = Inventario::find($detalle->articulo_id);
             if ($articulo) {
                 $articulos[] = $articulo;
             }
-        }
-        return view('Almacen.Vales.edit', compact('Vale', 'medidas', 'Departamentos', 'articulos','Empleados'));
+        }*/
+        return view('Almacen.Vales.edit', compact('Vale', 'medidas', 'Departamentos', 'detallevales','Empleados'));
     }
 
     public function update(Request $request, $id)
     {
-        // Encontrar el registro existente que se desea actualizar
         $vale = Vale::findOrFail($id);
 
-        // Guardar la fecha de salida del formulario
         $fechasalida = Carbon::parse($request->fechasalida);
         $iniciosemana = $fechasalida->startOfWeek();
         $finsemana = $fechasalida->endOfWeek();
 
-        // Actualizar los datos del vale
         $vale->update([
             'fechasalida' => $fechasalida,
             'solicitante' => $request->solicitante,
@@ -112,15 +107,12 @@ class ValesController extends Controller
             'entrega' => auth()->user()->empleado_num,
         ]);
 
-        // Eliminar todos los detalles actuales asociados a este vale
         $vale->detalles()->delete();
 
-        // Obtener las descripciones y salidas enviadas en el formulario
         $descripciones = $request->descripcion;
         $salidas = $request->salida;
         $articulo_ids = $request->articulo_id;
 
-        // Iterar sobre las descripciones y salidas para crear los detalles actualizados
         for ($i = 0; $i < count($descripciones); $i++) {
             if (!is_null($articulo_ids[$i])) { // Validar que articulo_id no sea null
                 $detalle = DetalleVales::create([
@@ -160,18 +152,23 @@ class ValesController extends Controller
     public function generarvalePDF($id)
     {
         $Vales = Vale::find($id);
-        $detallevales = DetalleVales::where('vale_d', $Vales->id_vale)->get();
-        $articulos = [];
-        foreach ($detallevales as $detalle) {
-            $articulo = Inventario::find($detalle->articulo_id);
-            if ($articulo) {
-                $articulos[] = $articulo;
-            }
-        }
-
-        $pdf = Pdf::loadView('Almacen.Vales.pdf', compact('Vales', 'articulos'));
+        $detallevales = DetalleVales::where('vale_id', $Vales->id_vale)->get();
+    
+        $pdf = Pdf::loadView('Almacen.Vales.pdf.pdf', compact('Vales', 'detallevales'));
         $pdf->setPaper('letter', 'landscape');
         $pdf->render();
         return $pdf->stream('Entrada_' . $id . '.pdf');
+    }
+    public function destroy(string $id)
+    {
+        try {
+            $Vales = Vale::findOrFail($id);
+            $Vales->delete();
+
+            return redirect()->route('Vales.index');
+        } catch (\Exception $e) {
+            // Maneja la excepción aquí (puedes mostrar un mensaje de error, registrar la excepción, etc.)
+            return redirect()->route('Vales.index')->with('error', 'No se pudo eliminar el registro.');
+        }
     }
 }

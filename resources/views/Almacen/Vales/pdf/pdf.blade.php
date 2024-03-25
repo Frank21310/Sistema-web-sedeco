@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Entrada</title>
+    <title>Vale de salida</title>
     <style>
         @page {
             margin-top: 1.5cm;
@@ -111,16 +111,13 @@
                 <td style="width: 60%;">
                     <img src="assets/img/sedeco.png" alt="" width="420px">
                     <p>Departamento de Recursos Materiales y Servicios Generales</p>
-                    <p>Solicitante:{{ $Entrada->Departamento->nombre_departamento }}</p>
-                    <p>Proveedor:{{ $Entrada->Proveedor->nombre }}</p>
+                    <p>Departamento Solicitante:{{ $Vales->Departamento->nombre_departamento }}</p>
+                    <p>Solicitante:{{ $Vales->Solicitante->nombre }} {{ $Vales->Solicitante->apellido_paterno }} {{ $Vales->Solicitante->apellido_materno }}</p>
                 </td>
                 <td style="width: 40%;">
-                    <p>Entrada del Almacen</p>
-                    <p>Factura:{{ $Entrada->factura }}</p>
-                    <p>Folio de la factura:{{ $Entrada->folio }}</p>
-                    <p>Fecha de entrada al almacén: {{ \Carbon\Carbon::parse($Entrada->fechaentrada)->format('d/m/Y') }}</p>
-                    <p>Fecha de factura:  {{ \Carbon\Carbon::parse($Entrada->fechafactura)->format('d/m/Y') }}</p>
-                    <p>RFC: {{ $Entrada->Proveedor->rfc }}</p>
+                    <p>Salida de almacén</p>
+                    <p>Material de oficina</p>
+                    <p>Fecha de salida: {{ \Carbon\Carbon::parse($Vales->fechasalida)->format('d/m/Y') }}</p>
                 </td>
             </tr>
         </table>
@@ -136,11 +133,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($articulos as $articulo)
+                    @foreach ($detallevales as $detallevale)
                         <tr>
-                            <td>{{ $articulo->descripcion }}</td>
-                            <td>{{ $articulo->Unidad->nombre_unidad }}</td>
-                            <td>{{ $articulo->cantidad }}</td>
+                            <td>{{ $detallevale->Inventario->descripcion }}</td>
+                            <td>{{ $detallevale->Inventario->Unidad->nombre_unidad }}</td>
+                            <td>{{ $detallevale->salida }}</td>
                         </tr>
                     @endforeach
 
@@ -154,7 +151,9 @@
                         <td>
                             <p>_______________________________</p>
                             <p>Entrega</p>
-                            <p>{{ $Entrada->Proveedor->nombre }}</p>
+                            <p>{{ $Vales->Entrega->nombre }} {{ $Vales->Entrega->apellido_paterno }}
+                                {{ $Vales->Entrega->apellido_materno }}</p>
+                            <p>{{ $Vales->Entrega->Cargos->nombre_cargo }}</p>
                         </td>
                         <td>
                             <p>_______________________________</p>
@@ -164,9 +163,9 @@
                         <td>
                             <p>_______________________________</p>
                             <p>Recibe</p>
-                            <p>{{ $Entrada->Empleado->nombre }} {{ $Entrada->Empleado->apellido_paterno }}
-                                {{ $Entrada->Empleado->apellido_materno }}</p>
-                            <p>{{ $Entrada->Empleado->Cargos->nombre_cargo }}</p>
+                            <p>{{ $Vales->Solicitante->nombre }} {{ $Vales->Solicitante->apellido_paterno }}
+                                {{ $Vales->Solicitante->apellido_materno }}</p>
+                            <p>{{ $Vales->Solicitante->Cargos->nombre_cargo }}</p>
                         </td>
                     </tr>
                 </tbody>

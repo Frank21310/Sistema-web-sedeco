@@ -51,17 +51,17 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($articulos as $articulo)
+                @foreach ($detallevales as $detallevale)
                     <tr class="fila-original">
                         <td>
-                            <input type="text" name="descripcion[]" value="{{ $articulo->descripcion }}"
+                            <input type="text" name="descripcion[]" value="{{ $detallevale->Inventario->descripcion }}"
                                 class="form-control custom-input select2 buscador" placeholder="Buscar artículo"
                                 id="mostrar">
                         </td>
                         <td>
                             <input type="hidden" name="articulo_id[]"
-                                value="{{ $articulo->articulo_id }}"class="articulo-id">
-                            <input type="number" name="salida[]" value="{{ $articulo->salida }}"
+                                value="{{ $detallevale->Inventario->id_articulo }}"class="articulo-id">
+                            <input type="number" name="salida[]" value="{{ $detallevale->salida }}"
                                 class="form-control custom-input">
                         </td>
                         <td>
