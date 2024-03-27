@@ -39,19 +39,19 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/Administrador/Empleados', EmpleadosController::class);
     Route::resource('/Administrador/Usuarios', UsuariosController::class);
 
-})->namespace('root');
+})->namespace('Administrador');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/Almancen', [SoloAlmacen::class, 'index'])->name(' administrador');
     Route::resource('/Almancen/Inventario', Inventario::class);
-    Route::resource('/Administrador/Entradas', Entradas::class);
-    Route::resource('/Administrador/Vales', ValesController::class);
-    Route::get('/Administrador/Vales//buscar-articulos', [ValesController::class, 'buscarArticulos'])->name('buscarArticulos');
+    Route::resource('/Almancen/Entradas', Entradas::class);
+    Route::resource('/Almancen/Vales', ValesController::class);
+    Route::get('/Almancen/Vales//buscar-articulos', [ValesController::class, 'buscarArticulos'])->name('buscarArticulos');
 
 
-    Route::get('/Administrador/Entradas/generar-pdf/{id}', [Entradas::class, 'generarPDF'])->name('generar.pdf');
-    Route::get('/Administrador/Salidas/generar-pdf/{id}', [Salidas::class, 'generarSalidaPDF'])->name('generarsalida.pdf');
-    Route::get('/Administrador/Vales/generar-pdf/{id}', [ValesController::class, 'generarvalePDF'])->name('generarvalePDF.pdf');
+    Route::get('/Almancen/Entradas/generar-pdf/{id}', [Entradas::class, 'generarPDF'])->name('generar.pdf');
+    Route::get('/Almancen/Salidas/generar-pdf/{id}', [Salidas::class, 'generarSalidaPDF'])->name('generarsalida.pdf');
+    Route::get('/Almancen/Vales/generar-pdf/{id}', [ValesController::class, 'generarvalePDF'])->name('generarvalePDF.pdf');
 
-    Route::resource('/Administrador/Salidas', Salidas::class);
-})->namespace('root');
+    Route::resource('/Almancen/Salidas', Salidas::class);
+})->namespace('Almancen');

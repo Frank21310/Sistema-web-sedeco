@@ -80,13 +80,7 @@ class ValesController extends Controller
         $Departamentos = Departamento::all();
         $Vale = Vale::where('id_vale', $id)->firstOrFail();
         $detallevales = DetalleVales::where('vale_id', $Vale->id_vale)->get();
-        /*$articulos = [];
-        foreach ($detallevales as $detalle) {
-            $articulo = Inventario::find($detalle->articulo_id);
-            if ($articulo) {
-                $articulos[] = $articulo;
-            }
-        }*/
+        
         return view('Almacen.Vales.edit', compact('Vale', 'medidas', 'Departamentos', 'detallevales','Empleados'));
     }
 

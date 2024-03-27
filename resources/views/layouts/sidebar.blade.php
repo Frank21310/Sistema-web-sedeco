@@ -59,7 +59,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('Salidas.index') }}"
-                        class="nav-link {{ 'Almancen/Entradas' == request()->path() ? 'active' : '' }}">
+                        class="nav-link {{ 'Almancen/Salidas' == request()->path() ? 'active' : '' }}">
                         <i class="fi fi-bs-sign-out-alt me-2 "></i>
                         Salidas
                     </a>

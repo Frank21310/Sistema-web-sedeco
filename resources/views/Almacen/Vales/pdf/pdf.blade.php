@@ -113,6 +113,9 @@
                     <p>Departamento de Recursos Materiales y Servicios Generales</p>
                     <p>Departamento Solicitante:{{ $Vales->Departamento->nombre_departamento }}</p>
                     <p>Solicitante:{{ $Vales->Solicitante->nombre }} {{ $Vales->Solicitante->apellido_paterno }} {{ $Vales->Solicitante->apellido_materno }}</p>
+                    @if ($Vales->departamento_id == 19)
+                        <p>SEMANA DEL {{$Vales->iniciosemana}} a {{$Vales->finsemana}} </p>
+                    @endif
                 </td>
                 <td style="width: 40%;">
                     <p>Salida de almacén</p>

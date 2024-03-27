@@ -113,6 +113,7 @@
                     <p>Departamento de Recursos Materiales y Servicios Generales</p>
                     <p>Solicitante:{{ $Entrada->Departamento->nombre_departamento }}</p>
                     <p>Proveedor:{{ $Entrada->Proveedor->nombre }}</p>
+                    
                 </td>
                 <td style="width: 40%;">
                     <p>Salida del Almacen</p>
