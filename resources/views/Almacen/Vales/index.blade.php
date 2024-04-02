@@ -89,8 +89,8 @@
                             @foreach ($Vales as $Vale)
                                 <tr>
                                     <td class="custom-td">{{ $Vale->id_vale }}</td>
-                                    <td class="custom-td">{{ $Vale->fechasalida}}</td>
-                                    <td class="custom-td">{{ $Vale->Solicitante->nombre }}</td>
+
+                                    <td class="custom-td">{{ \Carbon\Carbon::parse($Vale->fechasalida)->format('d/m/Y') }}</td>
                                     <td class="custom-td">{{ $Vale->Departamento->nombre_departamento }}</td>
                                     <td class="custom-td">{{ $Vale->Entrega->nombre }}</td>
                                     

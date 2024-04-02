@@ -152,19 +152,19 @@
                 <tbody>
                     <tr>
                         <td>
-                            <p>_______________________________</p>
+                            <p>____________________________</p>
                             <p>Entrega</p>
                             <p>{{ $Vales->Entrega->nombre }} {{ $Vales->Entrega->apellido_paterno }}
                                 {{ $Vales->Entrega->apellido_materno }}</p>
                             <p>{{ $Vales->Entrega->Cargos->nombre_cargo }}</p>
                         </td>
                         <td>
-                            <p>_______________________________</p>
+                            <p>____________________________</p>
                             <p>C. Pedro Alberto Perez Sosa</p>
                             <p>Jefe del Depto. de Recursos Materiales y Servicios Generales</p>
                         </td>
                         <td>
-                            <p>_______________________________</p>
+                            <p>____________________________</p>
                             <p>Recibe</p>
                             <p>{{ $Vales->Solicitante->nombre }} {{ $Vales->Solicitante->apellido_paterno }}
                                 {{ $Vales->Solicitante->apellido_materno }}</p>

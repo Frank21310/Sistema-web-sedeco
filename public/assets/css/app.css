@@ -34,11 +34,7 @@
 /* ---------------------------------------------------
     Navigation
 ----------------------------------------------------- */
-#Topbar {
-    background-color: #10312b !important;
-    box-shadow:0px 0px 5px 0px #7c7c7c;
 
-}
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
@@ -72,7 +68,16 @@
     border: 0;
     color: #DDC9A3;
 }
-
+.navbar-oax{
+    padding-bottom: 0;
+    padding-top: 20px;
+    background: url(greca.png) #fff repeat-x;
+    background-size: auto 20px;
+    box-shadow: 0 5px 5px rgba(108, 110, 109, 0.15);
+}
+#Topbar .container-fluid{
+    height:56px;
+   }
 a[data-toggle="collapse"] {
     position: relative;
 }

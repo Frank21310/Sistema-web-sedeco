@@ -37,6 +37,7 @@
             </div>
         </div>
     </div>
+    
     <br>
     @include('Almacen.Vales.formularios.vistaform')
 
