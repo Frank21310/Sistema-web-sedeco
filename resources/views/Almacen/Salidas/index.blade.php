@@ -95,7 +95,7 @@
                                             <a href="{{ route('generarsalida.pdf', $Salida->id_salida) }}" class="btn btn-info">
                                                 <i class="fa fa-print"></i>
                                             </a>
-                                            <a href="{{ route('Salidas.edit', $Salida->id_salida) }}"
+                                            <a href="{{ route('Salidas.edit', $Salida->id_salida) }}" 
                                                 class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
                                             <form action="{{ route('Salidas.destroy', $Salida->id_salida) }}"
                                                 id="delete_{{ $Salida->id_salida }}" method="POST">
