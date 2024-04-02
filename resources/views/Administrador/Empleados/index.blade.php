@@ -87,7 +87,7 @@
                                     <td class="custom-td">{{ $Empleado->nombre }}</td>
                                     <td class="custom-td">{{ $Empleado->apellido_paterno }}</td>
                                     <td class="custom-td">{{ $Empleado->apellido_materno }}</td>
-                                    <td class="custom-td">{{ $Empleado->Cargos->nombre_cargo }}</td>
+                                    <td class="custom-td">{{ optional($Empleado->Cargos)->nombre_cargo ?? 'Sin Nombre'}}</td>
                                     <td class="custom-td">
                                         <div class="btn-group" role="group">
                                             <a href="#" class="btn btn-info" data-bs-toggle="modal"

@@ -91,9 +91,8 @@
                                     <td class="custom-td">{{ $Vale->id_vale }}</td>
                                     <td class="custom-td">{{ $Vale->fechasalida}}</td>
                                     <td class="custom-td">
-                                        {{ optional($Vale->Solicitante)->nombre ?? 'Departamento' }}
                                     </td>
-                                    <td class="custom-td">{{ $Vale->Departamento->nombre_departamento }}</td>
+                                    <td class="custom-td">{{ optional($Vale->Departamento)->nombre_departamento ?? 'Sin departamento' }}</td>
                                     <td class="custom-td">{{ $Vale->Entrega->nombre }}</td>
                                     
                                     <td class="custom-td">
