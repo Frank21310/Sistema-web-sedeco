@@ -90,9 +90,9 @@
                                 <tr>
                                     <td class="custom-td">{{ $Entrada->id_entrada }}</td>
                                     <td class="custom-td">{{ $Entrada->folio}}</td>
-                                    <td class="custom-td">{{ $Entrada->Proveedor->nombre }}</td>
-                                    <td class="custom-td">{{ $Entrada->Departamento->nombre_departamento }}</td>
-                                    <td class="custom-td">{{ $Entrada->Empleado->nombre }}</td>
+                                    <td class="custom-td">{{ optional($Entrada->Proveedor)->nombre  ?? 'Sin proveedor' }}</td>
+                                    <td class="custom-td">{{ optional($Entrada->Departamento)->nombre_departamento   ?? 'Sin Departamento'}}</td>
+                                    <td class="custom-td">{{ optional($Entrada->Empleado)->nombre ?? 'Sin empleado'}}</td>
                                     <td class="custom-td">{{ $Entrada->fechaentrada }}</td>
                                     
                                     <td class="custom-td">

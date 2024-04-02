@@ -91,9 +91,9 @@
                             @foreach ($Articulos as $Articulo)
                                 <tr>
                                     <td class="custom-td">{{ $Articulo->descripcion }}</td>
-                                    <td class="custom-td">{{ $Articulo->Categoria->nombre_categoria }}</td>
+                                    <td class="custom-td">{{ optional($Articulo->Categoria)->nombre_categoria ?? 'Sin Categoria' }}</td>
                                     <td class="custom-td">{{ $Articulo->estante }}</td>
-                                    <td class="custom-td">{{ $Articulo->Unidad->nombre_unidad }}</td>
+                                    <td class="custom-td">{{ optional($Articulo->Unidad)->nombre_unidad ?? 'Sin medida' }}</td>
                                     <td class="custom-td">{{ $Articulo->cantidad }}</td>
                                     <td class="custom-td">{{ $Articulo->existencia }}</td>
                                     <!--<td class="custom-td">{{ $Articulo->fecha_elaboracion }}</td>-->

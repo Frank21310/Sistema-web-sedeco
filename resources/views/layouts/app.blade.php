@@ -26,6 +26,9 @@
     <!-- Scripts -->
 </head>
 <body>
+    <head>            
+        @include('layouts.topbar')
+    </head>
     <div id="app" class="wrapper">
         @guest
         @else
@@ -33,8 +36,6 @@
         @endguest
 
         <div id="content">
-            @include('layouts.topbar')
-
             <main class="principal">
                 @yield('content')
             </main>
