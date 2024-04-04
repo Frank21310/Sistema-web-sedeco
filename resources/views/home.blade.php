@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="">
+        
+    <div class="container">
         <div class="row ">
             <div class="col-lg-6 mx-auto text-center">
                 <p class="lead text-body-secondary">
@@ -17,9 +18,9 @@
         @endif
         @if (Auth::user()->rol_id == 2)
             <div class="row">
-                <div class="col-8 px-2"></div>
-                <div class="col-4 px-2">
-                    <div class="row py-2">
+                <div class="col-8"></div>
+                <div class="col-4">
+                    <div class="row ">
                         <div class="col">
                             <div class="card">
                                 <div class="card-header">Total de Artículos en Inventario</div>
@@ -63,8 +64,5 @@
                 </div>
             </div>
         @endif
-    </section>
-    <div class="container">
-
     </div>
 @endsection
