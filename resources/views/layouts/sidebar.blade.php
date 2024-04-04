@@ -1,7 +1,7 @@
 <div class="wrapper">
 
-    <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px; display: none;">
-        
+    <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3 bg-light active" style="width: 280px;">
+    
         <ul class="nav nav-pills flex-column mb-auto">
             @if (Auth::user()->rol_id == 1)
                 <li class="nav-item">

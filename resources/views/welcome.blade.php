@@ -22,9 +22,7 @@
 
 <body>
     <!--Topbar -->
-    <div>
         @include('layouts.topbar')
-    </div>
     <!-- End of Topbar -->
     <div class="container">
         <div class="row justify-content-center">
