@@ -79,8 +79,8 @@
                             <tr>
                                 <th class="col-1 custom-th">ID</th>
                                 <th class="col-1 custom-th">Fecha de salida</th>
-                                <th class="col-3 custom-th">Soliciante</th>
-                                <th class="col-2 custom-th">Departamento</th>
+                                <th class="col-2 custom-th">Soliciante</th>
+                                <th class="col-3 custom-th">Departamento</th>
                                 <th class="col-2 custom-th">Entrega</th>
                                 <th class="col-2 custom-th">Acciones</th> 
                             </tr>
@@ -89,11 +89,6 @@
                             @foreach ($Vales as $Vale)
                                 <tr>
                                     <td class="custom-td">{{ $Vale->id_vale }}</td>
-<<<<<<< HEAD
-
-                                    <td class="custom-td">{{ \Carbon\Carbon::parse($Vale->fechasalida)->format('d/m/Y') }}</td>
-                                    <td class="custom-td">{{ $Vale->Departamento->nombre_departamento }}</td>
-=======
                                     <td class="custom-td">{{ $Vale->fechasalida}}</td>
                                     <td class="custom-td">
                                     </td>
