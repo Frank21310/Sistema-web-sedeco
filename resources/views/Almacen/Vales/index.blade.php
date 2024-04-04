@@ -93,7 +93,6 @@
                                     <td class="custom-td">
                                     </td>
                                     <td class="custom-td">{{ optional($Vale->Departamento)->nombre_departamento ?? 'Sin departamento' }}</td>
->>>>>>> 75827e0f9033e7fa23cf739a2e627df8787cb867
                                     <td class="custom-td">{{ $Vale->Entrega->nombre }}</td>
                                     
                                     <td class="custom-td">
