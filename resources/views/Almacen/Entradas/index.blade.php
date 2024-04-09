@@ -93,7 +93,7 @@
                                     <td class="custom-td">{{ optional($Entrada->Proveedor)->nombre  ?? 'Sin proveedor' }}</td>
                                     <td class="custom-td">{{ optional($Entrada->Departamento)->nombre_departamento   ?? 'Sin Departamento'}}</td>
                                     <td class="custom-td">{{ optional($Entrada->Empleado)->nombre ?? 'Sin empleado'}}</td>
-                                    <td class="custom-td">{{ $Entrada->fechaentrada }}</td>
+                                    <td class="custom-td">{{ \Carbon\Carbon::parse($Entrada->fechaentrada)->format('d/m/Y') }}</td>
                                     
                                     <td class="custom-td">
                                         <div class="btn-group" role="group">

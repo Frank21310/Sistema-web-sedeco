@@ -18,48 +18,8 @@
         @endif
         @if (Auth::user()->rol_id == 2)
             <div class="row">
-                <div class="col-12">
-                    <h1>Calendario</h1>
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-calendar">
-                            <thead>
-                                <tr>
-                                    <th>Departamento</th>
-                                    <th>Enero</th>
-                                    <th>Febrero</th>
-                                    <th>Marzo</th>
-                                    <th>Abril</th>
-                                    <th>Mayo</th>
-                                    <th>Junio</th>
-                                    <th>Julio</th>
-                                    <th>Agosto</th>
-                                    <th>Septiembre</th>
-                                    <th>Octubre</th>
-                                    <th>Noviembre</th>
-                                    <th>Diciembre</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($departamentos as $departamento)
-                                    <tr>
-                                        <td>{{ $departamento->nombre_departamento }}</td>
-                                        @for ($i = 1; $i <= 12; $i++)
-                                            @php
-                                                $mesActual = $i;
-                                                $departamentoId = $departamento->id;
-                                                $valesMes = $valesPorDepartamentoYMes->get($departamentoId, []);
-                                                $valeSolicitado = in_array($mesActual, (array)$valesMes);
-                                            @endphp
-                                            <td style="{{ $valeSolicitado ? 'background-color: green;' : '' }}">
-                                                {{ $valeSolicitado ? 'Solicitado' : '' }}
-                                            </td>
-                                        @endfor
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                            
-                        </table>
-                    </div>
+                <div class="col-8">
+                    
                 </div>
                 <div class="col-4">
                     <div class="row ">
