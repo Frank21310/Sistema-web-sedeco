@@ -89,7 +89,7 @@
                                     <td class="custom-td">{{ $Salida->id_salida }}</td>
                                     <td class="custom-td">{{ $Salida->entrada_id }}</td>
                                     <td class="custom-td">{{ optional($Salida->Empleado)->nombre?? 'Sin empleado' }}</td>
-                                    <td class="custom-td">{{ $Salida->fechasalida }}</td>
+                                    <td class="custom-td">{{ \Carbon\Carbon::parse($Salida->fechasalida)->format('d/m/Y') }}</td>
                                     <td class="custom-td">
                                         <div class="btn-group" role="group">
                                             <a href="{{ route('generarsalida.pdf', $Salida->id_salida) }}" class="btn btn-info">

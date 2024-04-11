@@ -5,7 +5,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col">
-                    <h2 class="">Articulos</h2>
+                    <h2 class="">Artículos</h2>
                 </div>
                 <div class="col g-col-6 d-flex justify-content-end">
                     <button type="button" class="btn btn-primary ml-auto BotonRojo" data-bs-toggle="modal"
@@ -25,7 +25,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    <h3>Articulos existentes</h3>
+                    <h3>Artículos existentes</h3>
                 </div>
             </div>
             <div class="row">
@@ -77,10 +77,10 @@
                         <thead class="custom-thead">
                             <tr>
                                 <th class="col-4 custom-th">Descripción</th>
-                                <th class="col-2 custom-th">Categoria</th>
+                                <th class="col-2 custom-th">Categoría</th>
                                 <th class="col-1 custom-th">Estante</th>
                                 <th class="col-1 custom-th">Medida</th>
-                                <th class="col-1 custom-th">Cantidad</th>
+                                <th class="col-1 custom-th">Salidas</th>
                                 <th class="col-1 custom-th">Existencia</th>
                                 <!-- <th class="col-2 custom-th">Fecha Elaboracion</th> -->
                                 <th class="col-2 custom-th">Acciones</th>
@@ -94,7 +94,7 @@
                                     <td class="custom-td">{{ optional($Articulo->Categoria)->nombre_categoria ?? 'Sin Categoria' }}</td>
                                     <td class="custom-td">{{ $Articulo->estante }}</td>
                                     <td class="custom-td">{{ optional($Articulo->Unidad)->nombre_unidad ?? 'Sin medida' }}</td>
-                                    <td class="custom-td">{{ $Articulo->cantidad }}</td>
+                                    <td class="custom-td">{{ $Articulo->salida }}</td>
                                     <td class="custom-td">{{ $Articulo->existencia }}</td>
                                     <!--<td class="custom-td">{{ $Articulo->fecha_elaboracion }}</td>-->
                                     
