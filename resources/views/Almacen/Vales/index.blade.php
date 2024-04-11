@@ -79,7 +79,7 @@
                             <tr>
                                 <th class="col-1 custom-th">ID</th>
                                 <th class="col-1 custom-th">Fecha de salida</th>
-                                <th class="col-2 custom-th">Soliciante</th>
+                                <th class="col-2 custom-th">Solicitante</th>
                                 <th class="col-3 custom-th">Departamento</th>
                                 <th class="col-2 custom-th">Entrega</th>
                                 <th class="col-2 custom-th">Acciones</th> 
@@ -97,7 +97,7 @@
                                     
                                     <td class="custom-td">
                                         <div class="btn-group" role="group">
-                                            <a href="{{ route('generarvalePDF.pdf', $Vale->id_vale) }}" class="btn btn-info">
+                                            <a href="{{ route('generarvalePDF.pdf', $Vale->id_vale) }}" class="btn btn-info" target="_blank">
                                                 <i class="fa fa-print"></i>
                                             </a>
                                             <a href="{{ route('Vales.edit', $Vale->id_vale) }}" class="btn btn-primary"><i
