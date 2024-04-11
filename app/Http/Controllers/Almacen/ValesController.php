@@ -137,7 +137,7 @@ class ValesController extends Controller
         foreach ($articulos as $articulo) {
             $data[] = [
                 'label' => $articulo->descripcion, // 'label' es la descripción del artículo
-                'value' => $articulo->id_articulo // 'value' es el ID del artículo (opcional)
+                'value' => $articulo->id_articulo // 'value' es el ID del artículo
             ];
         }
 
