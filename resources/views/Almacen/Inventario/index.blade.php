@@ -76,14 +76,14 @@
                     <table class="table custom-table">
                         <thead class="custom-thead">
                             <tr>
-                                <th class="col-4 custom-th">Descripción</th>
+                                <th class="col- custom-th">Descripción</th>
                                 <th class="col-2 custom-th">Categoría</th>
                                 <th class="col-1 custom-th">Estante</th>
                                 <th class="col-1 custom-th">Medida</th>
                                 <th class="col-1 custom-th">Salidas</th>
                                 <th class="col-1 custom-th">Existencia</th>
                                 <!-- <th class="col-2 custom-th">Fecha Elaboracion</th> -->
-                                <th class="col-2 custom-th">Acciones</th>
+                                <th class="col-1 custom-th">Acciones</th>
 
                             </tr>
                         </thead>
