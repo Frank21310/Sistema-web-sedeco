@@ -147,7 +147,6 @@ class ValesController extends Controller
     {
         $Vales = Vale::find($id);
         $detallevales = DetalleVales::where('vale_id', $Vales->id_vale)->get();
-    
         $pdf = Pdf::loadView('Almacen.Vales.pdf.pdf', compact('Vales', 'detallevales'));
         $pdf->setPaper('letter', 'portrait');
         $pdf->render();

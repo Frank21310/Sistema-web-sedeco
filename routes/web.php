@@ -55,3 +55,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('/Almancen/Salidas', Salidas::class);
 })->namespace('Almancen');
+
+Route::group(['middleware' => ['auth']], function () {
+
+})->namespace('Requirente');

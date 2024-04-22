@@ -73,7 +73,7 @@
                 </a>
             </li>
         @endif
-        @if (Auth::user()->rol_id == 3)
+        @if (Auth::user()->rol_id == 7)
             <li class="nav-item">
                 <a href="{{ url('/home') }}" class="nav-link {{ 'home' == request()->path() ? 'active' : '' }}">
                     <i class="fas fa-home bi me-2 "></i>
