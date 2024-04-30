@@ -9,6 +9,7 @@ use App\Http\Controllers\Almacen\Inventario;
 use App\Http\Controllers\Almacen\Salidas;
 use App\Http\Controllers\Almacen\SoloAdminController as AlmacenSoloAdminController;
 use App\Http\Controllers\Almacen\ValesController;
+use App\Http\Controllers\Peticiones\Solicitud;
 use App\Http\Middleware\SoloAlmacen;
 use App\Models\Salida;
 use Illuminate\Support\Facades\Auth;
@@ -57,5 +58,6 @@ Route::group(['middleware' => ['auth']], function () {
 })->namespace('Almancen');
 
 Route::group(['middleware' => ['auth']], function () {
+    Route::resource('/Peticiones/Solicitudes', Solicitud::class);
 
-})->namespace('Requirente');
+})->namespace('Peticiones');

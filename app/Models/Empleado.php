@@ -15,9 +15,14 @@ class Empleado extends Model
         'apellido_paterno',
         'apellido_materno',
         'cargo_id',
+        'departamento'
     ];
     public function Cargos()
     {
         return $this->belongsTo(Cargo::class, 'cargo_id', 'id_cargo');
+    }
+    public function Departamento()
+    {
+        return $this->belongsTo(Departamento::class, 'departamento', 'id_departamento');
     }
 }

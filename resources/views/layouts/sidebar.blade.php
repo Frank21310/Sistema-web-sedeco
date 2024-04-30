@@ -73,7 +73,7 @@
                 </a>
             </li>
         @endif
-        @if (Auth::user()->rol_id == 7)
+        @if (Auth::user()->rol_id == 3)
             <li class="nav-item">
                 <a href="{{ url('/home') }}" class="nav-link {{ 'home' == request()->path() ? 'active' : '' }}">
                     <i class="fas fa-home bi me-2 "></i>
@@ -81,7 +81,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href=""
+                <a href="{{ route('Solicitudes.index') }}"
                     class="nav-link {{ 'Peticiones/Peticiones' == request()->path() ? 'active' : '' }}">
                     <i class="fi fi-rs-inventory-alt me-2 "></i>
                     Peticiones

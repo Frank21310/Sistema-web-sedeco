@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-
-class SoloAdministrador
+class SoloPeticiones
 {
     /**
      * Handle an incoming request.
@@ -17,16 +16,16 @@ class SoloAdministrador
      */
     public function handle(Request $request, Closure $next): Response
     {
-        switch(auth::user()->rol_id){
+        switch (auth::user()->rol_id) {
             case ('1'):
-                return $next($request);//Administrador
-            break;
-            case ('2'):
-                return redirect('Almacen');//Requirente
-            break;
-            case ('3'):
-                return redirect('Peticiones');//Requirente
+                return redirect('Administrador'); //Admin
                 break;
-        } 
+            case ('2'):
+                return redirect('Almacen');//Almacen
+                break;
+            case ('3'):
+                return $next($request); //Peticiones
+                break;
+        }
     }
 }

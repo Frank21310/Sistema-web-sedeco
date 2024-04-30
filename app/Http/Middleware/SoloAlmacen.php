@@ -24,6 +24,10 @@ class SoloAlmacen
             case ('2'):
                 return $next($request); //Almancen
                 break;
+                case ('3'):
+                return redirect('Peticiones');//Requirente
+                break;
+    
         }
     }
 }
