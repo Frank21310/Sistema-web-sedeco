@@ -81,7 +81,7 @@
                                 <th class="col-1 custom-th">Fecha de salida</th>
                                 <th class="col-2 custom-th">Solicitante</th>
                                 <th class="col-3 custom-th">Departamento</th>
-                                <th class="col-1 custom-th">Soliciante</th>
+                                <th class="col-1 custom-th">Entrego</th>
                                 
                                 <th class="col-2 custom-th">Acciones</th> 
                             </tr>
@@ -91,7 +91,7 @@
                                 <tr>
                                     <td class="custom-td">{{ $Vale->id_vale }}</td>
                                     <td class="custom-td">{{ \Carbon\Carbon::parse($Vale->fechasalida)->format('d/m/Y') }}</td>
-                                    <td class="custom-td">{{ optional($Vale->solicitante)->nombre?? '' }}</td>
+                                    <td class="custom-td">{{ optional($Vale->Solicitante)->nombre?? '' }} {{ optional($Vale->Solicitante)->apellido_paterno?? '' }}</td>
                                     <td class="custom-td">{{ optional($Vale->Departamento)->nombre_departamento ?? 'Sin departamento' }}</td>
                                     <td class="custom-td">{{ $Vale->Entrega->nombre }}</td>
                                     

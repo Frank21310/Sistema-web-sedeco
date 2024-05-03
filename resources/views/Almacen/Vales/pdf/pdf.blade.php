@@ -116,6 +116,7 @@
                     @if ($Vales->solicitante != null && $Vales->solicitante != null)
                         <p>Solicitante:{{ $Vales->Solicitante->nombre }} {{ $Vales->Solicitante->apellido_paterno }}
                             {{ $Vales->Solicitante->apellido_materno }}</p>
+                            <p>{{ $Vales->Solicitante->Cargos->nombre_cargo }}</p>
                     @endif
                     @if ($Vales->departamento_id == 19)
                         <p>SEMANA DEL {{ $Vales->iniciosemana }} a {{ $Vales->finsemana }} </p>
@@ -170,11 +171,11 @@
                         <td>
                             <p>____________________________</p>
                             <p>Recibe</p>
-                            @if ($Vales->solicitante != null && $Vales->solicitante != null)
+                            <!-- @if ($Vales->solicitante != null && $Vales->solicitante != null)
                             <p>{{ $Vales->Solicitante->nombre }} {{ $Vales->Solicitante->apellido_paterno }}
                                 {{ $Vales->Solicitante->apellido_materno }}</p>
                             <p>{{ $Vales->Solicitante->Cargos->nombre_cargo }}</p>
-                            @endif
+                            @endif-->
                             
                         </td>
                     </tr>

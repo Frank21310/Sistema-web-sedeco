@@ -21,7 +21,6 @@
                 <td>
                     <button type="button" class="btn btn-success btn-add-row"><i class="fas fa-plus"></i></button>
                     <button type="button" class="btn btn-danger btn-remove-row"><i class="fas fa-trash-alt"></i></button>
-
                 </td>
             </tr>
         </tbody>
@@ -29,17 +28,14 @@
 </div>
 
 
-<!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-<!-- jQuery UI -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 
 <script>
     $(document).ready(function() {
-        // Función para inicializar el autocompletado en un elemento de entrada
         function initAutocomplete($element) {
             $element.autocomplete({
                 source: function(request, response) {

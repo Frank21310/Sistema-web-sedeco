@@ -39,7 +39,7 @@ class ValesController extends Controller
 
     public function store(Request $request)
     {
-        $fechasalida = Carbon::parse($request->fechasalida);
+        $fechasalida = Carbon::createFromFormat('Y-m-d', $request->fechasalida);
         $iniciosemana = $fechasalida->startOfWeek();
         $finsemana = $fechasalida->endOfWeek();
 
