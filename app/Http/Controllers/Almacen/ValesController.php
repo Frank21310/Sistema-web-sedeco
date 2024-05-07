@@ -26,8 +26,8 @@ class ValesController extends Controller
         $Departamentos = Departamento::all();
         $Solicitantes = Empleado::all();
 
-        $Vales = Vale::select('*')->orderBy('fechasalida', 'DESC');
-        $limit = (isset($request->limit)) ? $request->limit : 4;
+        $Vales = Vale::select('*')->orderBy('updated_at', 'DESC');
+        $limit = (isset($request->limit)) ? $request->limit : 6;
 
         if (isset($request->search)) {
             $Vales = $Vales->where('id_vale', 'like', '%' . $request->search . '%')
@@ -39,16 +39,14 @@ class ValesController extends Controller
 
     public function store(Request $request)
     {
-        $fechasalida = Carbon::createFromFormat('Y-m-d', $request->fechasalida);
-        $iniciosemana = $fechasalida->startOfWeek();
-        $finsemana = $fechasalida->endOfWeek();
+
 
         $vale = Vale::create([
-            'fechasalida' => $fechasalida,
+            'fechasalida' => $request->fechasalida,
             'solicitante' => $request->solicitante,
             'departamento_id' => $request->departamento_id,
-            'iniciosemana' => $iniciosemana,
-            'finsemana' => $finsemana,
+            'iniciosemana' => $request->fechasalida,
+            'finsemana' => $request->fechasalida,
             'entrega' => auth()->user()->empleado_num,
         ]);
 
@@ -88,16 +86,12 @@ class ValesController extends Controller
     {
         $vale = Vale::findOrFail($id);
 
-        $fechasalida = Carbon::parse($request->fechasalida);
-        $iniciosemana = $fechasalida->startOfWeek();
-        $finsemana = $fechasalida->endOfWeek();
-
         $vale->update([
-            'fechasalida' => $fechasalida,
+            'fechasalida' => $request->fechasalida,
             'solicitante' => $request->solicitante,
             'departamento_id' => $request->departamento_id,
-            'iniciosemana' => $iniciosemana,
-            'finsemana' => $finsemana,
+            'iniciosemana' => $request->fechasalida,
+            'finsemana' => $request->fechasalida,
             'entrega' => auth()->user()->empleado_num,
         ]);
 

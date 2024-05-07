@@ -42,7 +42,7 @@
         <div class="col-4">
             <div class="form-group">
                 <label for="">Factura</label>
-                <input type="text" class="form-control custom-input" name="factura" value="{{(isset($Entrada))?$Entrada->factura:old('factura')}}" required>
+                <input type="text" class="form-control custom-input" name="factura" value="{{(isset($Entrada))?$Entrada->factura:old('factura')}}" >
             </div>
         </div>
         <div class="col-4">
