@@ -19,18 +19,25 @@ class Inventario extends Controller
     {
         $categorias = Categoria::all();
         $medidas = UnidadMedida::all();
-
-        $Articulos = ModelsInventario::select('*')->orderBy('descripcion', 'ASC');
-        $limit = (isset($request->limit)) ? $request->limit : 4;
-
-        if (isset($request->search)) {
-            $Articulos = $Articulos->where('id_articulo', 'like', '%' . $request->search . '%')
-                ->orWhere('descripcion', 'like', '%' . $request->search . '%')
-                ->orWhere('categoria_id', 'like', '%' . $request->search . '%');
-                
+    
+        $query = ModelsInventario::orderBy('descripcion', 'ASC'); // Creamos el objeto del query builder
+    
+        $limit = $request->has('limit') ? $request->limit : 4;
+    
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('id_articulo', 'like', '%' . $search . '%')
+                    ->orWhere('descripcion', 'like', '%' . $search . '%')
+                    ->orWhere('categoria_id', 'like', '%' . $search . '%');
+            });
         }
-        $Articulos = $Articulos->paginate($limit)->appends($request->all());
-        return view('Almacen.Inventario.index', compact('Articulos','categorias','medidas'));
+        
+        $query->whereNotIn('categoria_id', [7]);
+    
+        $Articulos = $query->paginate($limit)->appends($request->all());
+    
+        return view('Almacen.Inventario.index', compact('Articulos', 'categorias', 'medidas'));
     }
     public function store(Request $request)
     {

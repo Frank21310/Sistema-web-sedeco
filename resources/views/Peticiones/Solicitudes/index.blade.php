@@ -9,7 +9,7 @@
                 </div>
                 <div class="col g-col-6 d-flex justify-content-end">
                     <button type="button" class="btn btn-primary ml-auto BotonRojo" data-bs-toggle="modal"
-                        data-bs-target="#modalsolicitud">
+                        data-bs-target="#modalagregarentrada">
                         <i class="fas fa-plus"></i>
                         Solicitar
                     </button>
@@ -104,7 +104,7 @@
                                             </a>
                                             <a href="{{ route('Inventario.edit', $Solicitudes->id_articulo) }}" class="btn btn-primary"><i
                                                     class="fas fa-pencil-alt"></i></a>
-                                            <form action="{{ route('Inventario.destroy', $Solicitudes->id_articulo) }}"
+                                            <form action="{{ route('Solicitudes.destroy', $Solicitudes->id_articulo) }}"
                                                 id="delete_{{ $Solicitudes->id_articulo }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -123,7 +123,7 @@
                 </div>
             </div>
             <!-- Modal de nuevo articulo -->
-            <div class="modal fade modal-lg" id="modalsolicitud" tabindex="-1" aria-labelledby="agregarModalLabel"
+            <div class="modal fade modal-lg" id="modalagregarentrada" tabindex="-1" aria-labelledby="agregarModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -132,7 +132,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form id="createForm" action="{{ route('Vales.store') }}" method="POST"
+                            <form id="createForm" action="{{ route('Solicitudes.store') }}" method="POST"
                                 enctype="multipart/form-data">
                                 @include('Peticiones.Solicitudes.formularios.form')
                             </form>
@@ -155,13 +155,13 @@
 
     <Script type="text/javascript">
         $('#limit').on('change', function() {
-            window.location.href = "{{ route('Inventario.index') }}?limit=" + $(this).val() + '&search=' + $('#search')
+            window.location.href = "{{ route('Solicitudes.index') }}?limit=" + $(this).val() + '&search=' + $('#search')
                 .val()
         })
 
         $('#search').on('keyup', function(e) {
             if (e.keyCode == 13) {
-                window.location.href = "{{ route('Inventario.index') }}?limit=" + $('#limit').val() + '&search=' + $(
+                window.location.href = "{{ route('Solicitudes.index') }}?limit=" + $('#limit').val() + '&search=' + $(
                     this).val()
             }
         })

@@ -6,6 +6,7 @@
                 <span class="form-control custom-span">{{ Auth::user()->Empleados->nombre }}
                     {{ Auth::user()->Empleados->apellido_paterno }}
                     {{ Auth::user()->Empleados->apellido_materno }}</span>
+
             </div>
         </div>
     </div>

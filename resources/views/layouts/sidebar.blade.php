@@ -84,7 +84,7 @@
                 <a href="{{ route('Solicitudes.index') }}"
                     class="nav-link {{ 'Peticiones/Peticiones' == request()->path() ? 'active' : '' }}">
                     <i class="fi fi-rs-inventory-alt me-2 "></i>
-                    Peticiones
+                    Solicitudes
                 </a>
             </li>
         @endif
