@@ -26,7 +26,7 @@ class ValesController extends Controller
         $Departamentos = Departamento::all();
         $Solicitantes = Empleado::all();
 
-        $Vales = Vale::select('*')->orderBy('updated_at', 'DESC');
+        $Vales = Vale::select('*')->orderBy('fechasalida', 'DESC');
         $limit = (isset($request->limit)) ? $request->limit : 6;
 
         if (isset($request->search)) {
@@ -144,7 +144,7 @@ class ValesController extends Controller
         $pdf = Pdf::loadView('Almacen.Vales.pdf.pdf', compact('Vales', 'detallevales'));
         $pdf->setPaper('letter', 'portrait');
         $pdf->render();
-        return $pdf->stream('Entrada_' . $id . '.pdf');
+        return $pdf->stream('Vale_' . $id . '.pdf');
     }
     public function destroy(string $id)
     {

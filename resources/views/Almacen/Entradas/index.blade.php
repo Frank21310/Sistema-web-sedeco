@@ -97,7 +97,7 @@
                                     
                                     <td class="custom-td">
                                         <div class="btn-group" role="group">
-                                            <a href="{{ route('generar.pdf', $Entrada->id_entrada) }}" class="btn btn-info">
+                                            <a href="{{ route('generar.pdf', $Entrada->id_entrada) }}" class="btn btn-info" target="_blank">
                                                 <i class="fa fa-print"></i>
                                             </a>
                                             <a href="{{ route('Entradas.edit', $Entrada->id_entrada) }}" class="btn btn-primary"><i

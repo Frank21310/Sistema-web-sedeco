@@ -68,7 +68,7 @@
             <li class="nav-item">
                 <a href=""
                     class="nav-link {{ 'Almancen/Solicitudes' == request()->path() ? 'active' : '' }}">
-                    <i class="fi fi-rs-receipt me-2 "></i>
+                    <i class="fi fi-rr-apps-add"></i>
                     Solicitudes
                 </a>
             </li>
@@ -83,7 +83,7 @@
             <li class="nav-item">
                 <a href="{{ route('Solicitudes.index') }}"
                     class="nav-link {{ 'Peticiones/Peticiones' == request()->path() ? 'active' : '' }}">
-                    <i class="fi fi-rs-inventory-alt me-2 "></i>
+                    <i class="fi fi-rr-apps-add"></i>
                     Solicitudes
                 </a>
             </li>

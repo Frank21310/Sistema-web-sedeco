@@ -92,7 +92,7 @@
                                     <td class="custom-td">{{ \Carbon\Carbon::parse($Salida->fechasalida)->format('d/m/Y') }}</td>
                                     <td class="custom-td">
                                         <div class="btn-group" role="group">
-                                            <a href="{{ route('generarsalida.pdf', $Salida->id_salida) }}" class="btn btn-info">
+                                            <a href="{{ route('generarsalida.pdf', $Salida->id_salida) }}" class="btn btn-info" target="_blank">
                                                 <i class="fa fa-print"></i>
                                             </a>
                                             <a href="{{ route('Salidas.edit', $Salida->id_salida) }}" 
