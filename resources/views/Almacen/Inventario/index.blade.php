@@ -7,6 +7,13 @@
                 <div class="col">
                     <h2 class="">Artículos</h2>
                 </div>
+                <div class="col g-col-12 d-flex justify-content-end">
+                    <button type="button" class="btn btn-primary ml-auto BotonRojo" data-bs-toggle="modal"
+                        data-bs-target="#modalagregarrol">
+                        <i class="fas fa-plus"></i>
+                        Generar Reporte
+                    </button>
+                </div>
                 <div class="col g-col-6 d-flex justify-content-end">
                     <button type="button" class="btn btn-primary ml-auto BotonRojo" data-bs-toggle="modal"
                         data-bs-target="#modalagregarrol">

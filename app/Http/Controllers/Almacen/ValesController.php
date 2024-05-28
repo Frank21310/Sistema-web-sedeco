@@ -57,7 +57,7 @@ class ValesController extends Controller
         for ($i = 0; $i < count($descripciones); $i++) {
             DetalleVales::create([
                 'vale_id' => $vale->id_vale,
-                'articulo_id' => $articulo_ids[$i], 
+                'articulo_id' => $articulo_ids[$i],
                 'salida' => $salidas[$i],
             ]);
 
@@ -78,8 +78,8 @@ class ValesController extends Controller
         $Departamentos = Departamento::all();
         $Vale = Vale::where('id_vale', $id)->firstOrFail();
         $detallevales = DetalleVales::where('vale_id', $Vale->id_vale)->get();
-        
-        return view('Almacen.Vales.edit', compact('Vale', 'medidas', 'Departamentos', 'detallevales','Empleados'));
+
+        return view('Almacen.Vales.edit', compact('Vale', 'medidas', 'Departamentos', 'detallevales', 'Empleados'));
     }
 
     public function update(Request $request, $id)
@@ -108,7 +108,7 @@ class ValesController extends Controller
                     'articulo_id' => $articulo_ids[$i],
                     'salida' => $salidas[$i],
                 ]);
-        
+
                 // Actualizar el inventario correspondiente
                 $inventario = Inventario::find($articulo_ids[$i]);
                 $inventario->salida += $salidas[$i] - $detalle->salida; // Restar la salida anterior y agregar la nueva
@@ -124,7 +124,9 @@ class ValesController extends Controller
     {
         $searchTerm = $request->input('query'); // Obtener el valor del parámetro 'query'
 
-        $articulos = Inventario::where('descripcion', 'like', '%' . $searchTerm . '%')->get();
+        $articulos = Inventario::where('descripcion', 'like', '%' . $searchTerm . '%')
+            ->whereNotIn('categoria_id', [7]) // Excluir categoría 7
+            ->get();
 
         $data = [];
 
@@ -137,6 +139,7 @@ class ValesController extends Controller
 
         return response()->json($data);
     }
+
     public function generarvalePDF($id)
     {
         $Vales = Vale::find($id);

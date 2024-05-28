@@ -112,15 +112,10 @@
                     <img src="assets/img/sedeco.png" alt="" width="420px">
                     <p>Departamento de Recursos Materiales y Servicios Generales</p>
                     <p>Solicitante:{{ $Entrada->Departamento->nombre_departamento }}</p>
-                    <p>Proveedor:{{ $Entrada->Proveedor->nombre }}</p>
                 </td>
                 <td style="width: 40%;">
                     <p>Entrada del Almacen</p>
-                    <p>Factura:{{ $Entrada->factura }}</p>
-                    <p>Folio de la factura:{{ $Entrada->folio }}</p>
                     <p>Fecha de entrada al almacén: {{ \Carbon\Carbon::parse($Entrada->fechaentrada)->format('d/m/Y') }}</p>
-                    <p>Fecha de factura:  {{ \Carbon\Carbon::parse($Entrada->fechafactura)->format('d/m/Y') }}</p>
-                    <p>RFC: {{ $Entrada->Proveedor->rfc }}</p>
                 </td>
             </tr>
         </table>
@@ -154,7 +149,6 @@
                         <td>
                             <p>_______________________________</p>
                             <p>Entrega</p>
-                            <p>{{ $Entrada->Proveedor->nombre }}</p>
                         </td>
                         <td>
                             <p>_______________________________</p>
@@ -164,9 +158,7 @@
                         <td>
                             <p>_______________________________</p>
                             <p>Recibe</p>
-                            <p>{{ $Entrada->Empleado->nombre }} {{ $Entrada->Empleado->apellido_paterno }}
-                                {{ $Entrada->Empleado->apellido_materno }}</p>
-                            <p>{{ $Entrada->Empleado->Cargos->nombre_cargo }}</p>
+                            
                         </td>
                     </tr>
                 </tbody>
