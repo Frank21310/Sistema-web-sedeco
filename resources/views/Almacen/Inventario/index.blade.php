@@ -8,8 +8,8 @@
                     <h2 class="">Artículos</h2>
                 </div>
                 <div class="col g-col-12 d-flex justify-content-end">
-                    <button type="button" class="btn btn-primary ml-auto BotonRojo" data-bs-toggle="modal"
-                        data-bs-target="#modalagregarrol">
+                    <button type="button" class="btn btn-primary ml-auto BotonGris" data-bs-toggle="modal"
+                        data-bs-target="#modareporte">
                         <i class="fas fa-plus"></i>
                         Generar Reporte
                     </button>
@@ -210,7 +210,28 @@
                     </div>
                 </div>
             </div>
-        </div>
+            <!-- Modal para reportes -->
+            <div class="modal fade" id="modareporte" tabindex="-1" aria-labelledby="agregarModalLabel"aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="agregarModalLabel">Generar Reportes</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row"><button type="button" class="btn btn-primary btn-primary ml-auto BotonRojo">Reporte General</button></div>
+                            <div class="row"><button type="button" class="btn btn-primary btn-primary ml-auto BotonRojo">Reporte de Papelería</button></div>
+                            <div class="row"><button type="button" class="btn btn-primary btn-primary ml-auto BotonRojo">Reporte de Consumibles</button></div>
+                            <div class="row"><button type="button" class="btn btn-primary btn-primary ml-auto BotonRojo">Reporte de Suministros</button></div>
+                            <div class="row"><button type="button" class="btn btn-primary btn-primary ml-auto BotonRojo">Reporte de Limpieza</button></div>
+                            <div class="row"><button type="button" class="btn btn-primary btn-primary ml-auto BotonRojo">Reporte de Informática</button></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <div class="card-footer">
             @if ($Articulos->count() > 0)
                 {{ $Articulos->links() }}
