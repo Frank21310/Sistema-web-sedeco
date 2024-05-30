@@ -219,12 +219,14 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <div class="row"><button type="button" class="btn btn-primary btn-primary ml-auto BotonRojo">Reporte General</button></div>
-                            <div class="row"><button type="button" class="btn btn-primary btn-primary ml-auto BotonRojo">Reporte de Papelería</button></div>
-                            <div class="row"><button type="button" class="btn btn-primary btn-primary ml-auto BotonRojo">Reporte de Consumibles</button></div>
-                            <div class="row"><button type="button" class="btn btn-primary btn-primary ml-auto BotonRojo">Reporte de Suministros</button></div>
-                            <div class="row"><button type="button" class="btn btn-primary btn-primary ml-auto BotonRojo">Reporte de Limpieza</button></div>
-                            <div class="row"><button type="button" class="btn btn-primary btn-primary ml-auto BotonRojo">Reporte de Informática</button></div>
+                            <div class="row">
+                                <a href="{{ route('almacen.inventario.generar-reporte-general') }}" class="btn btn-primary ml-auto BotonRojo">Generar Reporte General</a>
+                            </div>
+                            @foreach($categorias as $categoria)
+                            <div class="row">
+                                <a href="{{ route('almacen.inventario.generar-reporte-categoria', ['categoria' => $categoria->id_categoria]) }}" class="btn btn-primary ml-auto BotonRojo">Generar Reporte {{ $categoria->nombre_categoria }}</a>
+                            </div>
+                             @endforeach 
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

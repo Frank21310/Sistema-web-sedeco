@@ -45,6 +45,9 @@ Route::group(['middleware' => ['auth']], function () {
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/Almancen', [SoloAlmacen::class, 'index'])->name(' administrador');
     Route::resource('/Almancen/Inventario', Inventario::class);
+    // Rutas para generar reportes
+    Route::get('/Almacen/Inventario/generar-reporte-general', [Inventario::class, 'generarReporteGeneral'])->name('almacen.inventario.generar-reporte-general');
+    Route::get('/Almacen/Inventario/generar-reporte-categoria/{categoria}', [Inventario::class, 'generarReporteCategoria'])->name('almacen.inventario.generar-reporte-categoria');
     Route::resource('/Almancen/Entradas', Entradas::class);
     Route::resource('/Almancen/Vales', ValesController::class);
     Route::get('/Almancen/Vales//buscar-articulos', [ValesController::class, 'buscarArticulos'])->name('buscarArticulos');
