@@ -92,7 +92,7 @@
 
         .Firmas td {
             border: none;
-            padding: 10px;
+            padding: 1px;
             margin: 0;
             text-align: center;
         }
@@ -111,12 +111,18 @@
                 <td style="width: 60%;">
                     <img src="assets/img/sedeco.png" alt="" width="420px">
                     <p>Departamento de Recursos Materiales y Servicios Generales</p>
-                    <p>Solicitante:{{ $Entrada->Departamento->nombre_departamento }}</p>
+                    <p>Solicitante:{{ isset($Entrada->Departamento->nombre_departamento) ? $Entrada->Departamento->nombre_departamento : '' }}</p>
+                    <p>Proveedor:{{ isset($Entrada->Proveedor->nombre) ? $Entrada->Proveedor->nombre : '' }}</p>
                 </td>
                 <td style="width: 40%;">
                     <p>Entrada del Almacen</p>
-                    <p>Fecha de entrada al almacén: {{ \Carbon\Carbon::parse($Entrada->fechaentrada)->format('d/m/Y') }}</p>
+                    <p>Factura:{{ isset($Entrada->factura) ? $Entrada->factura : '' }}</p>
+                    <p>Folio de la factura:{{ isset($Entrada->folio) ? $Entrada->folio : '' }}</p>
+                    <p>Fecha de entrada al almacén: {{ isset($Entrada->fechaentrada) ? \Carbon\Carbon::parse($Entrada->fechaentrada)->format('d/m/Y') : '' }}</p>
+                    <p>Fecha de factura:  {{ isset($Entrada->fechafactura) ? \Carbon\Carbon::parse($Entrada->fechafactura)->format('d/m/Y') : '' }}</p>
+                    <p>RFC: {{ isset($Entrada->Proveedor->rfc) ? $Entrada->Proveedor->rfc : '' }}</p> 
                 </td>
+                
             </tr>
         </table>
     </header>
@@ -146,10 +152,7 @@
             <table class="Firmas">
                 <tbody>
                     <tr>
-                        <td>
-                            <p>_______________________________</p>
-                            <p>Entrega</p>
-                        </td>
+                        
                         <td>
                             <p>_______________________________</p>
                             <p>C. Pedro Alberto Perez Sosa</p>
@@ -158,7 +161,9 @@
                         <td>
                             <p>_______________________________</p>
                             <p>Recibe</p>
-                            
+                            <p>{{ $Entrada->Empleado->nombre }} {{ $Entrada->Empleado->apellido_paterno }}
+                                {{ $Entrada->Empleado->apellido_materno }}</p>
+                            <p>{{ $Entrada->Empleado->Cargos->nombre_cargo }}</p>
                         </td>
                     </tr>
                 </tbody>
