@@ -22,11 +22,11 @@ class Inventario extends Controller
     {
         $categorias = Categoria::all();
         $medidas = UnidadMedida::all();
-    
+
         $query = ModelsInventario::orderBy('descripcion', 'ASC'); // Creamos el objeto del query builder
-    
+
         $limit = $request->has('limit') ? $request->limit : 4;
-    
+
         if ($request->has('search')) {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
@@ -35,11 +35,11 @@ class Inventario extends Controller
                     ->orWhere('categoria_id', 'like', '%' . $search . '%');
             });
         }
-        
+
         $query->whereNotIn('categoria_id', [7]);
-    
+
         $Articulos = $query->paginate($limit)->appends($request->all());
-    
+
         return view('Almacen.Inventario.index', compact('Articulos', 'categorias', 'medidas'));
     }
     public function store(Request $request)
@@ -91,35 +91,46 @@ class Inventario extends Controller
     {
         // Obtener los artículos con existencia menor o igual a 15
         $articulos = ModelsInventario::where('existencia', '<=', 15)->get();
+        // Mapear los datos para ajustar los encabezados
+        $datos = $articulos->map(function ($articulo) {
+            return [
+                'ID' => $articulo->articulo_id,
+                'DESCRIPCIÓN' => $articulo->descripcion,
+                'CATEGORIA' => $articulo->Categoria->nombre_categoria,
+                'UBICACION' => $articulo->estante,
+                'UNIDAD DE MEDIDA' => $articulo->unidad->nombre_unidad,
+                'SALIDA' => $articulo->salida,
+                'EXISTENCIA' => $articulo->existencia,
+            ];
+        });
 
         // Generar archivo Excel
-        return Excel::download(new ReporteGeneralExport($articulos), 'reporte_general.xlsx');
+        return Excel::download(new ReporteGeneralExport($datos), 'reporte_general.xlsx');
     }
 
     public function generarReporteCategoria($categoria)
-{
-    // Obtener los artículos de la categoría con existencia menor o igual a 15
-    $articulos = ModelsInventario::where('categoria_id', $categoria)
-                                  ->where('existencia', '<=', 15)
-                                  ->get();
+    {
+        // Obtener los artículos de la categoría con existencia menor o igual a 15
+        $articulos = ModelsInventario::where('categoria_id', $categoria)
+            ->where('existencia', '<=', 15)
+            ->get();
 
-    // Mapear los datos para ajustar los encabezados
-    $datos = $articulos->map(function ($articulo) {
-        return [
-            'ID' => $articulo->articulo_id,
-            'DESCRIPCIÓN' => $articulo->descripcion,
-            'CATEGORIA' => $articulo->Categoria->nombre_categoria,
-            'UBICACION' => $articulo->estante,
-            'UNIDAD DE MEDIDA' => $articulo->unidad->nombre_unidad,
-            'SALIDA' => $articulo->salida,
-            'EXISTENCIA' => $articulo->existencia,
-        ];
-    });
+        // Mapear los datos para ajustar los encabezados
+        $datos = $articulos->map(function ($articulo) {
+            return [
+                'ID' => $articulo->articulo_id,
+                'DESCRIPCIÓN' => $articulo->descripcion,
+                'CATEGORIA' => $articulo->Categoria->nombre_categoria,
+                'UBICACION' => $articulo->estante,
+                'UNIDAD DE MEDIDA' => $articulo->unidad->nombre_unidad,
+                'SALIDA' => $articulo->salida,
+                'EXISTENCIA' => $articulo->existencia,
+            ];
+        });
 
-    // Generar archivo Excel
-    return Excel::download(new ReporteCategoriaExport($datos), 'reporte_categoria_'.$categoria.'.xlsx');
-}
-
+        // Generar archivo Excel
+        return Excel::download(new ReporteCategoriaExport($datos), 'reporte_categoria_' . $categoria . '.xlsx');
+    }
 }
 class ReporteGeneralExport implements FromCollection
 {
