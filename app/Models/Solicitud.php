@@ -12,9 +12,14 @@ class Solicitud extends Model
     protected $table = 'solicitud';
     protected $fillable = [
         'vale_id',
+        'estatus_id',
     ];
     public function Vale()
     {
         return $this->belongsTo(Vale::class, 'vale_id', 'id_vale');
+    }
+    public function estatus()
+    {
+        return $this->belongsTo(Estatus::class, 'estatus_id', 'id_estatus');
     }
 }

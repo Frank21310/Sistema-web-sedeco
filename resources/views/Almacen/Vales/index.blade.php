@@ -93,7 +93,7 @@
                                     <td class="custom-td">{{ \Carbon\Carbon::parse($Vale->fechasalida)->format('d/m/Y') }}</td>
                                     <td class="custom-td">{{ optional($Vale->Solicitante)->nombre?? '' }} {{ optional($Vale->Solicitante)->apellido_paterno?? '' }}</td>
                                     <td class="custom-td">{{ optional($Vale->Departamento)->nombre_departamento ?? 'Sin departamento' }}</td>
-                                    <td class="custom-td">{{ $Vale->Entrega->nombre }}</td>
+                                    <td class="custom-td">{{ optional($Vale->Entrega)->nombre ?? 'Sin NOMBRE'  }}</td>
                                     
                                     <td class="custom-td">
                                         <div class="btn-group" role="group">

@@ -87,13 +87,11 @@
                         <tbody>
                             @foreach ($Solicitud as $Solicitudes)
                                 <tr>
-                                    <td class="custom-td">{{ $Solicitudes->descripcion }}</td>
-                                    <td class="custom-td">{{ optional($Solicitudes->Categoria)->nombre_categoria ?? 'Sin Categoria' }}</td>
-                                    <td class="custom-td">{{ $Solicitudes->estante }}</td>
-                                    <td class="custom-td">{{ optional($Solicitudes->Unidad)->nombre_unidad ?? 'Sin medida' }}</td>
-                                    <td class="custom-td">{{ $Solicitudes->salida }}</td>
-                                    <td class="custom-td">{{ $Solicitudes->existencia }}</td>
-                                    <!--<td class="custom-td">{{ $Solicitudes->fecha_elaboracion }}</td>-->
+                                    <td class="custom-td">{{ $Solicitudes->id_solicitud }}</td>
+                                    <td class="custom-td">{{ optional($Solicitudes->Vale)->fechasalida ?? 'Sin fecha' }}</td>
+                                    <td class="custom-td">{{ $Solicitudes->Vale->Departamento->nombre_departamento }}</td>
+                                    <td class="custom-td">{{ optional($Solicitudes->Vale)->Solicitante->nombre ?? 'Sin solicitante' }}</td>
+                                    <td class="custom-td">{{ $Solicitudes->estatus->nombre_estatus }}</td>
                                     
                                     <td class="custom-td">
                                         <div class="btn-group" role="group">
@@ -102,18 +100,6 @@
                                                 onclick="mostrarDetalles('{{ json_encode($Solicitudes) }}')">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="{{ route('Inventario.edit', $Solicitudes->id_articulo) }}" class="btn btn-primary"><i
-                                                    class="fas fa-pencil-alt"></i></a>
-                                            <form action="{{ route('Solicitudes.destroy', $Solicitudes->id_articulo) }}"
-                                                id="delete_{{ $Solicitudes->id_articulo }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-
-                                                <button type="submit" class="btn btn-danger"
-                                                    onclick="return confirm('¿Estás seguro de eliminar el registro?')">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
                                         </div>
                                     </td>
                                 </tr>

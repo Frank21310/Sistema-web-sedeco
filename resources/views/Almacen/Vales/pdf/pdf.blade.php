@@ -159,9 +159,8 @@
                         <td>
                             <p>____________________________</p>
                             <p>Entrega</p>
-                            <p>{{ $Vales->Entrega->nombre }} {{ $Vales->Entrega->apellido_paterno }}
-                                {{ $Vales->Entrega->apellido_materno }}</p>
-                            <p>{{ $Vales->Entrega->Cargos->nombre_cargo }}</p>
+                            <p>{{ optional($Vales->Entrega)->nombre?? 'Sin asignar' }}{{ optional($Vales->Entrega)->apellido_paterno?? 'Sin asignar' }}{{ optional($Vales->Entrega)->apellido_materno?? 'Sin asignar' }}</p>
+                            <p>{{ optional($Vales->Entrega)->Cargos->nombre_cargo?? 'Sin asignar' }}</p>
                         </td>
                         <td>
                             <p>____________________________</p>

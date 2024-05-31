@@ -31,12 +31,15 @@ class Solicitud extends Controller
 
     public function store(Request $request)
     {
+                                        
         $vale = Vale::create([
+
             'fechasalida' => $request->fechasalida,
             'solicitante' =>  auth()->user()->empleado_num,
-            'departamento_id' =>  auth()->user()->departamento,
+            'departamento_id' =>  auth()->user()->Empleados->departamento,
             'iniciosemana' => $request->fechasalida,
             'finsemana' => $request->fechasalida,
+
         ]);
 
         $descripciones = $request->descripcion;
