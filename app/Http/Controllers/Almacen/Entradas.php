@@ -27,7 +27,7 @@ class Entradas extends Controller
         $proveedores = Proveedor::all();
         $Departamentos = Departamento::all();
 
-        $Entradas = Entrada::select('*')->orderBy('id_entrada', 'ASC');
+        $Entradas = Entrada::select('*')->orderBy('id_entrada', 'DESC');
         $limit = (isset($request->limit)) ? $request->limit : 4;
 
         if (isset($request->search)) {

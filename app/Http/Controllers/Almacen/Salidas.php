@@ -109,6 +109,6 @@ class Salidas extends Controller
         $pdf = Pdf::loadView('Almacen.Salidas.pdf.pdf', compact('Salida', 'Entrada', 'articulos'));
         $pdf->setPaper('letter', 'landscape');
 
-        return $pdf->stream('Entrada_' . $id . '.pdf');
+        return $pdf->stream('Salida_' . $id . '.pdf');
     }
 }

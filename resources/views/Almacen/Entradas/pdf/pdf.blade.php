@@ -33,7 +33,7 @@
         }
 
         main {
-            margin-top: 1cm;
+            margin-top: 1.5cm;
         }
 
 
@@ -84,9 +84,9 @@
         }
 
         .Firmas {
-            border-collapse: collapse;
+            border-collapse: collapse; 
             width: 100%;
-            margin-top: 2cm;
+            margin-top: 1.5cm;
 
         }
 
@@ -152,15 +152,24 @@
             <table class="Firmas">
                 <tbody>
                     <tr>
-                        
                         <td>
                             <p>_______________________________</p>
+                            <p>Entrega</p>
+                            <p>Saúl Ivan Pérez Martinez</p>
+                            <p>Ventas</p>
+                        </td>   
+                    
+                        <td>
+                            <p>_______________________________</p>
+                            <p>Vo.Bo</p>
                             <p>C. Pedro Alberto Perez Sosa</p>
                             <p>Jefe del Depto. de Recursos Materiales y Servicios Generales</p>
                         </td>
+
                         <td>
                             <p>_______________________________</p>
                             <p>Recibe</p>
+                        
                             <p>{{ $Entrada->Empleado->nombre }} {{ $Entrada->Empleado->apellido_paterno }}
                                 {{ $Entrada->Empleado->apellido_materno }}</p>
                             <p>{{ $Entrada->Empleado->Cargos->nombre_cargo }}</p>
