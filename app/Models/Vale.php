@@ -17,6 +17,8 @@ class Vale extends Model
         'iniciosemana',
         'finsemana',
         'entrega',
+        'solicitud',
+
     ];
     public function detalles()
     {

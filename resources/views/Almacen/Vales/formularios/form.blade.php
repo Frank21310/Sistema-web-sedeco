@@ -37,11 +37,15 @@
             </div>
         </div>
     </div>
+    <input  name="solicitud" id="solicitud" value="1" class="form-control custom-input" hidden>
+
     
     <br>
     @include('Almacen.Vales.formularios.vistaform')
 
     <br>
+
+
 
 
 </div>

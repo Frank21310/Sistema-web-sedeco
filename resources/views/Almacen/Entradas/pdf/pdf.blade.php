@@ -33,7 +33,7 @@
         }
 
         main {
-            margin-top: 1.5cm;
+            margin-top: 1cm;
         }
 
 
@@ -155,8 +155,9 @@
                         <td>
                             <p>_______________________________</p>
                             <p>Entrega</p>
-                            <p>Saúl Ivan Pérez Martinez</p>
-                            <p>Ventas</p>
+                            <p>Saul Perez Martinez</p>
+                            <p>Agente de ventas</p>
+                            
                         </td>   
                     
                         <td>

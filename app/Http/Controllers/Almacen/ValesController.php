@@ -33,9 +33,32 @@ class ValesController extends Controller
             $Vales = $Vales->where('id_vale', 'like', '%' . $request->search . '%')
                 ->orWhere('solicita', 'like', '%' . $request->search . '%');
         }
+
+        // Agrega la condición para que solo muestre vales con solicitud igual a 1
+        $Vales = $Vales->where('solicitud', 1);
+            $Vales->orWhereNull('solicitud');
+
+
         $Vales = $Vales->paginate($limit)->appends($request->all());
         return view('Almacen.Vales.index', compact('Vales', 'medidas', 'Departamentos', 'Solicitantes'));
     }
+
+    /*public function index(Request $request)
+    {
+        $medidas = UnidadMedida::all();
+        $Departamentos = Departamento::all();
+        $Solicitantes = Empleado::all();
+
+        $Vales = Vale::select('*')->orderBy('fechasalida', 'DESC');
+        $limit = (isset($request->limit)) ? $request->limit : 6;
+
+        if (isset($request->search)) {
+            $Vales = $Vales->where('id_vale', 'like', '%' . $request->search . '%')
+                ->orWhere('solicita', 'like', '%' . $request->search . '%');
+        }
+        $Vales = $Vales->paginate($limit)->appends($request->all());
+        return view('Almacen.Vales.index', compact('Vales', 'medidas', 'Departamentos', 'Solicitantes'));
+    }*/
 
     public function store(Request $request)
     {
@@ -48,6 +71,7 @@ class ValesController extends Controller
             'iniciosemana' => $request->fechasalida,
             'finsemana' => $request->fechasalida,
             'entrega' => auth()->user()->empleado_num,
+            'solicitud' => $request->solicitud,
         ]);
 
         $descripciones = $request->descripcion;

@@ -101,7 +101,7 @@
                                     <td class="custom-td">{{ optional($Articulo->Categoria)->nombre_categoria ?? 'Sin Categoria' }}</td>
                                     <td class="custom-td">{{ $Articulo->estante }}</td>
                                     <td class="custom-td">{{ optional($Articulo->Unidad)->nombre_unidad ?? 'Sin medida' }}</td>
-                                    <td class="custom-td">{{ $Articulo->salida }}</td>
+                                    <td class="custom-td">{{ $Articulo->id_articulo }}</td>
                                     <td class="custom-td">{{ $Articulo->existencia }}</td>
                                     <!--<td class="custom-td">{{ $Articulo->fecha_elaboracion }}</td>-->
                                     

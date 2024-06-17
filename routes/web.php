@@ -51,8 +51,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/Almancen/Entradas', Entradas::class);
     Route::resource('/Almancen/Vales', ValesController::class);
     Route::get('/Almancen/Vales//buscar-articulos', [ValesController::class, 'buscarArticulos'])->name('buscarArticulos');
-
-
+    
     Route::get('/Almancen/Entradas/generar-pdf/{id}', [Entradas::class, 'generarPDF'])->name('generar.pdf');
     Route::get('/Almancen/Salidas/generar-pdf/{id}', [Salidas::class, 'generarSalidaPDF'])->name('generarsalida.pdf');
     Route::get('/Almancen/Vales/generar-pdf/{id}', [ValesController::class, 'generarvalePDF'])->name('generarvalePDF.pdf');

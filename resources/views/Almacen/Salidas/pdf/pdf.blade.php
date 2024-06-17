@@ -157,18 +157,23 @@
                     <tr>
                         <td>
                             <p>_______________________________</p>
+                            <p>Entrega</p>
+
                             <p>{{ $Entrada->Empleado->nombre }} {{ $Entrada->Empleado->apellido_paterno }}
                                 {{ $Entrada->Empleado->apellido_materno }}</p>
                             <p>{{ $Entrada->Empleado->Cargos->nombre_cargo }}</p>
                         </td>
                         <td>
                             <p>_______________________________</p>
+                            <p>Vo.Bo</p>
+
                             <p>C. Pedro Alberto Perez Sosa</p>
                             <p>Jefe del Depto. de Recursos Materiales y Servicios Generales</p>
                         </td>
                         <td>
                             <p>_______________________________</p>
                             <p>Recibe</p>
+                            <p>Nora luz Luises Hernandez</p>
                             
                         </td>
                     </tr>
