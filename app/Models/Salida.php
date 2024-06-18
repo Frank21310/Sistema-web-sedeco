@@ -14,6 +14,7 @@ class Salida extends Model
         'entrada_id',
         'fechasalida',
         'empleado_num',
+        'recibe',
     ];
     public function Empleado()
     {
@@ -22,6 +23,10 @@ class Salida extends Model
     public function Entrada()
     {
         return $this->belongsTo(Entrada::class, 'entrada_id', 'id_entrada');
+    }
+    public function Recibe()
+    {
+        return $this->belongsTo(Empleado::class, 'recibe', 'num_empleado');
     }
     
 }

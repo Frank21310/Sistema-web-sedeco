@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Almacen;
 use App\Http\Controllers\Controller;
 use App\Models\DetalleEntrada;
 use App\Models\DetalleSalida;
+use App\Models\Empleado;
 use App\Models\Entrada;
 use App\Models\inventario;
 use App\Models\Salida;
@@ -21,15 +22,16 @@ class Salidas extends Controller
     }
     public function index(Request $request)
     {
-        $Salidas = Salida::select('*')->orderBy('id_salida', 'ASC');
+        $Receptor = Empleado::all();
+        $Salidas = Salida::select('*')->orderBy('id_salida', 'DESC');
         $limit = (isset($request->limit)) ? $request->limit : 4;
 
         if (isset($request->search)) {
             $Salidas = $Salidas->where('id_salida', 'like', '%' . $request->search . '%')
                 ->orWhere('empleado_num', 'like', '%' . $request->search . '%');
-        }
+        } 
         $Salidas = $Salidas->paginate($limit)->appends($request->all());
-        return view('Almacen.Salidas.index', compact('Salidas'));
+        return view('Almacen.Salidas.index', compact('Salidas','Receptor'));
     }
 
     public function store(Request $request)
@@ -42,6 +44,7 @@ class Salidas extends Controller
         $salida = new Salida();
         $salida->entrada_id = $request->entrada_id;
         $salida->fechasalida = $request->fechasalida;
+        $salida->recibe = $request->recibe;
         $salida->empleado_num = auth()->user()->empleado_num;
         $salida->save();
         return redirect()->route('Salidas.index');

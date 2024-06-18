@@ -155,7 +155,7 @@
                         </div>
 
                         <div class="modal-body">
-                            <!-- Aquí se mostrarán los detalles del rol -->
+                            <!-- Aquí se mostrará el articulo -->
                             <div class="row">
                                 <div class="col-12">
                                     <label for="nombre_rol">descripcion:</label>

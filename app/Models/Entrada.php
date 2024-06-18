@@ -14,6 +14,8 @@ class Entrada extends Model
     protected $table = 'entradas';
     protected $fillable = [
         'factura',
+        'entrega',
+        'cargoentrega',
         'folio',
         'codigo',
         'fechaentrada',

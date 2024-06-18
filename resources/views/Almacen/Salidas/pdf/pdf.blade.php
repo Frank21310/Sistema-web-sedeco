@@ -158,7 +158,6 @@
                         <td>
                             <p>_______________________________</p>
                             <p>Entrega</p>
-
                             <p>{{ $Entrada->Empleado->nombre }} {{ $Entrada->Empleado->apellido_paterno }}
                                 {{ $Entrada->Empleado->apellido_materno }}</p>
                             <p>{{ $Entrada->Empleado->Cargos->nombre_cargo }}</p>
@@ -173,7 +172,9 @@
                         <td>
                             <p>_______________________________</p>
                             <p>Recibe</p>
-                            <p>Nora luz Luises Hernandez</p>
+                            <p>{{ $Salida->Recibe->nombre }} {{ $Salida->Recibe->apellido_paterno }}
+                                {{ $Salida->Recibe->apellido_materno }}</p>
+                            <p>{{ $Salida->Recibe->Cargos->nombre_cargo }}</p>
                             
                         </td>
                     </tr>

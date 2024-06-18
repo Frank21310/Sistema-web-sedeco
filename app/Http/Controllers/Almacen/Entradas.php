@@ -42,6 +42,8 @@ class Entradas extends Controller
     {
         $entrada = new Entrada();
         $entrada->factura = $request->factura;
+        $entrada->entrega = $request->entrega;
+        $entrada->cargoentrega = $request->cargoentrega;
         $entrada->folio = $request->folio;
         $entrada->fechaentrada = $request->fechaentrada;
         $entrada->fechafactura = $request->fechafactura;
@@ -89,6 +91,8 @@ class Entradas extends Controller
     {
         $Entrada = Entrada::where('id_entrada', $id)->firstOrFail();
         $Entrada->factura = $request->factura;
+        $Entrada->entrega = $request->entrega;
+        $Entrada->cargoentrega = $request->cargoentrega;
         $Entrada->folio = $request->folio;
         $Entrada->fechaentrada = $request->fechaentrada;
         $Entrada->fechafactura = $request->fechafactura;

@@ -28,6 +28,20 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="">Entrega </label>
+                <input type="text" class="form-control custom-input" name="entrega" >
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label for="">Cargo </label>
+                <input type="text" class="form-control custom-input" name="cargoentrega" >
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-12">
             <div class="form-group">
                 <label for="">Folio </label>
@@ -35,6 +49,7 @@
             </div>
         </div>
     </div>
+    
     <div class="row">
 
         <div class="col-4">

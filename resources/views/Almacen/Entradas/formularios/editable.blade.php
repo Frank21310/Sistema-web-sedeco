@@ -30,6 +30,20 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label for="">Entrega </label>
+                <input type="text" class="form-control custom-input" name="entrega" value="{{(isset($Entrada))?$Entrada->entrega:old('entrega')}}" >
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label for="">Cargo </label>
+                <input type="text" class="form-control custom-input" name="cargoentrega" value="{{(isset($Entrada))?$Entrada->cargoentrega:old('cargoentrega')}}" >
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-12">
             <div class="form-group">
                 <label for="">Folio </label>
