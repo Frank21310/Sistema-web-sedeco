@@ -65,6 +65,6 @@ class Solicitud extends Controller
             'estatus_id' => 1, // Suponiendo que el estatus 1 representa el estatus que deseas
         ]);
 
-        return redirect()->route('Vales.index')->with('Vale creado exitosamente.');
+        return redirect()->route('Solicitudes.index')->with('Vale creado exitosamente.');
     }
 }

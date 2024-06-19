@@ -7,13 +7,7 @@
                 <div class="col">
                     <h2 class="">Solicitudes</h2>
                 </div>
-                <div class="col g-col-6 d-flex justify-content-end">
-                    <button type="button" class="btn btn-primary ml-auto BotonRojo" data-bs-toggle="modal"
-                        data-bs-target="#modalagregarentrada">
-                        <i class="fas fa-plus"></i>
-                        Solicitar
-                    </button>
-                </div>
+                
             </div> 
             @if (session('error'))
                 <div class="alert alert-danger" role="alert">
@@ -94,13 +88,11 @@
                                     <td class="custom-td">{{ $Solicitudes->estatus->nombre_estatus }}</td>
                                     
                                     <td class="custom-td">
-                                        <div class="btn-group" role="group">
-                                            <a href="#" class="btn btn-info" data-bs-toggle="modal"
-                                                data-bs-target="#verarticulomodal"
-                                                onclick="mostrarDetalles('{{ json_encode($Solicitudes) }}')">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                        </div>
+                                        <a href="{{ route('generarsalidaPDF.pdf', $Solicitudes->id_solicitud) }}" class="btn btn-info" target="_blank">
+                                            <i class="fa fa-print"></i>
+                                        </a>
+                                        <a href="{{ route('solicitud.edit', $Solicitudes->id_solicitud) }}" class="btn btn-primary"><i
+                                            class="fas fa-pencil-alt"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -118,9 +110,9 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form id="createForm" action="{{ route('Solicitudes.store') }}" method="POST"
+                            <form id="createForm" action="{{ route('solicitud.store') }}" method="POST"
                                 enctype="multipart/form-data">
-                                @include('Peticiones.Solicitudes.formularios.form')
+                                @include('Almacen.Solicitudes.formularios.form')
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -141,13 +133,13 @@
 
     <Script type="text/javascript">
         $('#limit').on('change', function() {
-            window.location.href = "{{ route('Solicitudes.index') }}?limit=" + $(this).val() + '&search=' + $('#search')
+            window.location.href = "{{ route('solicitud.index') }}?limit=" + $(this).val() + '&search=' + $('#search')
                 .val()
         })
 
         $('#search').on('keyup', function(e) {
             if (e.keyCode == 13) {
-                window.location.href = "{{ route('Solicitudes.index') }}?limit=" + $('#limit').val() + '&search=' + $(
+                window.location.href = "{{ route('solicitud.index') }}?limit=" + $('#limit').val() + '&search=' + $(
                     this).val()
             }
         })

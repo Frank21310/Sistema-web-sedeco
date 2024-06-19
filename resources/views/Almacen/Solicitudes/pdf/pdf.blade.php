@@ -3,10 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Entrada</title>
+    <title>Vale de salida</title>
     <style>
         @page {
-            margin-top: 2.5cm;
+            margin-top: 1.5cm;
             margin-bottom: 2.5cm;
             margin-left: 2.5cm;
             margin-right: 2.5cm;
@@ -33,7 +33,7 @@
         }
 
         main {
-            margin-top: 1.5cm;
+            margin-top: 1cm;
         }
 
 
@@ -71,6 +71,7 @@
             text-align: center;
 
         }
+
         .full-width-table th:nth-child(3),
         .full-width-table td:nth-child(3) {
             width: 10%;
@@ -84,15 +85,15 @@
         }
 
         .Firmas {
-            border-collapse: collapse; 
+            border-collapse: collapse;
             width: 100%;
-            margin-top: 1.5cm;
+            margin-top: 2cm;
 
         }
 
         .Firmas td {
             border: none;
-            padding: 1px;
+            padding: 10px;
             margin: 0;
             text-align: center;
         }
@@ -111,18 +112,21 @@
                 <td style="width: 60%;">
                     <img src="assets/img/sedeco.png" alt="" width="420px">
                     <p>Departamento de Recursos Materiales y Servicios Generales</p>
-                    <p>Solicitante:{{ isset($Entrada->Departamento->nombre_departamento) ? $Entrada->Departamento->nombre_departamento : '' }}</p>
-                    <p>Proveedor:{{ isset($Entrada->Proveedor->nombre) ? $Entrada->Proveedor->nombre : '' }}</p>
+                    <p>Departamento Solicitante:{{ $Vales->Departamento->nombre_departamento }}</p>
+                    @if ($Vales->solicitante != null && $Vales->solicitante != null)
+                        <p>Solicitante:{{ $Vales->Solicitante->nombre }} {{ $Vales->Solicitante->apellido_paterno }}
+                            {{ $Vales->Solicitante->apellido_materno }}</p>
+                            <p>{{ $Vales->Solicitante->Cargos->nombre_cargo }}</p>
+                    @endif
+                    @if ($Vales->departamento_id == 19)
+                        <p>SEMANA DEL {{ $Vales->iniciosemana }} a {{ $Vales->finsemana }} </p>
+                    @endif
                 </td>
                 <td style="width: 40%;">
-                    <p>Entrada del Almacen</p>
-                    <p>Factura:{{ isset($Entrada->factura) ? $Entrada->factura : '' }}</p>
-                    <p>Folio de la factura:{{ isset($Entrada->folio) ? $Entrada->folio : '' }}</p>
-                    <p>Fecha de entrada al almacén: {{ isset($Entrada->fechaentrada) ? \Carbon\Carbon::parse($Entrada->fechaentrada)->format('d/m/Y') : '' }}</p>
-                    <p>Fecha de factura:  {{ isset($Entrada->fechafactura) ? \Carbon\Carbon::parse($Entrada->fechafactura)->format('d/m/Y') : '' }}</p>
-                    <p>RFC: {{ isset($Entrada->Proveedor->rfc) ? $Entrada->Proveedor->rfc : '' }}</p> 
+                    <p>Salida de almacén</p>
+                    <p>Material de oficina</p>
+                    <p>Fecha de salida: {{ \Carbon\Carbon::parse($Vales->fechasalida)->format('d/m/Y') }}</p>
                 </td>
-                
             </tr>
         </table>
     </header>
@@ -137,11 +141,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($articulos as $articulo)
+                    @foreach ($detallevales as $detallevale)
                         <tr>
-                            <td>{{ $articulo->descripcion }}</td>
-                            <td>{{ $articulo->Unidad->nombre_unidad }}</td>
-                            <td>{{ $articulo->cantidad }}</td>
+                            <td>{{ $detallevale->Inventario->descripcion }}</td>
+                            <td>{{ $detallevale->Inventario->Unidad->nombre_unidad }}</td>
+                            <td>{{ $detallevale->salida }}</td>
                         </tr>
                     @endforeach
 
@@ -153,26 +157,25 @@
                 <tbody>
                     <tr>
                         <td>
-                            <p>_______________________________</p>
+                            <p>____________________________</p>
                             <p>Entrega</p>
-                            <p>{{ $Entrada->entrega }}</p>
-                            <p>{{ $Entrada->cargoentrega}}</p>
-                            
-                        </td>   
-                    
+                            <p>{{ optional($Vales->Entrega)->nombre?? 'Sin asignar' }}{{ optional($Vales->Entrega)->apellido_paterno?? 'Sin asignar' }}{{ optional($Vales->Entrega)->apellido_materno?? 'Sin asignar' }}</p>
+                            <p>{{ optional($Vales->Entrega)->Cargos->nombre_cargo?? 'Sin asignar' }}</p>
+                        </td>
                         <td>
-                            <p>_______________________________</p>
-                            <p>Vo.Bo</p>
+                            <p>____________________________</p>
                             <p>C. Pedro Alberto Perez Sosa</p>
                             <p>Jefe del Depto. de Recursos Materiales y Servicios Generales</p>
                         </td>
-
                         <td>
-                            <p>_______________________________</p>
+                            <p>____________________________</p>
                             <p>Recibe</p>
-                            <p>{{ $Entrada->Empleado->nombre }} {{ $Entrada->Empleado->apellido_paterno }}
-                                {{ $Entrada->Empleado->apellido_materno }}</p>
-                            <p>{{ $Entrada->Empleado->Cargos->nombre_cargo }}</p>
+                            <!-- @if ($Vales->solicitante != null && $Vales->solicitante != null)
+                            <p>{{ $Vales->Solicitante->nombre }} {{ $Vales->Solicitante->apellido_paterno }}
+                                {{ $Vales->Solicitante->apellido_materno }}</p>
+                            <p>{{ $Vales->Solicitante->Cargos->nombre_cargo }}</p>
+                            @endif-->
+                            
                         </td>
                     </tr>
                 </tbody>

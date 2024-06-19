@@ -7,6 +7,7 @@ use App\Http\Controllers\Administrador\UsuariosController;
 use App\Http\Controllers\Almacen\Entradas;
 use App\Http\Controllers\Almacen\Inventario;
 use App\Http\Controllers\Almacen\Salidas;
+use App\Http\Controllers\Almacen\SolicitudesController;
 use App\Http\Controllers\Almacen\SoloAdminController as AlmacenSoloAdminController;
 use App\Http\Controllers\Almacen\ValesController;
 use App\Http\Controllers\Peticiones\Solicitud;
@@ -50,6 +51,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/Almacen/Inventario/generar-reporte-categoria/{categoria}', [Inventario::class, 'generarReporteCategoria'])->name('almacen.inventario.generar-reporte-categoria');
     Route::resource('/Almancen/Entradas', Entradas::class);
     Route::resource('/Almancen/Vales', ValesController::class);
+    
+    Route::resource('/Almancen/solicitud', SolicitudesController::class);
+
     Route::get('/Almancen/Vales//buscar-articulos', [ValesController::class, 'buscarArticulos'])->name('buscarArticulos');
     
     Route::get('/Almancen/Entradas/generar-pdf/{id}', [Entradas::class, 'generarPDF'])->name('generar.pdf');
@@ -57,6 +61,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/Almancen/Vales/generar-pdf/{id}', [ValesController::class, 'generarvalePDF'])->name('generarvalePDF.pdf');
 
     Route::resource('/Almancen/Salidas', Salidas::class);
+    Route::get('/Almancen/Salidas/generar-pdf/{id}', [Salidas::class, 'generarsalidaPDF'])->name('generarsalidaPDF.pdf');
+
+
+
+
+
 })->namespace('Almancen');
 
 Route::group(['middleware' => ['auth']], function () {

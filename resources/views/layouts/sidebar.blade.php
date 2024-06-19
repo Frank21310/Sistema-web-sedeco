@@ -66,8 +66,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href=""
-                    class="nav-link {{ 'Almancen/Solicitudes' == request()->path() ? 'active' : '' }}">
+                <a href="{{ route('solicitud.index') }}"
+                    class="nav-link {{ 'Almancen/solicitud' == request()->path() ? 'active' : '' }}">
                     <i class="fi fi-rr-apps-add"></i>
                     Solicitudes
                 </a>
@@ -82,7 +82,7 @@
             </li>
             <li class="nav-item">
                 <a href="{{ route('Solicitudes.index') }}"
-                    class="nav-link {{ 'Peticiones/Peticiones' == request()->path() ? 'active' : '' }}">
+                    class="nav-link {{ 'Peticiones/Solicitudes' == request()->path() ? 'active' : '' }}">
                     <i class="fi fi-rr-apps-add"></i>
                     Solicitudes
                 </a>
