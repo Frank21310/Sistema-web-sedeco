@@ -172,9 +172,13 @@
                         <td>
                             <p>_______________________________</p>
                             <p>Recibe</p>
-                            <p>{{ $Salida->Recibe->nombre }} {{ $Salida->Recibe->apellido_paterno }}
-                                {{ $Salida->Recibe->apellido_materno }}</p>
-                            <p>{{ $Salida->Recibe->Cargos->nombre_cargo }}</p>
+                            
+
+                            <p>{{ isset($Salida->Recibe->nombre) ? $Salida->Recibe->nombre : '' }}
+                                {{ isset($Salida->Recibe->apellido_paterno) ? $Salida->Recibe->apellido_paterno : '' }}
+                                {{ isset($Salida->Recibe->apellido_materno) ? $Salida->Recibe->apellido_materno : '' }}</p>
+                            <p>                            {{ isset($Salida->Recibe->Cargos->nombre_cargo) ? $Salida->Recibe->Cargos->nombre_cargo : '' }}
+                            </p>
                             
                         </td>
                     </tr>

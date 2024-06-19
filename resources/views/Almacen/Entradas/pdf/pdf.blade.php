@@ -6,7 +6,7 @@
     <title>Entrada</title>
     <style>
         @page {
-            margin-top: 1.5cm;
+            margin-top: 2.5cm;
             margin-bottom: 2.5cm;
             margin-left: 2.5cm;
             margin-right: 2.5cm;
@@ -33,7 +33,7 @@
         }
 
         main {
-            margin-top: 1cm;
+            margin-top: 1.5cm;
         }
 
 
@@ -86,7 +86,7 @@
         .Firmas {
             border-collapse: collapse; 
             width: 100%;
-            margin-top: 1.5cm;
+            margin-top: 1cm;
 
         }
 
