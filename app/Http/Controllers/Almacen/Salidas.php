@@ -77,7 +77,7 @@ class Salidas extends Controller
             return redirect()->route('Salidas.index')->with('error', 'No se pudo eliminar el registro.');
         }
     }
-    public function generarSalidaPDF($id)
+    public function generarsalidaPDF($id)
     {
         $Salida = Salida::find($id);
 

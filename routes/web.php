@@ -40,7 +40,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/Administrador/Roles', RolesController::class);
     Route::resource('/Administrador/Empleados', EmpleadosController::class);
     Route::resource('/Administrador/Usuarios', UsuariosController::class);
-
 })->namespace('Administrador');
 
 Route::group(['middleware' => ['auth']], function () {
@@ -51,25 +50,22 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/Almacen/Inventario/generar-reporte-categoria/{categoria}', [Inventario::class, 'generarReporteCategoria'])->name('almacen.inventario.generar-reporte-categoria');
     Route::resource('/Almancen/Entradas', Entradas::class);
     Route::resource('/Almancen/Vales', ValesController::class);
-    
+    Route::resource('/Almancen/Salidas', Salidas::class);
+
     Route::resource('/Almancen/solicitud', SolicitudesController::class);
 
     Route::get('/Almancen/Vales//buscar-articulos', [ValesController::class, 'buscarArticulos'])->name('buscarArticulos');
-    
+
     Route::get('/Almancen/Entradas/generar-pdf/{id}', [Entradas::class, 'generarPDF'])->name('generar.pdf');
-    Route::get('/Almancen/Salidas/generar-pdf/{id}', [Salidas::class, 'generarSalidaPDF'])->name('generarsalida.pdf');
+    Route::get('/Almancen/Salidas/generar-pdf/{id}', [Salidas::class, 'generarsalidaPDF'])->name('generarsalidaPDF.pdf');
     Route::get('/Almancen/Vales/generar-pdf/{id}', [ValesController::class, 'generarvalePDF'])->name('generarvalePDF.pdf');
 
-    Route::resource('/Almancen/Salidas', Salidas::class);
-    Route::get('/Almancen/Salidas/generar-pdf/{id}', [Salidas::class, 'generarsalidaPDF'])->name('generarsalidaPDF.pdf');
 
-
-
-
-
+    Route::get('/Almancen/solicitud/generar-pdf/{id}', [SolicitudesController::class, 'generarsalida'])->name('generarsalida.pdf');
+    Route::put('/Almancen/solicitud/solicitud/{id}/actualizar-estatus', [SolicitudesController::class, 'actualizarEstatus'])
+        ->name('actualizar-estatus');
 })->namespace('Almancen');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('/Peticiones/Solicitudes', Solicitud::class);
-
 })->namespace('Peticiones');

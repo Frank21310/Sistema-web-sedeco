@@ -77,9 +77,11 @@ class SolicitudesController extends Controller
         $solicitud = Solicitud::findOrFail($id);
         $vale = $solicitud->vale;
         $detallevales = $vale->detalles;
+
         $medidas = UnidadMedida::all();
         $Empleados = Empleado::all();
         $Departamentos = Departamento::all();
+
         return view('Almacen.Solicitudes.edit', compact('solicitud', 'vale', 'detallevales', 'medidas', 'Empleados', 'Departamentos'));
     }
 
@@ -121,26 +123,25 @@ class SolicitudesController extends Controller
 
         return redirect()->route('solicitud.index')->with('success', 'Vale actualizado exitosamente.');
     }
-    public function generarsalidaPDF($id)
-{
-    // Obtener la solicitud por su ID
-    $solicitud = Solicitud::find($id);
+    public function generarsalida($id)
+    {
+        $solicitud = Solicitud::findOrFail($id);
+        $Vales = $solicitud->vale;
+        $detallevales = DetalleVales::where('vale_id', $Vales->id_vale)->get();
+        $pdf = Pdf::loadView('Almacen.Vales.pdf.pdf', compact('Vales', 'detallevales'));
+        $pdf->setPaper('letter', 'portrait');
+        $pdf->render();
+        return $pdf->stream('Vale_' . $id . '.pdf');
+    }
+    public function actualizarEstatus($id)
+    {
+        $solicitud = Solicitud::findOrFail($id);
 
+        $solicitud->update([
+            'estatus_id' => 3,
+        ]);
 
-    // Obtener el vale asociado a la solicitud
-    $vale = $solicitud->vale;
-
-
-    // Obtener los detalles del vale
-    $detallevales = DetalleVales::where('vale_id', $vale->id_vale)->get();
-
-    // Cargar la vista del PDF con los datos necesarios
-    $pdf = PDF::loadView('Almacen.Vales.pdf.pdf', compact('vale', 'detallevales'));
-    $pdf->setPaper('letter', 'portrait');
-
-    // Renderizar y devolver el PDF como descarga
-    return $pdf->stream('Vale_' . $vale->id_vale . '.pdf');
-}
-
-
+        // Puedes redirigir a alguna ruta después de actualizar si es necesario
+        return redirect()->back()->with('success', 'Estatus actualizado correctamente');
+    }
 }

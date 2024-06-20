@@ -71,28 +71,43 @@
                         <thead class="custom-thead">
                             <tr>
                                 <th class="col-1 custom-th">Folio</th>
-                                <th class="col-2 custom-th">Fecha de solicitud</th>
+                                <th class="col-1 custom-th">Fecha de solicitud</th>
                                 <th class="col-3 custom-th">Departamento</th>
                                 <th class="col-3 custom-th">Solicitante</th>
                                 <th class="col-2 custom-th">Estatus</th>
-                                <th class="col-1 custom-th">Acciones</th>
+                                <th class="col-2 custom-th">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($Solicitud as $Solicitudes)
                                 <tr>
                                     <td class="custom-td">{{ $Solicitudes->id_solicitud }}</td>
-                                    <td class="custom-td">{{ optional($Solicitudes->Vale)->fechasalida ?? 'Sin fecha' }}</td>
+                                    <td class="custom-td">    {{ optional($Solicitudes->Vale)->fechasalida ? \Carbon\Carbon::parse(optional($Solicitudes->Vale)->fechasalida)->format('d/m/Y') : 'Sin fecha' }}
+                                    </td>
                                     <td class="custom-td">{{ $Solicitudes->Vale->Departamento->nombre_departamento }}</td>
-                                    <td class="custom-td">{{ optional($Solicitudes->Vale)->Solicitante->nombre ?? 'Sin solicitante' }}</td>
+                                    <td class="custom-td">{{ optional($Solicitudes->Vale)->Solicitante->nombre ?? 'Sin solicitante' }}{{ optional($Solicitudes->Vale)->Solicitante->apellido_paterno ?? 'Sin solicitante' }}</td>
                                     <td class="custom-td">{{ $Solicitudes->estatus->nombre_estatus }}</td>
                                     
                                     <td class="custom-td">
-                                        <a href="{{ route('generarsalidaPDF.pdf', $Solicitudes->id_solicitud) }}" class="btn btn-info" target="_blank">
+                                        <a href="{{ route('generarsalida.pdf', $Solicitudes->id_solicitud) }}" class="btn btn-info" target="_blank">
                                             <i class="fa fa-print"></i>
                                         </a>
+                                        @if ($Solicitudes->estatus_id == 3)
+                                            
+                                        @else
                                         <a href="{{ route('solicitud.edit', $Solicitudes->id_solicitud) }}" class="btn btn-primary"><i
                                             class="fas fa-pencil-alt"></i></a>
+                                        @endif
+                                        
+                                        
+
+                                        <form action="{{ route('actualizar-estatus', $Solicitudes->id_solicitud) }}" method="POST" style="display: inline;">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit" class="btn btn-success">
+                                                <i class="fi fi-sr-list-check"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
