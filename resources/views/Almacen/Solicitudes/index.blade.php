@@ -19,11 +19,6 @@
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    <h3>Solicitudes Realizadas</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
                     <div class="row">
                         <div class="col-2">
                             <a class="navbar-brand">Listar</a>
@@ -59,7 +54,7 @@
                         </div>
                         <div class="col-10">
                             <input class="form-control custom-input" type="search" id="search" placeholder="Search"
-                                aria-label="Search" value="{{ isset($_GET['search']) ? $_GET['search'] : '' }}">
+                                aria-label="Search" value="{{ isset($_GET['search']) ? $_GET['search'] : '' }}" disabled>
                         </div>
                     </div>
                 </div>

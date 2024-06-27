@@ -22,21 +22,36 @@ class Entradas extends Controller
         $this->middleware('SoloAlmacen', ['only' => ['index']]);
     }
     public function index(Request $request)
-    {
-        $medidas = UnidadMedida::all();
-        $proveedores = Proveedor::all();
-        $Departamentos = Departamento::all();
+{
+    $medidas = UnidadMedida::all();
+    $proveedores = Proveedor::all();
+    $Departamentos = Departamento::all();
 
-        $Entradas = Entrada::select('*')->orderBy('id_entrada', 'DESC');
-        $limit = (isset($request->limit)) ? $request->limit : 4;
+    $Entradas = Entrada::select('*')->orderBy('id_entrada', 'DESC');
+    $limit = $request->limit ?? 4;
 
-        if (isset($request->search)) {
-            $Entradas = $Entradas->where('id_entrada', 'like', '%' . $request->search . '%')
-                ->orWhere('proveedor_id', 'like', '%' . $request->search . '%');
-        }
-        $Entradas = $Entradas->paginate($limit)->appends($request->all());
-        return view('Almacen.Entradas.index', compact('Entradas', 'medidas', 'proveedores', 'Departamentos'));
+    if ($request->has('search')) {
+        $searchTerm = $request->search;
+        $Entradas = $Entradas->where(function ($query) use ($searchTerm) {
+            $query->where('id_entrada', 'like', '%' . $searchTerm . '%')
+                ->orWhere('factura', 'like', '%' . $searchTerm . '%')
+                ->orWhere('entrega', 'like', '%' . $searchTerm . '%')
+                ->orWhere('cargoentrega', 'like', '%' . $searchTerm . '%')
+                ->orWhere('folio', 'like', '%' . $searchTerm . '%')
+                ->orWhere('fechaentrada', 'like', '%' . $searchTerm . '%')
+                ->orWhere('fechafactura', 'like', '%' . $searchTerm . '%');
+        })
+        ->orWhereHas('Departamento', function ($query) use ($searchTerm) {
+            $query->where('nombre_departamento', 'like', '%' . $searchTerm . '%');
+        })
+        ->orWhereHas('Proveedor', function ($query) use ($searchTerm) {
+            $query->where('nombre', 'like', '%' . $searchTerm . '%');
+        });
     }
+
+    $Entradas = $Entradas->paginate($limit)->appends($request->all());
+    return view('Almacen.Entradas.index', compact('Entradas', 'medidas', 'proveedores', 'Departamentos'));
+}
 
     public function store(Request $request)
     {

@@ -209,13 +209,13 @@
 
     <Script type="text/javascript">
         $('#limit').on('change', function() {
-            window.location.href = "{{ route('Inventario.index') }}?limit=" + $(this).val() + '&search=' + $('#search')
+            window.location.href = "{{ route('Entradas.index') }}?limit=" + $(this).val() + '&search=' + $('#search')
                 .val()
         })
 
         $('#search').on('keyup', function(e) {
             if (e.keyCode == 13) {
-                window.location.href = "{{ route('Inventario.index') }}?limit=" + $('#limit').val() + '&search=' + $(
+                window.location.href = "{{ route('Entradas.index') }}?limit=" + $('#limit').val() + '&search=' + $(
                     this).val()
             }
         })

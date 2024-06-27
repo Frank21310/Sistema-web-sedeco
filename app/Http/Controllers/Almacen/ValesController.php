@@ -27,13 +27,30 @@ class ValesController extends Controller
         $Solicitantes = Empleado::all();
 
         $Vales = Vale::select('*')->orderBy('fechasalida', 'DESC');
-        $limit = (isset($request->limit)) ? $request->limit : 6;
+        $limit = $request->limit ?? 4;
+    
 
-        if (isset($request->search)) {
-            $Vales = $Vales->where('id_vale', 'like', '%' . $request->search . '%')
-                ->orWhere('solicita', 'like', '%' . $request->search . '%');
-        }
-
+        if  ($request->has('search')) {
+            $searchTerm = $request->search;
+            $Vales = $Vales->where(function ($query) use ($searchTerm){
+                $query->where('id_vale', 'like', '%' . $searchTerm . '%')
+                ->orWhere('fechasalida', 'like', '%' . $searchTerm . '%')
+                ->orWhere('solicitante', 'like', '%' . $searchTerm . '%')
+                ->orWhere('iniciosemana', 'like', '%' . $searchTerm. '%')
+                ->orWhere('finsemana', 'like', '%' . $searchTerm . '%')
+                ->orWhere('entrega', 'like', '%' . $searchTerm. '%')
+                ->orWhere('solicitud', 'like', '%' . $searchTerm . '%');
+            })
+            ->orWhereHas('Departamento', function ($query) use ($searchTerm) {
+                $query->where('nombre_departamento', 'like', '%' . $searchTerm . '%');
+            })
+            ->orWhereHas('Solicitante', function ($query) use ($searchTerm) {
+                $query->where('nombre', 'like', '%' . $searchTerm . '%');
+            })
+            ->orWhereHas('Entrega', function ($query) use ($searchTerm) {
+                $query->where('nombre', 'like', '%' . $searchTerm . '%');
+            });
+        } 
         // Agrega la condición para que solo muestre vales con solicitud igual a 1
         $Vales = $Vales->where('solicitud', 1);
             $Vales->orWhereNull('solicitud');
