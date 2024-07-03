@@ -8,8 +8,8 @@
         @page {
             margin-top: 2cm;
             margin-bottom: 2cm;
-            margin-left: 2.5cm;
-            margin-right: 2cm;
+            margin-left: 2cm;
+            margin-right: 2.5cm;
         }
 
         @font-face {
@@ -33,7 +33,7 @@
         }
 
         main {
-            margin-top: 0.5cm;
+            margin-top: 1cm;
         }
 
 
@@ -170,11 +170,11 @@
                         <td>
                             <p>__________________________</p>
                             <p>Recibe</p>
-                            <!-- @if ($Vales->solicitante != null && $Vales->solicitante != null)
+                            @if ($Vales->solicitante != null && $Vales->solicitante != null)
                             <p>{{ $Vales->Solicitante->nombre }} {{ $Vales->Solicitante->apellido_paterno }}
                                 {{ $Vales->Solicitante->apellido_materno }}</p>
                             <p>{{ $Vales->Solicitante->Cargos->nombre_cargo }}</p>
-                            @endif-->
+                            @endif
                             
                         </td>
                     </tr>
