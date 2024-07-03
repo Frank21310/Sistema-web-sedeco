@@ -117,11 +117,10 @@
                     
                 </td>
                 <td style="width: 40%;">
-                    <p>Salida del Almacen</p>
+                    <p>Salida del AlmacenN°: {{ isset($Salida->id_salida) ? $Salida->id_salida : '' }}</p>
                     <p>Factura:{{ $Entrada->factura }}</p>
                     <p>Folio de la factura:{{ $Entrada->folio }}</p>
                     <p>Fecha de salida del almacén: {{ \Carbon\Carbon::parse($Salida->fechasalida)->format('d/m/Y') }}</p>
-                    <p>Fecha de factura:  {{ \Carbon\Carbon::parse($Entrada->fechafactura)->format('d/m/Y') }}</p>
                     <p>RFC: {{ isset($Entrada->Proveedor->rfc) ? $Entrada->Proveedor->rfc : '' }}</p> 
 
 

@@ -6,10 +6,10 @@
     <title>Vale de salida</title>
     <style>
         @page {
-            margin-top: 1.5cm;
-            margin-bottom: 2.5cm;
+            margin-top: 2cm;
+            margin-bottom: 2cm;
             margin-left: 2.5cm;
-            margin-right: 2.5cm;
+            margin-right: 2cm;
         }
 
         @font-face {
@@ -33,7 +33,7 @@
         }
 
         main {
-            margin-top: 1cm;
+            margin-top: 0.5cm;
         }
 
 
@@ -157,18 +157,18 @@
                 <tbody>
                     <tr>
                         <td>
-                            <p>____________________________</p>
+                            <p>___________________________</p>
                             <p>Entrega</p>
                             <p>{{ optional($Vales->Entrega)->nombre?? 'Sin asignar' }}{{ optional($Vales->Entrega)->apellido_paterno?? 'Sin asignar' }}{{ optional($Vales->Entrega)->apellido_materno?? 'Sin asignar' }}</p>
                             <p>{{ optional($Vales->Entrega)->Cargos->nombre_cargo?? 'Sin asignar' }}</p>
                         </td>
                         <td>
-                            <p>____________________________</p>
+                            <p>___________________________</p>
                             <p>C. Pedro Alberto Perez Sosa</p>
                             <p>Jefe del Depto. de Recursos Materiales y Servicios Generales</p>
                         </td>
                         <td>
-                            <p>____________________________</p>
+                            <p>__________________________</p>
                             <p>Recibe</p>
                             <!-- @if ($Vales->solicitante != null && $Vales->solicitante != null)
                             <p>{{ $Vales->Solicitante->nombre }} {{ $Vales->Solicitante->apellido_paterno }}

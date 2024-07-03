@@ -8,6 +8,7 @@ use App\Models\inventario;
 use App\Models\Solicitud as ModelsSolicitud;
 use App\Models\Vale;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class Solicitud extends Controller
 {
@@ -17,17 +18,38 @@ class Solicitud extends Controller
         $this->middleware('SoloPeticiones', ['only' => ['index']]);
     }
     public function index(Request $request)
-    {
-        $Solicitud = ModelsSolicitud::select('*')->orderBy('id_solicitud', 'ASC');
-        $limit = (isset($request->limit)) ? $request->limit : 4;
+{
+    // Obtener el usuario autenticado
+    $user = Auth::user();
 
-        if (isset($request->search)) {
-            $Solicitud = $Solicitud->where('id_solicitud', 'like', '%' . $request->search . '%')
-                ->orWhere('empleado_num', 'like', '%' . $request->search . '%');
-        }
-        $Solicitud = $Solicitud->paginate($limit)->appends($request->all());
-        return view('Peticiones.Solicitudes.index', compact('Solicitud'));
+    // Obtener el número de empleado del usuario autenticado
+    $empleado_num = $user->empleado_num;
+
+    // Consulta inicial de solicitudes
+    $Solicitud = ModelsSolicitud::query()
+        ->whereHas('Vale.Solicitante', function ($query) use ($empleado_num) {
+            $query->where('num_empleado', $empleado_num);
+        })
+        ->orderBy('id_solicitud', 'ASC');
+
+    // Aplicar filtro de búsqueda si se especifica
+    if ($request->filled('search')) {
+        $search = $request->search;
+        $Solicitud->where(function ($query) use ($search) {
+            $query->where('id_solicitud', 'like', '%' . $search . '%')
+                ->orWhereHas('Vale.Solicitante', function ($query) use ($search) {
+                    $query->where('num_empleado', 'like', '%' . $search . '%');
+                });
+        });
     }
+
+    // Paginar y devolver la vista con las solicitudes
+    $limit = $request->input('limit', 4);
+    $Solicitud = $Solicitud->paginate($limit)->appends($request->all());
+
+    return view('Peticiones.Solicitudes.index', compact('Solicitud'));
+}
+
 
     public function store(Request $request)
     {

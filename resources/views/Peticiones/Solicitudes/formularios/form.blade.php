@@ -14,8 +14,13 @@
         <div class="col-12">
             <div class="form-group">
                 <label for="">Departamento Solicitante</label>
-                <span 
-                    class="form-control custom-span">{{ Auth::user()->Empleados->Departamento->nombre_departamento }}</span>
+                <span class="form-control custom-span">
+                    @if (Auth::user()->Empleados && Auth::user()->Empleados->Departamento)
+                        {{ Auth::user()->Empleados->Departamento->nombre_departamento }}
+                    @else
+                        Sin departamento asignado
+                    @endif
+                </span>
             </div>
         </div>
     </div>
