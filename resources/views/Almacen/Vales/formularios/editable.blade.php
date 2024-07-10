@@ -36,7 +36,7 @@
             <div class="form-group">
                 <label for="">Fecha de salida </label>
                 <input type="date" name="fechasalida" id="fechaentrada" class="form-control custom-input"
-                    value="{{ isset($Vale) ? $Vale->fechaentrada : old('fechaentrada') }}" required>
+                    value="{{ isset($Vale) ? $Vale->fechaentrada : old('fechasalida') }}" required>
             </div>
         </div>
     </div>

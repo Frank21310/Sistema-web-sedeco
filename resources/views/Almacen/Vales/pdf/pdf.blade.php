@@ -87,7 +87,7 @@
         .Firmas {
             border-collapse: collapse;
             width: 100%;
-            margin-top: 2cm;
+            margin-top: 0.5cm;
 
         }
 
