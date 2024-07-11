@@ -115,9 +115,11 @@
                     <p>Proveedor:{{ isset($Entrada->Proveedor->nombre) ? $Entrada->Proveedor->nombre : '' }}</p>
                 </td>
                 <td style="width: 40%;">
+                    <br>
+                    <br>
                     <p>Entrada del Almacen N°: {{ isset($Entrada->id_entrada) ? $Entrada->id_entrada : '' }}</p>
-                    <p>Factura:{{ isset($Entrada->factura) ? $Entrada->factura : '' }}</p>
-                    <p>Folio de la factura:{{ isset($Entrada->folio) ? $Entrada->folio : '' }}</p>
+                    <!--<p>Factura:{{ isset($Entrada->factura) ? $Entrada->factura : '' }}</p>
+                    <p>Folio de la factura:{{ isset($Entrada->folio) ? $Entrada->folio : '' }}</p> --> <!--Modificacion pedida por xochilt el 11/07/2024-->
                     <p>Fecha de entrada al almacén: {{ isset($Entrada->fechaentrada) ? \Carbon\Carbon::parse($Entrada->fechaentrada)->format('d/m/Y') : '' }}</p>
                     <!--<p>Fecha de factura:  {{ isset($Entrada->fechafactura) ? \Carbon\Carbon::parse($Entrada->fechafactura)->format('d/m/Y') : '' }}</p>-->
                     <p>RFC: {{ isset($Entrada->Proveedor->rfc) ? $Entrada->Proveedor->rfc : '' }}</p> 
