@@ -26,6 +26,9 @@ class SoloPeticiones
             case ('3'):
                 return $next($request); //Peticiones
                 break;
+            case ('4'):
+                return redirect('Transportes');//Almacen
+                break;
         }
     }
 }

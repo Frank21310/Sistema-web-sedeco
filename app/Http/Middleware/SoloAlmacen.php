@@ -27,6 +27,9 @@ class SoloAlmacen
                 case ('3'):
                 return redirect('Peticiones');//Requirente
                 break;
+            case ('4'):
+                return redirect('Transportes');//Almacen
+                break;
     
         }
     }

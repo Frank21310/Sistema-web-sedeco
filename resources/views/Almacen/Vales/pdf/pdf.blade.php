@@ -33,7 +33,7 @@
         }
 
         main {
-            margin-top: 1cm;
+            margin-top: 1.25cm;
         }
 
 
@@ -175,7 +175,6 @@
                                 {{ $Vales->Solicitante->apellido_materno }}</p>
                             <p>{{ $Vales->Solicitante->Cargos->nombre_cargo }}</p>
                             @endif
-                            
                         </td>
                     </tr>
                 </tbody>

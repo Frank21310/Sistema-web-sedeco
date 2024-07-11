@@ -81,10 +81,9 @@ class Solicitud extends Controller
             $inventario->save();
         }
 
-        // Crear una nueva solicitud
         ModelsSolicitud::create([
             'vale_id' => $vale->id_vale,
-            'estatus_id' => 1, // Suponiendo que el estatus 1 representa el estatus que deseas
+            'estatus_id' => 1, 
         ]);
 
         return redirect()->route('Solicitudes.index')->with('Vale creado exitosamente.');

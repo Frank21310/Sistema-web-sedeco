@@ -88,5 +88,34 @@
                 </a>
             </li>
         @endif
+        @if (Auth::user()->rol_id == 4)
+            <li class="nav-item">
+                <a href="{{ url('/home') }}" class="nav-link {{ 'home' == request()->path() ? 'active' : '' }}">
+                    <i class="fas fa-home bi me-2 "></i>
+                    Inicio
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href=""
+                    class="nav-link {{ 'Peticiones/Solicitudes' == request()->path() ? 'active' : '' }}">
+                    <i class="fi fi-rr-apps-add"></i>
+                    Vehiculos
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href=""
+                    class="nav-link {{ 'Peticiones/Solicitudes' == request()->path() ? 'active' : '' }}">
+                    <i class="fi fi-rr-apps-add"></i>
+                    Salidas
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href=""
+                    class="nav-link {{ 'Peticiones/Solicitudes' == request()->path() ? 'active' : '' }}">
+                    <i class="fi fi-rr-apps-add"></i>
+                    Entradas
+                </a>
+            </li>
+        @endif
     </ul>
 </div>
