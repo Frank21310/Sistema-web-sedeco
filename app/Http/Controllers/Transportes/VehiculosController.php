@@ -56,7 +56,7 @@ class VehiculosController extends Controller
     public function edit(string $id)
     {
         $Vehiculo = Vehichulos::where('id_vehiculo', $id)->firstOrFail();
-        return view('Transportes.Vehiculos.edit', compact('Articulo'));
+        return view('Transportes.Vehiculos.edit', compact('Vehiculo'));
     }
     public function update(Request $request, string $id)
     { {

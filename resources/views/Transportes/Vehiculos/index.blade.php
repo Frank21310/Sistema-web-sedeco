@@ -85,15 +85,18 @@
                         <tbody>
                             @foreach ($vehiculos as $vehiculo)
                                 <tr>
-                                    <td class="custom-td">{{ $vehiculo->descripcion }}</td>
-                                    <td class="custom-td">{{ optional($vehiculo->Categoria)->nombre_categoria ?? 'Sin Categoria' }}</td>
-                                    <td class="custom-td">{{ $vehiculo->estante }}</td>
-                                    <td class="custom-td">{{ optional($vehiculo->Unidad)->nombre_unidad ?? 'Sin medida' }}</td>
-                                    <td class="custom-td">{{ $vehiculo->vehiculo }}</td>
-                                    <td class="custom-td">{{ $vehiculo->existencia }}</td>
-                                    <!--<td class="custom-td">{{ $vehiculo->fecha_elaboracion }}</td>-->
-                                    
+                                    <td class="custom-td">{{ $vehiculo->id_vehiculo }}</td>
+                                    <td class="custom-td">{{ optional($vehiculo->marca)->marca ?? '' }}</td>
+                                    <td class="custom-td">{{ $vehiculo->modelo }}</td>
+                                    <td class="custom-td">{{ optional($vehiculo->placas)->placas ?? 'Sin matricula' }}</td>
+                                    <td class="custom-td">{{ $vehiculo->condicion }}</td>
                                     <td class="custom-td">
+                                        @if ($vehiculo->disponibilidad)
+                                            Disponible
+                                        @else
+                                            No disponible
+                                        @endif
+                                    </td>                                    <td class="custom-td">
                                         <div class="btn-group" role="group">
                                             
                                             <a href="{{ route('Vehiculos.edit', $vehiculo->id_vehiculo) }}" class="btn btn-primary"><i

@@ -4,10 +4,10 @@
         <div class="card-header">
             <div class="row">
                 <div class="col">
-                    <h2 class="">Editar articulo {{$Articulo->descripcion}} </h2>
+                    <h2 class="">Editar {{$Vehiculo->marca}} {{$Vehiculo->modelo}} {{$Vehiculo->color}} </h2>
                 </div>
                 <div class="col g-col-6 d-flex justify-content-end ">
-                    <a id="BtnAgregar" href="{{ route('Inventario.index') }}" class="btn btn-primary ml-auto BotonRojo">
+                    <a id="BtnAgregar" href="{{ route('Vehiculos.index') }}" class="btn btn-primary ml-auto BotonRojo">
                         <i class="fas fa-arrow-left"></i>
                         Volver
                     </a>
@@ -16,9 +16,9 @@
         </div>
         <hr>
         <div class="card-body">
-            <form action="{{ route('Inventario.update', $Articulo->id_articulo) }}" method="POST" enctype="multipart/form-data" id="create">
+            <form action="{{ route('Vehiculos.update', $Vehiculo->id_vehiculo) }}" method="POST" enctype="multipart/form-data" id="create">
                 @method('PUT')
-                @include('Almacen.Inventario.formularios.vistaform')
+                @include('Transportes.Vehiculos.formularios.vistaform')
             </form>
         </div>
         <hr>
