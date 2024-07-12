@@ -96,7 +96,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href=""
+                <a href="{{ route('Vehiculos.index') }}"
                     class="nav-link {{ 'Peticiones/Solicitudes' == request()->path() ? 'active' : '' }}">
                     <i class="fi fi-rr-apps-add"></i>
                     Vehiculos

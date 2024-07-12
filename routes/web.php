@@ -11,7 +11,9 @@ use App\Http\Controllers\Almacen\SolicitudesController;
 use App\Http\Controllers\Almacen\SoloAdminController as AlmacenSoloAdminController;
 use App\Http\Controllers\Almacen\ValesController;
 use App\Http\Controllers\Peticiones\Solicitud;
+use App\Http\Controllers\Transportes\VehiculosController;
 use App\Http\Middleware\SoloAlmacen;
+use App\Http\Middleware\SoloTransportes;
 use App\Models\Salida;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -69,3 +71,10 @@ Route::group(['middleware' => ['auth']], function () {
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('/Peticiones/Solicitudes', Solicitud::class);
 })->namespace('Peticiones');
+
+Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/Transportes', [SoloTransportes::class, 'index'])->name('transportes');
+
+    Route::resource('/Transportes/Vehiculos', VehiculosController::class);
+})->namespace('Administrador');
