@@ -7,7 +7,7 @@
     <style>
         @page {
             margin-top: 2cm;
-            margin-bottom: 2cm;
+            margin-bottom: 3cm;
             margin-left: 2cm;
             margin-right: 2.5cm;
         }
@@ -33,7 +33,7 @@
         }
 
         main {
-            margin-top: 1.25cm;
+            margin-top: 1.5cm;
         }
 
 
