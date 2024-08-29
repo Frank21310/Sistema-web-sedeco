@@ -120,9 +120,10 @@
                     <br>
                     <p>Salida del AlmacenN°: {{ isset($Salida->id_salida) ? $Salida->id_salida : '' }}</p>
                     <!--<p>Factura:{{ isset($Entrada->factura) ? $Entrada->factura : '' }}</p>
-                    <p>Folio de la factura:{{ isset($Entrada->folio) ? $Entrada->folio : '' }}</p> --> <!--Modificacion pedida por xochilt el 11/07/2024-->
-                    <p>Fecha de salida del almacén: {{ \Carbon\Carbon::parse($Salida->fechasalida)->format('d/m/Y') }}</p>
+                    <p>Folio de la factura:{{ isset($Entrada->folio) ? $Entrada->folio : '' }}</p> --> <!--Modificacion pedida por xochilt el 11/07/2024
+                    <p>Fecha de salida del almacén: {{ \Carbon\Carbon::parse($Salida->fechasalida)->format('d/m/Y') }}</p>-->
                     <p>RFC: {{ isset($Entrada->Proveedor->rfc) ? $Entrada->Proveedor->rfc : '' }}</p> 
+                    <p>Fecha de salida:  {{ isset($Salida->fechasalida) ? \Carbon\Carbon::parse($Salida->fechasalida)->format('d/m/Y') : '' }}</p>
 
 
                 </td>
@@ -172,9 +173,12 @@
                         <td>
                             <p>_______________________________</p>
                             <p>Recibe</p>
+                            <!--<p><p>Jorge Mexueiro Hernandez</p>
+                            <p>Taller Mecanico y refacciones Exclusive Motors S.A De C.V.
+                            <p>Dirección Administrativa</p></p>-->
                             
 
-                            <p>{{ isset($Salida->Recibe->nombre) ? $Salida->Recibe->nombre : '' }}
+                            {{ isset($Salida->Recibe->nombre) ? $Salida->Recibe->nombre : '' }}
                                 {{ isset($Salida->Recibe->apellido_paterno) ? $Salida->Recibe->apellido_paterno : '' }}
                                 {{ isset($Salida->Recibe->apellido_materno) ? $Salida->Recibe->apellido_materno : '' }}</p>
                             <p>                            {{ isset($Salida->Recibe->Cargos->nombre_cargo) ? $Salida->Recibe->Cargos->nombre_cargo : '' }}

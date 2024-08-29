@@ -8,8 +8,8 @@
         @page {
             margin-top: 2cm;
             margin-bottom: 2cm;
-            margin-left: 2cm;
-            margin-right: 2cm;
+            margin-left: 2.5cm;
+            margin-right: 2.5cm;
         }
 
         @font-face {
@@ -33,7 +33,7 @@
         }
 
         main {
-            margin-top: 0.5cm;
+            margin-top: 1cm;
         }
 
 
@@ -120,9 +120,9 @@
                     <p>Entrada del Almacen N°: {{ isset($Entrada->id_entrada) ? $Entrada->id_entrada : '' }}</p>
                     <!--<p>Factura:{{ isset($Entrada->factura) ? $Entrada->factura : '' }}</p>
                     <p>Folio de la factura:{{ isset($Entrada->folio) ? $Entrada->folio : '' }}</p> --> <!--Modificacion pedida por xochilt el 11/07/2024-->
-                    <p>Fecha de entrada al almacén: {{ isset($Entrada->fechaentrada) ? \Carbon\Carbon::parse($Entrada->fechaentrada)->format('d/m/Y') : '' }}</p>
                     <!--<p>Fecha de factura:  {{ isset($Entrada->fechafactura) ? \Carbon\Carbon::parse($Entrada->fechafactura)->format('d/m/Y') : '' }}</p>-->
-                    <p>RFC: {{ isset($Entrada->Proveedor->rfc) ? $Entrada->Proveedor->rfc : '' }}</p> 
+                    <p>RFC: {{ isset($Entrada->Proveedor->rfc) ? $Entrada->Proveedor->rfc : '' }}</p>
+                    <p>Fecha de entrada:  {{ isset($Entrada->fechaentrada) ? \Carbon\Carbon::parse($Entrada->fechaentrada)->format('d/m/Y') : '' }}</p>
                 </td>
                 
             </tr>

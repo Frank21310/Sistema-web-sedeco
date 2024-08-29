@@ -86,9 +86,9 @@
                             @foreach ($vehiculos as $vehiculo)
                                 <tr>
                                     <td class="custom-td">{{ $vehiculo->id_vehiculo }}</td>
-                                    <td class="custom-td">{{ optional($vehiculo->marca)->marca ?? '' }}</td>
+                                    <td class="custom-td">{{$vehiculo->marca }}                                    </td>
                                     <td class="custom-td">{{ $vehiculo->modelo }}</td>
-                                    <td class="custom-td">{{ optional($vehiculo->placas)->placas ?? 'Sin matricula' }}</td>
+                                    <td class="custom-td">{{$vehiculo->placas}}</td>
                                     <td class="custom-td">{{ $vehiculo->condicion }}</td>
                                     <td class="custom-td">
                                         @if ($vehiculo->disponibilidad)
@@ -96,9 +96,9 @@
                                         @else
                                             No disponible
                                         @endif
-                                    </td>                                    <td class="custom-td">
+                                    </td>                                    
+                                    <td class="custom-td">
                                         <div class="btn-group" role="group">
-                                            
                                             <a href="{{ route('Vehiculos.edit', $vehiculo->id_vehiculo) }}" class="btn btn-primary"><i
                                                     class="fas fa-pencil-alt"></i></a>
                                             <form action="{{ route('Vehiculos.destroy', $vehiculo->id_vehiculo) }}"

@@ -7,7 +7,7 @@
     <style>
         @page {
             margin-top: 2cm;
-            margin-bottom: 3cm;
+            margin-bottom: 2cm;
             margin-left: 2cm;
             margin-right: 2.5cm;
         }
@@ -33,7 +33,7 @@
         }
 
         main {
-            margin-top: 1.5cm;
+            margin-top: 1cm;
         }
 
 
@@ -157,29 +157,30 @@
                 <tbody>
                     <tr>
                         <td>
-                            <p>___________________________</p>
+                            <p>____________________</p>
                             <p>Entrega</p>
                             <p>{{ optional($Vales->Entrega)->nombre?? 'Sin asignar' }}{{ optional($Vales->Entrega)->apellido_paterno?? 'Sin asignar' }}{{ optional($Vales->Entrega)->apellido_materno?? 'Sin asignar' }}</p>
                             <p>{{ optional($Vales->Entrega)->Cargos->nombre_cargo?? 'Sin asignar' }}</p>
                         </td>
                         <td>
-                            <p>___________________________</p>
+                            <p>__________________________</p>
                             <p>C. Pedro Alberto Perez Sosa</p>
                             <p>Jefe del Depto. de Recursos Materiales y Servicios Generales</p>
                         </td>
                         <td>
                             <p>__________________________</p>
                             <p>Recibe</p>
-                            @if ($Vales->solicitante != null && $Vales->solicitante != null)
-                            <p>{{ $Vales->Solicitante->nombre }} {{ $Vales->Solicitante->apellido_paterno }}
-                                {{ $Vales->Solicitante->apellido_materno }}</p>
-                            <p>{{ $Vales->Solicitante->Cargos->nombre_cargo }}</p>
-                            @endif
+                           
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
 
     </main>
 
