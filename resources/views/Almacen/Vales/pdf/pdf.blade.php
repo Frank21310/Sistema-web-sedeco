@@ -7,7 +7,7 @@
     <style>
         @page {
             margin-top: 2cm;
-            margin-bottom: 2cm;
+            margin-bottom: 1cm;
             margin-left: 2cm;
             margin-right: 2.5cm;
         }
@@ -35,7 +35,6 @@
         main {
             margin-top: 1cm;
         }
-
 
         p {
             font-family: 'Montserrat';
@@ -87,7 +86,7 @@
         .Firmas {
             border-collapse: collapse;
             width: 100%;
-            margin-top: 0.5cm;
+            margin-top: 1cm;
 
         }
 
@@ -176,12 +175,13 @@
                 </tbody>
             </table>
         </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+        <!--<div>
+            <br>
+        <h4>Despues de 24 horas de realizar su evento, se debera regresar todo lo prestado en buen estado. Si no se hara responsable de reponer los articulos prestados.</h4>
 
+        </div>-->
+        
+    
     </main>
 
 </body>
