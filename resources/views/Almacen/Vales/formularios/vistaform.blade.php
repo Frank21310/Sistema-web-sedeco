@@ -4,7 +4,7 @@
         <thead class="custom-thead">
             <tr>
                 <th scope="col">Descripción</th>
-                <th scope="col">Salida</th>
+                <th scope="col">Cantidad</th>
                 <th scope="col">Acciones</th>
             </tr>
         </thead>

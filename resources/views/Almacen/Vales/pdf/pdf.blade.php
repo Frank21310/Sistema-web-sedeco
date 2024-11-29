@@ -110,8 +110,8 @@
             <tr>
                 <td style="width: 60%;">
                     <img src="assets/img/sedeco.png" alt="" width="420px">
-                    <p>Departamento de Recursos Materiales y Servicios Generales</p>
-                    <p>Departamento Solicitante:{{ $Vales->Departamento->nombre_departamento }}</p>
+                    <p>DEPARTAMENTO DE RECURSOS MATERIALES Y SERVICIOS GENERALES</p>
+                    <p>DEPARTAMENTO SOLICITANTE:{{ $Vales->Departamento->nombre_departamento }}</p>
                     @if ($Vales->solicitante != null && $Vales->solicitante != null)
                         <p>Solicitante:{{ $Vales->Solicitante->nombre }} {{ $Vales->Solicitante->apellido_paterno }}
                             {{ $Vales->Solicitante->apellido_materno }}</p>
@@ -187,8 +187,8 @@
             <tr>
                 <td style="width: 60%;">
                     <img src="assets/img/sedeco.png" alt="" width="420px">
-                    <p>Departamento de Recursos Materiales y Servicios Generales</p>
-                    <p>Departamento Solicitante:{{ $Vales->Departamento->nombre_departamento }}</p>
+                    <p>DEPARTAMENTO DE RECURSOS MATERIALES Y SERVICIOS GENERALES</p>
+                    <p>DEPARTAMENTO SOLICITANTE:{{ $Vales->Departamento->nombre_departamento }}</p>
                 </td>
                 <td style="width: 40%;">
                     <p>Solicitud de Material</p>
