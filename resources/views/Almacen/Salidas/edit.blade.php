@@ -4,10 +4,10 @@
         <div class="card-header">
             <div class="row">
                 <div class="col">
-                    <h2 class="">Editar entrada {{$Entrada->id_entrada}} </h2>
+                    <h2 class="">Editar Salida {{$Salida->id_salida}} </h2>
                 </div>
                 <div class="col g-col-6 d-flex justify-content-end ">
-                    <a id="BtnAgregar" href="{{ route('Entradas.index') }}" class="btn btn-primary ml-auto BotonRojo">
+                    <a id="BtnAgregar" href="{{ route('Salidas.index') }}" class="btn btn-primary ml-auto BotonRojo">
                         <i class="fas fa-arrow-left"></i>
                         Volver
                     </a>
@@ -16,9 +16,9 @@
         </div>
         <hr>
         <div class="card-body">
-            <form action="{{ route('Entradas.update', $Entrada->id_entrada) }}" method="POST" enctype="multipart/form-data" id="create">
+            <form action="{{ route('Salidas.update', $Salida->id_salida) }}" method="POST" enctype="multipart/form-data" id="create">
                 @method('PUT')
-                @include('Almacen.Entradas.formularios.editable')
+                @include('Almacen.Salidas.formularios.editable')
             </form>
         </div>
         <hr>

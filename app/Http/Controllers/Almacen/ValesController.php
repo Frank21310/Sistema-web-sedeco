@@ -7,11 +7,13 @@ use App\Models\Departamento;
 use App\Models\DetalleVales;
 use App\Models\Empleado;
 use App\Models\inventario;
+use App\Models\Solicitud;
 use App\Models\UnidadMedida;
 use App\Models\Vale;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ValesController extends Controller
 {
@@ -183,6 +185,12 @@ class ValesController extends Controller
 
     public function generarvalePDF($id)
     {
+        // Obtener el usuario autenticado
+         $user = Auth::user();
+
+        // Obtener el número de empleado del usuario autenticado
+        $empleado_num = $user->empleado_num;
+
         $Vales = Vale::find($id);
         $detallevales = DetalleVales::where('vale_id', $Vales->id_vale)->get();
         $pdf = Pdf::loadView('Almacen.Vales.pdf.pdf', compact('Vales', 'detallevales'));

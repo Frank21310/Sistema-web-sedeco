@@ -54,7 +54,7 @@
                                                 role="button" aria-disabled="true">Iniciar
                                                 Sesión</a>
                                             <a href="{{ route('register') }}" class="btn btn-outline-dark fw-bold BotonRojo"
-                                                tabindex="-1" role="button" aria-disabled="true">Registrarse</a>
+                                                tabindex="-1" role="button" aria-disabled="true" hidden>Registrarse</a>
                                         </div>
                                     @endauth
                                 </form>

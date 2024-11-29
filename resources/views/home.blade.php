@@ -19,7 +19,6 @@
         @if (Auth::user()->rol_id == 2)
             <div class="row">
                 <div class="col-8">
-                    
                 </div>
                 <div class="col-4">
                     <div class="row ">

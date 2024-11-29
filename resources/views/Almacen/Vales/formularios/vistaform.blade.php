@@ -12,11 +12,11 @@
             <tr class="fila-original">
                 <td>
                     <input type="text" name="descripcion[]" class="form-control custom-input select2 buscador"
-                        placeholder="Buscar artículo" id="mostrar">
+                        placeholder="Buscar artículo" id="mostrar" required>
                 </td>
                 <td>
                     <input type="hidden" name="articulo_id[]" class="articulo-id">
-                    <input type="number" name="salida[]" class="form-control custom-input">
+                    <input type="number" name="salida[]" class="form-control custom-input" required>
                 </td>
                 <td>
                     <button type="button" class="btn btn-success btn-add-row"><i class="fas fa-plus"></i></button>
@@ -26,7 +26,6 @@
         </tbody>
     </table>
 </div>
-
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
@@ -86,5 +85,26 @@
         // Inicializa el autocompletado en la fila original
         initAutocomplete(tableBody.find('.fila-original .buscador'));
     });
+
+    function validateForm() {
+        const form = document.getElementById('createForm');
+        const inputs = form.querySelectorAll('input[required]');
+        let isValid = true;
+
+        inputs.forEach(input => {
+            if (!input.value) {
+                isValid = false;
+                input.classList.add('is-invalid'); // Agrega clase para resaltar el campo
+            } else {
+                input.classList.remove('is-invalid'); // Remueve clase si el campo es válido
+            }
+        });
+
+        if (isValid) {
+            form.submit(); // Enviar el formulario si todos los campos son válidos
+        } else {
+            alert('Por favor, completa todos los campos requeridos.'); // Mensaje de advertencia
+        }
+    }
 </script>
 

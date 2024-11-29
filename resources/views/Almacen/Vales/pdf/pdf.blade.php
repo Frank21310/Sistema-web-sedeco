@@ -6,7 +6,7 @@
     <title>Vale de salida</title>
     <style>
         @page {
-            margin-top: 2cm;
+            margin-top: 1cm;
             margin-bottom: 1cm;
             margin-left: 2cm;
             margin-right: 2.5cm;
@@ -33,7 +33,7 @@
         }
 
         main {
-            margin-top: 1cm;
+            margin-top: 1.5cm;
         }
 
         p {
@@ -86,7 +86,7 @@
         .Firmas {
             border-collapse: collapse;
             width: 100%;
-            margin-top: 1cm;
+            margin-top: 0.5cm;
 
         }
 
@@ -103,7 +103,7 @@
         }
     </style>
 </head>
-
+@if ($Vales->entrega)
 <body>
     <header>
         <table>
@@ -123,7 +123,7 @@
                 </td>
                 <td style="width: 40%;">
                     <p>Salida de almacén</p>
-                    <p>Material de oficina</p>
+                    <p>Material </p>
                     <p>Fecha de salida: {{ \Carbon\Carbon::parse($Vales->fechasalida)->format('d/m/Y') }}</p>
                 </td>
             </tr>
@@ -175,15 +175,77 @@
                 </tbody>
             </table>
         </div>
-        <!--<div>
-            <br>
-        <h4>Despues de 24 horas de realizar su evento, se debera regresar todo lo prestado en buen estado. Si no se hara responsable de reponer los articulos prestados.</h4>
-
-        </div>-->
-        
+       
     
     </main>
 
 </body>
+@else
+<body>
+    <header>
+        <table>
+            <tr>
+                <td style="width: 60%;">
+                    <img src="assets/img/sedeco.png" alt="" width="420px">
+                    <p>Departamento de Recursos Materiales y Servicios Generales</p>
+                    <p>Departamento Solicitante:{{ $Vales->Departamento->nombre_departamento }}</p>
+                </td>
+                <td style="width: 40%;">
+                    <p>Solicitud de Material</p>
+                    <p>Fecha de Solicitud: {{ \Carbon\Carbon::parse($Vales->fechasalida)->format('d/m/Y') }}</p>
+                </td>
+            </tr>
+        </table>
+    </header>
+    <main>
+        <div>
+            <table class="full-width-table">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">Descripción</th>
+                        <th>Unidad de medida</th>
+                        <th>Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($detallevales as $detallevale)
+                        <tr>
+                            <td>{{ $detallevale->Inventario->descripcion }}</td>
+                            <td>{{ $detallevale->Inventario->Unidad->nombre_unidad }}</td>
+                            <td>{{ $detallevale->salida }}</td>
+                        </tr>
+                    @endforeach
+
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <table class="Firmas">
+                <tbody>
+                    <tr>
+                        <td>
+                            <p>
+                                </p>
+                            <p>_______________________________</p>
+                            <p>Elaboro</p>
+                            <p>{{ optional($Vales->Solicitante)->nombre?? 'Sin asignar' }}{{ optional($Vales->Solicitante)->apellido_paterno?? 'Sin asignar' }}{{ optional($Vales->Solicitante)->apellido_materno?? 'Sin asignar' }}</p>
+                            <p>{{ optional($Vales->Solicitante)->Cargos->nombre_cargo?? 'Sin asignar' }}</p>
+                        </td>
+                        <td>
+                            <p>_______________________________</p>
+                            <p>Autoriza</p>
+                           
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+       
+    
+    </main>
+
+</body>
+@endif
+
 
 </html>

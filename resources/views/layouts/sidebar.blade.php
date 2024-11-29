@@ -37,6 +37,7 @@
                     Inicio
                 </a>
             </li>
+            @if (Auth::user()->empleado_num == 12431245)
             <li class="nav-item">
                 <a href="{{ route('Inventario.index') }}"
                     class="nav-link {{ 'Almancen/Inventario' == request()->path() ? 'active' : '' }}">
@@ -44,6 +45,7 @@
                     Inventario
                 </a>
             </li>
+            @endif
             <li class="nav-item">
                 <a href="{{ route('Entradas.index') }}"
                     class="nav-link {{ 'Almancen/Entradas' == request()->path() ? 'active' : '' }}">
@@ -58,6 +60,7 @@
                     Salidas
                 </a>
             </li>
+            @if (Auth::user()->empleado_num == 12431245)
             <li class="nav-item">
                 <a href="{{ route('Vales.index') }}"
                     class="nav-link {{ 'Almancen/Vales' == request()->path() ? 'active' : '' }}">
@@ -72,6 +75,7 @@
                     Solicitudes
                 </a>
             </li>
+            @endif
         @endif
         @if (Auth::user()->rol_id == 3)
             <li class="nav-item">

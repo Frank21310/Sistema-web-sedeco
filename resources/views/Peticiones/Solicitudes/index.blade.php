@@ -106,7 +106,7 @@
                     </table>
                 </div>
             </div>
-            <!-- Modal de nuevo articulo -->
+            <!-- Modal de peticiones solicitudes -->
             <div class="modal fade modal-lg" id="modalagregarentrada" tabindex="-1" aria-labelledby="agregarModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog">
@@ -123,8 +123,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="button" class="btn btn-primary"
-                                onclick="document.getElementById('createForm').submit()">Crear</button>
+                            <button type="button" class="btn btn-primary" onclick="validateForm()">Crear</button>
                         </div>
                     </div>
                 </div>

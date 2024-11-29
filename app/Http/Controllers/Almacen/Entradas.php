@@ -64,7 +64,7 @@ class Entradas extends Controller
         $entrada->fechafactura = $request->fechafactura;
         $entrada->departamento_id = $request->departamento_id;
         $entrada->proveedor_id = $request->proveedor_id;
-        $entrada->empleado_num = auth()->user()->empleado_num;
+        $entrada->empleado_num = 12431245;
         $entrada->save();
 
         foreach ($request->descripcion as $key => $descripcion) {
@@ -113,7 +113,7 @@ class Entradas extends Controller
         $Entrada->fechafactura = $request->fechafactura;
         $Entrada->departamento_id = $request->departamento_id;
         $Entrada->proveedor_id = $request->proveedor_id;
-        $Entrada->empleado_num = auth()->user()->empleado_num;
+        $Entrada->empleado_num = 12431245;
         $Entrada->save();
 
         $detallesEntrada = $Entrada->detalles()->get();

@@ -45,22 +45,24 @@ class Salidas extends Controller
         $salida->entrada_id = $request->entrada_id;
         $salida->fechasalida = $request->fechasalida;
         $salida->recibe = $request->recibe;
-        $salida->empleado_num = auth()->user()->empleado_num;
+        $salida->empleado_num = 12431245;
         $salida->save();
         return redirect()->route('Salidas.index');
     }
 
     public function edit(string $id)
     {
-        $Salida = Salida::where('id_entrada', $id)->firstOrFail();
-        return view('Almacen.Salidas.edit', compact('Salida'));
+        $Receptor = Empleado::all();
+        $Salida = Salida::where('id_salida', $id)->firstOrFail();
+        return view('Almacen.Salidas.edit', compact('Salida','Receptor'));
     }
 
     public function update(Request $request, string $id)
     {
-        $Salida = Salida::where('id_entrada', $id)->firstOrFail();
+        $Salida = Salida::where('id_salida', $id)->firstOrFail();
         $Salida->fechasalida = $request->fechasalida;
         $Salida->empleado_num = auth()->user()->empleado_num;
+        $Salida->recibe = $request->recibe;
         $Salida->entrada_id = $request->entrada_id;
         $Salida->save();
         return redirect()->route('Salidas.index');
