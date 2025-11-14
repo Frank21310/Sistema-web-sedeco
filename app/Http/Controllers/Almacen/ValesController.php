@@ -41,6 +41,7 @@ class ValesController extends Controller
                 ->orWhere('iniciosemana', 'like', '%' . $searchTerm. '%')
                 ->orWhere('finsemana', 'like', '%' . $searchTerm . '%')
                 ->orWhere('entrega', 'like', '%' . $searchTerm. '%')
+                ->orWhere('memo', 'like', '%' . $searchTerm . '%')
                 ->orWhere('solicitud', 'like', '%' . $searchTerm . '%');
             })
             ->orWhereHas('Departamento', function ($query) use ($searchTerm) {
@@ -82,14 +83,14 @@ class ValesController extends Controller
     public function store(Request $request)
     {
 
-
         $vale = Vale::create([
             'fechasalida' => $request->fechasalida,
             'solicitante' => $request->solicitante,
             'departamento_id' => $request->departamento_id,
             'iniciosemana' => $request->fechasalida,
             'finsemana' => $request->fechasalida,
-            'entrega' => auth()->user()->empleado_num,
+            'memo' => $request->memo,
+            'entrega' => 1234,
             'solicitud' => $request->solicitud,
         ]);
 
@@ -135,7 +136,8 @@ class ValesController extends Controller
             'departamento_id' => $request->departamento_id,
             'iniciosemana' => $request->fechasalida,
             'finsemana' => $request->fechasalida,
-            'entrega' => auth()->user()->empleado_num,
+            'memo' => $request->memo,
+            'entrega' => 1234,
         ]);
 
         $vale->detalles()->delete();

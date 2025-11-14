@@ -17,6 +17,7 @@ class Vale extends Model
         'iniciosemana',
         'finsemana',
         'entrega',
+        'memo',
         'solicitud',
 
     ];

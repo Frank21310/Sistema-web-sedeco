@@ -37,6 +37,14 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="">Memorándum</label>
+                <input type="text" name="memo" id="memo" class="form-control custom-input" required>
+            </div>
+        </div>
+    </div>
     <input  name="solicitud" id="solicitud" value="1" class="form-control custom-input" hidden>
 
     

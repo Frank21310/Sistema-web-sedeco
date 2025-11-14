@@ -6,8 +6,8 @@
     <title>Vale de salida</title>
     <style>
         @page {
-            margin-top: 1cm;
-            margin-bottom: 1cm;
+            margin-top: 1.5cm;
+            margin-bottom: 2cm;
             margin-left: 2cm;
             margin-right: 2.5cm;
         }
@@ -33,7 +33,7 @@
         }
 
         main {
-            margin-top: 1.5cm;
+            margin-top: 1cm;
         }
 
         p {
@@ -110,21 +110,20 @@
             <tr>
                 <td style="width: 60%;">
                     <img src="assets/img/sedeco.png" alt="" width="420px">
-                    <p>DEPARTAMENTO DE RECURSOS MATERIALES Y SERVICIOS GENERALES</p>
-                    <p>DEPARTAMENTO SOLICITANTE:{{ $Vales->Departamento->nombre_departamento }}</p>
+                    <p style="text-transform: uppercase;">DEPARTAMENTO DE RECURSOS MATERIALES Y SERVICIOS GENERALES</p>
+                    <p style="text-transform: uppercase;">AREA SOLICITANTE: {{ $Vales->Departamento->nombre_departamento }}</p>
                     @if ($Vales->solicitante != null && $Vales->solicitante != null)
-                        <p>Solicitante:{{ $Vales->Solicitante->nombre }} {{ $Vales->Solicitante->apellido_paterno }}
+                        <p style="text-transform: uppercase;">NOMBRE DEL SOLICITANTE: {{ $Vales->Solicitante->nombre }} {{ $Vales->Solicitante->apellido_paterno }}
                             {{ $Vales->Solicitante->apellido_materno }}</p>
-                            <p>{{ $Vales->Solicitante->Cargos->nombre_cargo }}</p>
-                    @endif
-                    @if ($Vales->departamento_id == 19)
-                        <p>SEMANA DEL {{ $Vales->iniciosemana }} a {{ $Vales->finsemana }} </p>
+                        <p style="text-transform: uppercase;">{{ $Vales->Solicitante->Cargos->nombre_cargo }}</p>
                     @endif
                 </td>
                 <td style="width: 40%;">
                     <p>Salida de almacén</p>
                     <p>Material </p>
                     <p>Fecha de salida: {{ \Carbon\Carbon::parse($Vales->fechasalida)->format('d/m/Y') }}</p>
+                    <p>Memorándum: {{ $Vales->memo }}</p>
+
                 </td>
             </tr>
         </table>
@@ -156,27 +155,35 @@
                 <tbody>
                     <tr>
                         <td>
-                            <p>____________________</p>
+                            <br>
+                            <br>
+                            <p>________________________</p>
                             <p>Entrega</p>
-                            <p>{{ optional($Vales->Entrega)->nombre?? 'Sin asignar' }}{{ optional($Vales->Entrega)->apellido_paterno?? 'Sin asignar' }}{{ optional($Vales->Entrega)->apellido_materno?? 'Sin asignar' }}</p>
+                            <p>{{ optional($Vales->Entrega)->nombre?? 'Sin asignar' }} {{ optional($Vales->Entrega)->apellido_paterno?? 'Sin asignar' }} {{ optional($Vales->Entrega)->apellido_materno?? 'Sin asignar' }}</p>
                             <p>{{ optional($Vales->Entrega)->Cargos->nombre_cargo?? 'Sin asignar' }}</p>
                         </td>
                         <td>
-                            <p>__________________________</p>
+                            <br>
+                            <p>________________________</p>
                             <p>C. Pedro Alberto Perez Sosa</p>
                             <p>Jefe del Depto. de Recursos Materiales y Servicios Generales</p>
                         </td>
                         <td>
-                            <p>__________________________</p>
+                            <p>________________________</p>
                             <p>Recibe</p>
                            
                         </td>
                     </tr>
                 </tbody>
+                
             </table>
-        </div>
-       
+            <!--<p>Regresar todo el material prestado en buenas condiciones y completo; de lo contrario, se hará responsable de reparar o reponer lo dañado.</p>
+            -->
+    </div>
     
+
+
+
     </main>
 
 </body>
@@ -226,13 +233,13 @@
                         <td>
                             <p>
                                 </p>
-                            <p>_______________________________</p>
+                            <p>____________________________</p>
                             <p>Elaboro</p>
                             <p>{{ optional($Vales->Solicitante)->nombre?? 'Sin asignar' }}{{ optional($Vales->Solicitante)->apellido_paterno?? 'Sin asignar' }}{{ optional($Vales->Solicitante)->apellido_materno?? 'Sin asignar' }}</p>
                             <p>{{ optional($Vales->Solicitante)->Cargos->nombre_cargo?? 'Sin asignar' }}</p>
                         </td>
                         <td>
-                            <p>_______________________________</p>
+                            <p>____________________________</p>
                             <p>Autoriza</p>
                            
                         </td>

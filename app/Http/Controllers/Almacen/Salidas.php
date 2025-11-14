@@ -45,7 +45,7 @@ class Salidas extends Controller
         $salida->entrada_id = $request->entrada_id;
         $salida->fechasalida = $request->fechasalida;
         $salida->recibe = $request->recibe;
-        $salida->empleado_num = 12431245;
+        $salida->empleado_num = 1234;
         $salida->save();
         return redirect()->route('Salidas.index');
     }
@@ -112,7 +112,7 @@ class Salidas extends Controller
         }
 
         $pdf = Pdf::loadView('Almacen.Salidas.pdf.pdf', compact('Salida', 'Entrada', 'articulos'));
-        $pdf->setPaper('letter', 'landscape');
+        $pdf->setPaper('letter', 'portrait');
 
         return $pdf->stream('Salida_' . $id . '.pdf');
     }

@@ -40,6 +40,14 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label for="">Memorándum</label>
+                <input type="text" name="memo" id="memo" class="form-control custom-input" value="{{ isset($Vale) ? $Vale->memo : old('memo') }}" required>
+            </div>
+        </div>
+    </div>
     <br>
     <div class="table-responsive">
         <table id="articulos-table" class="table custom-table">

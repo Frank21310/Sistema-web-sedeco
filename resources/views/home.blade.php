@@ -18,9 +18,8 @@
         @endif
         @if (Auth::user()->rol_id == 2)
             <div class="row">
-                <div class="col-8">
-                </div>
-                <div class="col-4">
+                    <iframe src="https://calendar.google.com/calendar/embed?src=212e6358ac3e9610f6424ba04df55dfe3b7fa8d74a8fd460eecaba90feab68e6%40group.calendar.google.com&ctz=America%2FMexico_City" style="border: 0" width="1000" height="800" frameborder="0" scrolling="no"></iframe>
+                <!--<div class="col-4">
                     <div class="row ">
                         <div class="col">
                             <div class="card">
@@ -62,7 +61,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
         @endif
     </div>

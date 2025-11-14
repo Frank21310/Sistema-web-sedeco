@@ -6,9 +6,9 @@
     <title>Entrada</title>
     <style>
         @page {
-            margin-top: 1.5cm;
+            margin-top: 2cm;
             margin-bottom: 2.5cm;
-            margin-left: 2.5cm;
+            margin-left: 2cm;
             margin-right: 2.5cm;
         }
 
@@ -86,7 +86,7 @@
         .Firmas {
             border-collapse: collapse;
             width: 100%;
-            margin-top: 1cm;
+            margin-top: 0.5cm;
 
         }
 
@@ -110,19 +110,21 @@
             <tr>
                 <td style="width: 60%;">
                     <img src="assets/img/sedeco.png" alt="" width="400px">
-                    <p>Departamento de Recursos Materiales y Servicios Generales</p>
-                    <p>Solicitante:{{ $Entrada->Departamento->nombre_departamento }}</p>
-                    <p>Proveedor:{{ isset($Entrada->Proveedor->nombre) ? $Entrada->Proveedor->nombre : '' }}</p>
-
-                    
+                    <p style="text-transform: uppercase;">DEPARTAMENTO DE RECURSOS MATERIALES Y SERVICIOS GENERALES</p>
+                    <p>AREA SOLICITANTE:{{ $Entrada->Departamento->nombre_departamento }}</p>
+                    @if ($Salida->Recibe != null && $Salida->Recibe != null)
+                    <p style="text-transform: uppercase;">NOMBRE DEL SOLICITANTE: {{ $Salida->Recibe->nombre }} {{ $Salida->Recibe->apellido_paterno }}
+                        {{$Salida->Recibe->apellido_materno }}</p>
+                @endif
                 </td>
                 <td style="width: 40%;">
                     <br>
-                    <p>Salida del AlmacenN°: {{ isset($Salida->id_salida) ? $Salida->id_salida : '' }}</p>
+                    <p>Salida de almacén</p>
+                    <p>Material </p>
+
                     <!--<p>Factura:{{ isset($Entrada->factura) ? $Entrada->factura : '' }}</p>
                     <p>Folio de la factura:{{ isset($Entrada->folio) ? $Entrada->folio : '' }}</p> --> <!--Modificacion pedida por xochilt el 11/07/2024
                     <p>Fecha de salida del almacén: {{ \Carbon\Carbon::parse($Salida->fechasalida)->format('d/m/Y') }}</p>-->
-                    <p>RFC: {{ isset($Entrada->Proveedor->rfc) ? $Entrada->Proveedor->rfc : '' }}</p> 
                     <p>Fecha de salida:  {{ isset($Salida->fechasalida) ? \Carbon\Carbon::parse($Salida->fechasalida)->format('d/m/Y') : '' }}</p>
 
 
@@ -157,33 +159,22 @@
                 <tbody>
                     <tr>
                         <td>
-                            <p>_______________________________</p>
+                            <p>_______________________</p>
                             <p>Entrega</p>
                             <p>{{ $Entrada->Empleado->nombre }} {{ $Entrada->Empleado->apellido_paterno }}
                                 {{ $Entrada->Empleado->apellido_materno }}</p>
                             <p>{{ $Entrada->Empleado->Cargos->nombre_cargo }}</p>
                         </td>
                         <td>
-                            <p>_______________________________</p>
+                            <p>_______________________</p>
                             <p>Vo.Bo</p>
 
                             <p>C. Pedro Alberto Perez Sosa</p>
                             <p>Jefe del Depto. de Recursos Materiales y Servicios Generales</p>
                         </td>
                         <td>
-                            <p>_______________________________</p>
+                            <p>_______________________</p>
                             <p>Recibe</p>
-                            <!--<p><p>Jorge Mexueiro Hernandez</p>
-                            <p>Taller Mecanico y refacciones Exclusive Motors S.A De C.V.
-                            <p>Dirección Administrativa</p></p>-->
-                            
-
-                            {{ isset($Salida->Recibe->nombre) ? $Salida->Recibe->nombre : '' }}
-                                {{ isset($Salida->Recibe->apellido_paterno) ? $Salida->Recibe->apellido_paterno : '' }}
-                                {{ isset($Salida->Recibe->apellido_materno) ? $Salida->Recibe->apellido_materno : '' }}</p>
-                            <p>                            {{ isset($Salida->Recibe->Cargos->nombre_cargo) ? $Salida->Recibe->Cargos->nombre_cargo : '' }}
-                            </p>
-                            
                         </td>
                     </tr>
                 </tbody>

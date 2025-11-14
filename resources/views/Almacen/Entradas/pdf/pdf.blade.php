@@ -7,7 +7,7 @@
     <style>
         @page {
             margin-top:2cm;
-            margin-bottom: 2cm;
+            margin-bottom: 1cm;
             margin-left: 2.5cm;
             margin-right: 2.5cm;
         }
@@ -33,7 +33,7 @@
         }
 
         main {
-            margin-top: 0.5cm;
+            margin-top: 1cm;
         }
 
 
@@ -112,7 +112,7 @@
                     <img src="assets/img/sedeco.png" alt="" width="420px">
                     <p>DEPARTAMENTO DE RECURSOS MATERIALES Y SERVICIOS GENERALES</p>
                     <p>SOLICITANTE:{{ isset($Entrada->Departamento->nombre_departamento) ? $Entrada->Departamento->nombre_departamento : '' }}</p>
-                    <p>PROVEEODOR:{{ isset($Entrada->Proveedor->nombre) ? $Entrada->Proveedor->nombre : '' }}</p>
+                    <p>PROVEEDOR:{{ isset($Entrada->Proveedor->nombre) ? $Entrada->Proveedor->nombre : '' }}</p>
                 </td>
                 <td style="width: 40%;">
                     <br>
