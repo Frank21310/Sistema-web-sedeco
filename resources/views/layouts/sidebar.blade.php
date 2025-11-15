@@ -99,18 +99,60 @@
                     Inicio
                 </a>
             </li>
-            <li class="nav-item">
+            <!-- BITÁCORAS - SUBMENÚ ACORDEÓN -->
+            <li class="mb-1">
+                <button class="btn btn-toggle align-items-center rounded {{ request()->is('bitacoras/*') ? '' : 'collapsed' }}"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#bitacoras-collapse"
+                        aria-expanded="{{ request()->is('bitacoras/*') ? 'true' : 'false' }}">
+                    <i class="fi fi-rr-apps-add me-2"></i>
+                    Bitácoras
+                </button>
+
+                <div class="collapse {{ request()->is('bitacoras/*') ? 'show' : '' }}" id="bitacoras-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li>
+                <a class="nav-link ps-4 {{ request()->is('bitacoras/general') ? 'active' : '' }}"
+                   href="{{ route('bitacoras.general') }}">
+                    General
+                </a>
+            </li>
+
+            <li class="mb-1">
+                <a class="nav-link ps-4 {{ request()->is('bitacoras/consolidado') ? 'active' : '' }}"
+                   href="{{ route('bitacoras.consolidado') }}">
+                    Consolidado
+                </a>
+            </li>
+
+            <li class="mb-1">
+                <a class="nav-link ps-4 {{ request()->is('bitacoras/comision') ? 'active' : '' }}"
+                   href="{{ route('bitacoras.comision') }}">
+                    Comisión
+                </a>
+            </li>
+
+            <li class="mb-1">
+                <a class="nav-link ps-4 {{ request()->is('bitacoras/directo') ? 'active' : '' }}"
+                   href="{{ route('bitacoras.directo') }}">
+                    Directo
+                </a>
+            </li>
+                    </ul>
+                </div>
+            </li>
+            <!--<li class="nav-item">
                 <a href="{{ route('Vehiculos.index') }}"
                     class="nav-link {{ 'Peticiones/Solicitudes' == request()->path() ? 'active' : '' }}">
                     <i class="fi fi-rr-apps-add"></i>
-                    Vehiculos
+                    Comisiones
                 </a>
             </li>
             <li class="nav-item">
                 <a href=""
                     class="nav-link {{ 'Peticiones/Solicitudes' == request()->path() ? 'active' : '' }}">
                     <i class="fi fi-rr-apps-add"></i>
-                    Salidas
+                    Consolidado
                 </a>
             </li>
             <li class="nav-item">
@@ -119,7 +161,7 @@
                     <i class="fi fi-rr-apps-add"></i>
                     Entradas
                 </a>
-            </li>
+            </li>-->
         @endif
     </ul>
 </div>

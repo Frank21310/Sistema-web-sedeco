@@ -5,13 +5,13 @@
         <div class="card-header">
             <div class="row">
                 <div class="col">
-                    <h2 class="">Vehiculos</h2>
+                    <h2 class="">Bitacoras Generales</h2>
                 </div>
                 <div class="col g-col-6 d-flex justify-content-end">
                     <button type="button" class="btn btn-primary ml-auto BotonRojo" data-bs-toggle="modal"
                         data-bs-target="#modalnuevovehiculo">
                         <i class="fas fa-plus"></i>
-                        Nuevo Vehiculo
+                        Añadir Bitacora
                     </button>
                 </div>
             </div> 
@@ -83,38 +83,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($vehiculos as $vehiculo)
+
                                 <tr>
-                                    <td class="custom-td">{{ $vehiculo->id_vehiculo }}</td>
-                                    <td class="custom-td">{{$vehiculo->marca }}                                    </td>
-                                    <td class="custom-td">{{ $vehiculo->modelo }}</td>
-                                    <td class="custom-td">{{$vehiculo->placas}}</td>
-                                    <td class="custom-td">{{ $vehiculo->condicion }}</td>
+                                    <td class="custom-td"></td>
+                                    <td class="custom-td">                                 </td>
+                                    <td class="custom-td"></td>
+                                    <td class="custom-td"></td>
+                                    <td class="custom-td"></td>
                                     <td class="custom-td">
-                                        @if ($vehiculo->disponibilidad)
-                                            Disponible
-                                        @else
-                                            No disponible
-                                        @endif
+                                        
                                     </td>                                    
                                     <td class="custom-td">
                                         <div class="btn-group" role="group">
-                                            <a href="{{ route('Vehiculos.edit', $vehiculo->id_vehiculo) }}" class="btn btn-primary"><i
-                                                    class="fas fa-pencil-alt"></i></a>
-                                            <form action="{{ route('Vehiculos.destroy', $vehiculo->id_vehiculo) }}"
-                                                id="delete_{{ $vehiculo->id_vehiculo }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-
-                                                <button type="submit" class="btn btn-danger"
-                                                    onclick="return confirm('¿Estás seguro de eliminar el registro?')">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
+                                            
+                                            
                                         </div>
                                     </td>
                                 </tr>
-                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -144,9 +129,7 @@
             </div>
 
         <div class="card-footer">
-            @if ($vehiculos->count() > 0)
-                {{ $vehiculos->links() }}
-            @endif
+           
         </div>
     </div>
 

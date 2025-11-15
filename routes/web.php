@@ -11,6 +11,7 @@ use App\Http\Controllers\Almacen\SolicitudesController;
 use App\Http\Controllers\Almacen\SoloAdminController as AlmacenSoloAdminController;
 use App\Http\Controllers\Almacen\ValesController;
 use App\Http\Controllers\Peticiones\Solicitud;
+use App\Http\Controllers\Transportes\BitacorasController;
 use App\Http\Controllers\Transportes\VehiculosController;
 use App\Http\Middleware\SoloAlmacen;
 use App\Http\Middleware\SoloTransportes;
@@ -74,7 +75,13 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::get('/Transportes', [SoloTransportes::class, 'index'])->name('transportes');
+    Route::get('/Transportes', [BitacorasController::class, 'index'])->name('transportes');
+    Route::prefix('bitacoras')->name('bitacoras.')->group(function () {
+    Route::get('/general', [BitacorasController::class, 'index'])->name('general');
+    Route::get('/consolidado', [BitacorasController::class, 'consolidado'])->name('consolidado');
+    Route::get('/comision', [BitacorasController::class, 'comision'])->name('comision');
+    Route::get('/directo', [BitacorasController::class, 'directo'])->name('directo');
+});
 
     Route::resource('/Transportes/Vehiculos', VehiculosController::class);
 })->namespace('Administrador');

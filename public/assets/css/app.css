@@ -73,7 +73,30 @@
     background-size: auto 20px;
     box-shadow: 0 5px 5px rgba(108, 110, 109, 0.15);
 }
+.menu-link,
+.submenu-link {
+    display: block;
+    color: #6c757d !important; /* gris tenue */
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-weight: 500;
+}
 
+/* Hover gris un poco más oscuro */
+.menu-link:hover,
+.submenu-link:hover {
+    color: #444 !important;
+    background-color: #e9ecef;
+}
+
+/* 🔥 ACTIVO EN ROJO */
+.menu-active {
+    color: #d30000 !important;   /* rojo */
+    font-weight: 600;
+    background-color: #ffe5e5 !important; /* rojo clarito */
+    border-left: 4px solid #d30000;
+}
 
 #Topbar .container-fluid{
     height:56px;
@@ -222,6 +245,7 @@ ul.CTAs a {
     content: counter(roman-counter, upper-roman) "." counter(decimal-counter) " ";
     counter-increment: decimal-counter;
   }
+  
   
   
 
