@@ -8,12 +8,12 @@
                     <h4 class="justify-content">Registro general de bitacoras</h4>
                 </div>
                 <div class="col g-col-6 d-flex justify-content-end">
-                    <button type="button" class="btn btn-primary ml-auto BotonRojo" data-bs-toggle="modal"
-                        data-bs-target="#modalnuevovehiculo">
-                        <i class="fas fa-plus"></i>
-                        Nueva Bitacora
-                    </button>
+                    <a href="{{ route('bitacoras.create') }}" class="btn btn-primary ml-auto BotonRojo">
+                    <i class="fas fa-plus"></i>
+                    Nueva Bitacora
+                    </a>
                 </div>
+                
             </div> 
             @if (session('error'))
                 <div class="alert alert-danger" role="alert">
@@ -95,7 +95,6 @@
                                         <div class="btn-group" role="group">
                                             <a href="{{ route('bitacoras.edit', $bitacora->id_bitacora) }}" class="btn btn-primary"><i
                                                     class="fas fa-pencil-alt"></i></a>
-                                            
                                         </div>
                                     </td>
                                 </tr>

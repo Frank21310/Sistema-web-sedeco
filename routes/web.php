@@ -82,6 +82,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/consolidado', [BitacorasController::class, 'index'])->name('consolidado');
             Route::get('/comision', [BitacorasController::class, 'index'])->name('comision');
             Route::get('/directo', [BitacorasController::class, 'index'])->name('directo');
+            // Crear bitácora
+            Route::get('/create', [BitacorasController::class, 'create'])->name('create');
+            Route::post('/', [BitacorasController::class, 'store'])->name('store');
             // Ruta para editar
             Route::get('/{id}/edit', [BitacorasController::class, 'edit'])->name('edit');
         }
