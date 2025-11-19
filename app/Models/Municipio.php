@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Municipio extends Model
 {
     protected $table = 'municipio';
+    protected $primaryKey = 'id_municipio';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
     protected $fillable = [
         'region_id',

@@ -76,12 +76,16 @@ Route::group(['middleware' => ['auth']], function () {
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/Transportes', [BitacorasController::class, 'index'])->name('transportes');
-    Route::prefix('bitacoras')->name('bitacoras.')->group(function () {
-    Route::get('/general', [BitacorasController::class, 'index'])->name('general');
-    Route::get('/consolidado', [BitacorasController::class, 'index'])->name('consolidado');
-    Route::get('/comision', [BitacorasController::class, 'index'])->name('comision');
-    Route::get('/directo', [BitacorasController::class, 'index'])->name('directo');
-});
+    Route::prefix('bitacoras')->name('bitacoras.')->group(
+        function () {
+            Route::get('/general', [BitacorasController::class, 'index'])->name('general');
+            Route::get('/consolidado', [BitacorasController::class, 'index'])->name('consolidado');
+            Route::get('/comision', [BitacorasController::class, 'index'])->name('comision');
+            Route::get('/directo', [BitacorasController::class, 'index'])->name('directo');
+            // Ruta para editar
+            Route::get('/{id}/edit', [BitacorasController::class, 'edit'])->name('edit');
+        }
+    );
 
     Route::resource('/Transportes/Vehiculos', VehiculosController::class);
 })->namespace('Administrador');

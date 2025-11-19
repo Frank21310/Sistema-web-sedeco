@@ -24,7 +24,8 @@ class Bitacora extends Model
         'kilometro_inicial',
         'kilometro_final',
         'asfalto_recorrido',
-        'rendimiento'
+        'rendimiento',
+        'tipo'
     ];
 
     public function municipio()
@@ -40,5 +41,9 @@ class Bitacora extends Model
     public function detalle()
     {
         return $this->hasMany(DetalleBitacora::class, 'bitacora_id');
+    }
+    public function departamento()
+    {
+        return $this->belongsTo(Departamento::class, 'departamento_id');
     }
 }

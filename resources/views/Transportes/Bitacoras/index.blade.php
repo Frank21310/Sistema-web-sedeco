@@ -86,25 +86,16 @@
                             @foreach ($Bitacoras as $bitacora)
                                 <tr>
                                     <td class="custom-td">{{ $bitacora->id_bitacora }}</td>
-                                    <td class="custom-td">{{$bitacora->marca }}                                    </td>
-                                    <td class="custom-td">{{ $bitacora->modelo }}</td>
-                                    <td class="custom-td">{{$bitacora->placas}}</td>
-                                    <td class="custom-td">{{ $bitacora->condicion }}</td>
-                          
+                                    <td class="custom-td">{{$bitacora->departamento->nombre_departamento }}                                    </td>
+                                    <td class="custom-td">{{$bitacora->municipio->nombre_municipio }}</td>
+                                    <td class="custom-td">{{$bitacora->fecha_elaboracion}}</td>
+                                    <td class="custom-td">{{ $bitacora->vehiculo->marca}} {{ $bitacora->vehiculo->modelo}}</td>
+                                    <td class="custom-td">{{$bitacora->elaboro}}</td>
                                     <td class="custom-td">
                                         <div class="btn-group" role="group">
-                                            <a href="{{ route('Bitacoras.edit', $bitacora->id_bitacora) }}" class="btn btn-primary"><i
+                                            <a href="{{ route('bitacoras.edit', $bitacora->id_bitacora) }}" class="btn btn-primary"><i
                                                     class="fas fa-pencil-alt"></i></a>
-                                            <form action="{{ route('Vehiculos.destroy', $bitacora->id_bitacora) }}"
-                                                id="delete_{{ $bitacora->id_bitacora }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-
-                                                <button type="submit" class="btn btn-danger"
-                                                    onclick="return confirm('¿Estás seguro de eliminar el registro?')">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
+                                            
                                         </div>
                                     </td>
                                 </tr>
