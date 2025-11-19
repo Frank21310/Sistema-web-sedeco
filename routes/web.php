@@ -78,9 +78,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/Transportes', [BitacorasController::class, 'index'])->name('transportes');
     Route::prefix('bitacoras')->name('bitacoras.')->group(function () {
     Route::get('/general', [BitacorasController::class, 'index'])->name('general');
-    Route::get('/consolidado', [BitacorasController::class, 'consolidado'])->name('consolidado');
-    Route::get('/comision', [BitacorasController::class, 'comision'])->name('comision');
-    Route::get('/directo', [BitacorasController::class, 'directo'])->name('directo');
+    Route::get('/consolidado', [BitacorasController::class, 'index'])->name('consolidado');
+    Route::get('/comision', [BitacorasController::class, 'index'])->name('comision');
+    Route::get('/directo', [BitacorasController::class, 'index'])->name('directo');
 });
 
     Route::resource('/Transportes/Vehiculos', VehiculosController::class);
