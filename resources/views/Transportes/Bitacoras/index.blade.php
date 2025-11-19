@@ -5,13 +5,13 @@
         <div class="card-header">
             <div class="row">
                 <div class="col">
-                    <h2 class="">Bitacoras Generales</h2>
+                    <h4 class="justify-content">Registro general de bitacoras</h4>
                 </div>
                 <div class="col g-col-6 d-flex justify-content-end">
                     <button type="button" class="btn btn-primary ml-auto BotonRojo" data-bs-toggle="modal"
                         data-bs-target="#modalnuevovehiculo">
                         <i class="fas fa-plus"></i>
-                        Añadir Bitacora
+                        Nueva Bitacora
                     </button>
                 </div>
             </div> 
@@ -30,9 +30,9 @@
                         <div class="col-2">
                             <a class="navbar-brand">Listar</a>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                             <select name="limit" id="limit" class="form-control custom-select">
-                                @foreach ([5, 10, 15, 20] as $limit)
+                                @foreach ([10, 15, 20, 50] as $limit)
                                     <option value="{{ $limit }}"
                                         @if (@isset($_GET['limit'])) {{ $_GET['limit'] == $limit ? 'selected' : '' }} @endif>
                                         {{ $limit }}
@@ -73,33 +73,42 @@
                         <thead class="custom-thead">
                             <tr>
                                 <th class="col-1 custom-th">ID</th>
-                                <th class="col-2 custom-th">Marca</th>
-                                <th class="col-2 custom-th">Modelo</th>
-                                <th class="col-1 custom-th">Placas</th>
-                                <th class="col-2 custom-th">Estado</th>
-                                <th class="col-2 custom-th">Disponibilidad</th>
-                                <th class="col-2 custom-th">Acciones</th>
-
+                                <th class="col-2 custom-th">Departamento</th>
+                                <th class="col-2 custom-th">Municipio</th>
+                                <th class="col-2 custom-th">Fecha Elaboracion</th>
+                                <th class="col-2 custom-th">Vehiculo</th>
+                                <th class="col-2 custom-th">Elaboro</th>
+                                <th class="col-1 custom-th">Acciones</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
-
+                            @foreach ($Bitacoras as $bitacora)
                                 <tr>
-                                    <td class="custom-td"></td>
-                                    <td class="custom-td">                                 </td>
-                                    <td class="custom-td"></td>
-                                    <td class="custom-td"></td>
-                                    <td class="custom-td"></td>
-                                    <td class="custom-td">
-                                        
-                                    </td>                                    
+                                    <td class="custom-td">{{ $bitacora->id_bitacora }}</td>
+                                    <td class="custom-td">{{$bitacora->marca }}                                    </td>
+                                    <td class="custom-td">{{ $bitacora->modelo }}</td>
+                                    <td class="custom-td">{{$bitacora->placas}}</td>
+                                    <td class="custom-td">{{ $bitacora->condicion }}</td>
+                          
                                     <td class="custom-td">
                                         <div class="btn-group" role="group">
-                                            
-                                            
+                                            <a href="{{ route('Bitacoras.edit', $bitacora->id_bitacora) }}" class="btn btn-primary"><i
+                                                    class="fas fa-pencil-alt"></i></a>
+                                            <form action="{{ route('Vehiculos.destroy', $bitacora->id_bitacora) }}"
+                                                id="delete_{{ $bitacora->id_bitacora }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <button type="submit" class="btn btn-danger"
+                                                    onclick="return confirm('¿Estás seguro de eliminar el registro?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
                                         </div>
                                     </td>
                                 </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
